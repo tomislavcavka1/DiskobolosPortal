@@ -12,7 +12,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     IdleProvider.idle(5); // in seconds
     IdleProvider.timeout(120); // in seconds
 
-    $urlRouterProvider.otherwise("/dashboards/dashboard_1");
+    $urlRouterProvider.otherwise("sports");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -183,17 +183,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
-
-
+    
+    /*
+    Glavni izbornik
+    */
     .state('content', {
         abstract: true,
         url: "",
         templateUrl: "views/common/content.html"
     })
 
-    .state('content.sportovi', {
-        url: "/sportovi",
-        templateUrl: "views/sportovi.html",
+    .state('content.sports', {
+        url: "/sports",
+        templateUrl: "views/sports.html",
         data: {
             pageTitle: 'Sportovi'
         },
@@ -219,9 +221,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         }
     })
     
-    .state('content.kategorije_clanstva', {
-        url: "/kategorije_clanstva",
-        templateUrl: "views/kategorija_clanstva.html",
+    .state('content.membershipCategory', {
+        url: "/membershipCategory",
+        templateUrl: "views/membershipCategory.html",
         data: {
             pageTitle: 'Kategorije članstva'
         },
@@ -247,9 +249,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         }
     })
     
-    .state('content.maticna_knjiga', {
-        url: "/maticna_knjiga_clanica",
-        templateUrl: "views/maticna_knjiga.html",
+    .state('content.memberRegister', {
+        url: "/memberRegister",
+        templateUrl: "views/memberRegister.html",
         data: {
             pageTitle: 'Matična knjiga članica'
         },
@@ -275,10 +277,20 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         }
     })
     
+    /*
+    Vrednovanje
+    */
     
-    .state('content.uvjeti_natjecaja', {
-            url: "/uvjeti_natjecaja",
-            templateUrl: "views/uvjeti_natjecaja.html",
+    .state('evaluation', {
+        abstract: true,
+        url: "",
+        templateUrl: "views/common/content.html"
+    })
+    
+    
+    .state('evaluation.termsOfCompetition', {
+            url: "/termsOfCompetition",
+            templateUrl: "views/termsOfCompetition.html",
             data: { pageTitle: 'Uvjeti natječaja' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
@@ -291,9 +303,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             }
         })
     
-    .state('content.rang_kat_sport', {
-            url: "/rangiranje_kategorizacija_sportova",
-            templateUrl: "views/rang_kat_sport.html",
+    .state('evaluation.rankingAndCategorizationOfSpors', {
+            url: "/rankingAndCategorizationOfSpors",
+            templateUrl: "views/rankingAndCategorizationOfSpors.html",
             data: { pageTitle: 'Rangiranje i kategorizacija sportova' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
@@ -306,9 +318,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             }
         })
     
-    .state('content.kat_sport_klubovi', {
-            url: "/kategorizacija_sporta_za_sportske_klubove",
-            templateUrl: "views/kat_sport_klubovi.html",
+    .state('evaluation.categorizationOfSportsPerSportClub', {
+            url: "/categorizationOfSportsPerSportClub",
+            templateUrl: "views/categorizationOfSportsPerSportClub.html",
             data: { pageTitle: 'Kategorizacija sporta za sporstke klubove' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
@@ -321,12 +333,34 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             }
         })
     
+   
+    
+    /*
+    Korisni linkovi
+    */
+    
+    .state('usefulLinks', {
+        abstract: true,
+        url: "",
+        templateUrl: "views/common/content.html"
+    })
+    
+    
+    .state('usefulLinks.registerOfNonprofitOrganizations', {
+            url: "/registerOfNonprofitOrganizations",
+            templateUrl: "views/registerOfNonprofitOrganizations.html",
+            data: { pageTitle: 'registra_neprotifabilnih_organizacija' }
+        })
+    
+     /*
+    Login
+    */
+    
      .state('login', {
             url: "/login",
             templateUrl: "views/login.html",
             data: { pageTitle: 'Login', specialClass: 'login-bg' }
         })
-    
 
 
 }

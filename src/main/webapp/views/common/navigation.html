@@ -4,13 +4,14 @@
             <li class="nav-header">
 
                 <div class="profile-element" uib-dropdown>
-                    <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                  <div align="center"> <img alt="image" class="sidebar-logo"  src="img/logo.png"/></div> 
+                    
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">David Williams</strong>
+                                    <strong class="font-bold">Helena Dobrović</strong>
                              </span>
-                                <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                                <span class="text-muted text-xs block">Administrator <b class="caret"></b></span>
                             </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
@@ -22,7 +23,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    IN+
+                   <img alt="image" class="logo-icon"  src="img/logo-icon.png"/>
                 </div>
             </li>
             <li ng-class="{active: $state.includes('dashboards')}">
@@ -36,30 +37,30 @@
                 </ul>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="content.sportovi"><i class="fa fa-group"></i> <span class="nav-label">Sportovi</span> </a>
+                <a ui-sref="content.sports"><i class="fa fa-group"></i> <span class="nav-label">Sportovi</span> </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="content.kategorije_clanstva"><i class="fa fa-delicious"></i> <span class="nav-label">Kategorija članstva</span> </a>
+                <a ui-sref="content.membershipCategory"><i class="fa fa-delicious"></i> <span class="nav-label">Kategorija članstva</span> </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="content.maticna_knjiga"><i class="fa fa-address-book-o"></i> <span class="nav-label">Matična knjiga članica</span> </a>
+                <a ui-sref="content.memberRegister"><i class="fa fa-address-book-o"></i> <span class="nav-label">Matična knjiga članica</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('korisni_linkvoi')}">
+            <li ng-class="{active: $state.includes('usefulLinks')}">
                 <a href="#"><i class="fa fa-bookmark-o"></i> <span class="nav-label">Korisni linkovi</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
-                    <li ui-sref-active="active"><a ui-sref="korisni_linkvoi.flot_chart">Registar neprofitnih organizacija</a></li>
-                    <li ui-sref-active="active"><a ui-sref="korisni_linkvoi.rickshaw_chart">Registar udruga Republike Hrvatske</a></li>
-                    <li ui-sref-active="active"><a ui-sref="korisni_linkvoi.c3charts">Registar sportskih djelatnosti </a></li>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('usefulLinks')}">
+                    <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfNonprofitOrganizations">Registar neprofitnih organizacija</a></li>
+                    <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfCroatianRepublicAssociations">Registar udruga Republike Hrvatske</a></li>
+                    <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfSportsActivities">Registar sportskih djelatnosti </a></li>
                    
                 </ul>
             </li>
 
-            <li ng-class="{active: $state.includes('vrednovanje')}">
+            <li ng-class="{active: $state.includes('evaluation')}">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Vrednovanje</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('vrednovanje')}">
-                    <li ui-sref-active="active"><a ui-sref="content.uvjeti_natjecaja">Uvjeti natječaja</a></li>
-                    <li ui-sref-active="active"><a ui-sref="content.rang_kat_sport">Rangiranje i kategorizacija sportova</a></li>
-                    <li ui-sref-active="active"><a ui-sref="content.kat_sport_klubovi">Kategorizacija sporta za sportske klubove</a></li>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('evaluation')}">
+                    <li ui-sref-active="active"><a ui-sref="evaluation.termsOfCompetition">Uvjeti natječaja</a></li>
+                    <li ui-sref-active="active"><a ui-sref="evaluation.rankingAndCategorizationOfSpors">Rangiranje i kategorizacija sportova</a></li>
+                    <li ui-sref-active="active"><a ui-sref="evaluation.categorizationOfSportsPerSportClub">Kategorizacija sporta za sportske klubove</a></li>
                    
                 </ul>
             </li>

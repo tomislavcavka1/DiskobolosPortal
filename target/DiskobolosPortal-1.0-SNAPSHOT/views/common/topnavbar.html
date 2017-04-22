@@ -4,7 +4,7 @@
             <span minimaliza-sidebar></span>
             <form role="search" class="navbar-form-custom" method="post" action="views/search_results.html">
                 <div class="form-group">
-                    <input type="text" placeholder="{{ 'SEARCH' | translate }}" class="form-control" name="top-search" id="top-search">
+                    <input type="text" placeholder="pretraživanje" class="form-control" name="top-search" id="top-search">
                 </div>
             </form>
         </div>
@@ -14,7 +14,7 @@
             <!--</li>-->
             <li uib-dropdown>
                 <a class="count-info" href uib-dropdown-toggle>
-                    Language
+                    Izaberite jezik
                 </a>
                 <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" ng-controller="translateCtrl">
                     <li><a ng-click="changeLanguage('en')">English</a></li>
