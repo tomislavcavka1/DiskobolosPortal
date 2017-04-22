@@ -103,6 +103,7 @@ sportModule.controller('sportController', function (
         $scope.getSports();
 });
 
+// this is the change I have made
 
 sportModule.controller('ModalInstanceCtrl', function (
         $scope,
