@@ -1,0 +1,59 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Sportovi</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li class="active">
+                <strong>Sportovi</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="sportController">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <table datatable="ng" dt-options="dtOptions"  class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Naziv</th>
+                                <th>Nacionalni sportski savez/<br/>članstvo u HOO-u</th>
+                                <th>Međunarodna federacija</th>
+                                <th>Priznati od IOC-a, <br/>članovi SPORTACCORD-a</th>
+                                <td>Promijeni/izbriši</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="sport in sports">
+                                <td>{{sport.id}}</td>
+                                <td>{{sport.name}}</td>
+                                <td>{{sport.nationalSportsFederation}}</td>
+                                <td>{{sport.internationalFederation}}</td>
+                                <td>{{sport.iocSportAccord}}</td>
+                                <td style="width:50px;">
+                                    <button type="button" class="btn btn-info " ng-click="editData(sport.id)"><i class="fa fa-paste"></i> </button>
+                                    <button type="button" class="btn btn-danger "><i class="fa fa-trash"></i> </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
