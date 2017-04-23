@@ -74,6 +74,7 @@ memberRegisterModule.controller('memberRegisterController', function (
         $scope.getMemberRegisters();
 });
 
+// test comment
 
 memberRegisterModule.controller('MemberRegisterModalCtrl', function (
         $scope,
