@@ -13,9 +13,16 @@ mainAppServices.factory('SportDataFactory', ['$resource', 'ConfigConstants', fun
     }]);
 
 
-// Services responsible for creation of sports, fetching sports etc.
+// Services responsible for creation of membership category, fetching membership category etc.
 mainAppServices.factory('MembershpCategoryDataFactory', ['$resource', 'ConfigConstants', function ($resource, ConfigConstants) {
         return $resource('', {}, {
             'getAllMembershipCategories': {method: 'GET', url: ConfigConstants.ServerName['hostUrl'] + '/categories/all', isArray: false}
+        });
+    }]);
+
+// Services responsible for creation of member register, fetching member register etc.
+mainAppServices.factory('MemberRegisterDataFactory', ['$resource', 'ConfigConstants', function ($resource, ConfigConstants) {
+        return $resource('', {}, {
+            'getAllMemberRegisters': {method: 'GET', url: ConfigConstants.ServerName['hostUrl'] + '/memberRegister/all', isArray: false}
         });
     }]);

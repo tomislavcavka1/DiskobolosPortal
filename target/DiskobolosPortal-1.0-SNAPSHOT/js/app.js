@@ -14,7 +14,8 @@
         'mainAppServices',        
         'underscore',
         'sportModule',
-        'membershipCategoryModule'
+        'membershipCategoryModule',
+        'memberRegisterModule'
     ])
 })();
 

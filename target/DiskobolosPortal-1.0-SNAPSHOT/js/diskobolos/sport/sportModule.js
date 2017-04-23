@@ -40,7 +40,7 @@ sportModule.controller('sportController', function (
       $scope.sports = {};            
                     
       $scope.getSports = function () {
-            
+                  
       SportDataFactory.getAllSports({}, function (response) {
                 //success
                 $scope.sports = response.sports;
@@ -103,7 +103,6 @@ sportModule.controller('sportController', function (
         $scope.getSports();
 });
 
-// this is the change I have made
 
 sportModule.controller('ModalInstanceCtrl', function (
         $scope,
