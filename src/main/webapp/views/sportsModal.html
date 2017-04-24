@@ -2,34 +2,33 @@
     <div class="modal-header">
         <i class="fa fa-edit modal-icon"></i>
         <p class="modal-title">Izmjena podataka</p>
-     </div>
+    </div>
     <div class="modal-body">
-      
+
         <div class="form-group">
-            
-                <label>Naziv</label> <input type="text" placeholder="Enter your email" class="form-control" ng-model="data.email">
-      </div>
-        
-         <div class="form-group">
-            
-                <label>Nacionalni sportski savez</label> <input type="text" placeholder="Enter your email" class="form-control" ng-model="data.email">
-      </div>
-        
-         <div class="form-group">
-            
-                <label>Međunarodna federacija</label> <input type="text" placeholder="Enter your email" class="form-control" ng-model="data.email">
-      </div>
-        
-         <div class="form-group">
-            
-                <label>Priznati od IOC-a, članovi SPORTACCORD-a</label> <input type="text" placeholder="Enter your email" class="form-control" ng-model="data.email">
-      </div>
-        
-          
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
-    </div>
+            <label>Naziv</label> <input type="text" placeholder="Enter your email" class="form-control" ng-model="data.name">
+        </div>
+
+        <div class="form-group">
+            <label>Nacionalni sportski savez</label>
+            <tags-input ng-model="data.nationalSportsFederations"></tags-input>
+        </div>
+
+        <div class="form-group">
+            <label>Međunarodna federacija</label>
+            <tags-input ng-model="data.internationalFederations"></tags-input>
+        </div>
+
+        <div class="form-group">
+            <label>Priznati od IOC-a, članovi SPORTACCORD-a</label>
+            <tags-input ng-model="data.iocSportAccords"></tags-input>
+</div>
+
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
+    <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+</div>
 </div>
 

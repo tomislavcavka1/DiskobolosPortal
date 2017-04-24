@@ -215,7 +215,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         serie: true,
                         name: 'datatables.buttons',
                         files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
-                        }
+                    },
+                    {
+                            name: 'ngTagsInput',
+                            files: ['js/plugins/ngTags//ng-tags-input.min.js', 'css/plugins/ngTags/ng-tags-input-custom.min.css']
+                      }
                     ]);
             }
         }
@@ -257,7 +261,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         },
         resolve: {
             loadPlugin: function ($ocLazyLoad) {
-                return $ocLazyLoad.load([
+                return $ocLazyLoad.load([                                   
                     {
                         serie: true,
                         files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']

@@ -8,7 +8,8 @@ var mainAppServices = angular.module('mainAppServices', ['ngResource', 'configur
 // Services responsible for creation of sports, fetching sports etc.
 mainAppServices.factory('SportDataFactory', ['$resource', 'ConfigConstants', function ($resource, ConfigConstants) {
         return $resource('', {}, {
-            'getAllSports': {method: 'GET', url: ConfigConstants.ServerName['hostUrl'] + '/sports/all', isArray: false}
+            'getAllSports': {method: 'GET', url: ConfigConstants.ServerName['hostUrl'] + '/sports/all', isArray: false},
+            'editSelectedSport': {method: 'POST', url: ConfigConstants.ServerName['hostUrl'] + '/sports/edit'}
         });
     }]);
 
