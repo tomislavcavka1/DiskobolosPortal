@@ -61,13 +61,13 @@ membershipCategoryModule.controller('membershpCategoryController', function (
             $rootScope.$broadcast('selectedMembershipCategory', $rootScope.selectedMembershipCategory);
 
             var modalInstance = $uibModal.open({
-                templateUrl: 'views/modal_example1.html',
+                templateUrl: 'views/membershipCategoryModal.html',
                 controller: 'MembershipModalCtrl',
                 scope: $scope
             });
             
             modalInstance.result.then(function (response) {
-                console.log('Modal name', 'modal_example1.html');                
+                console.log('Modal name', 'membershipCategoryModal.html');                
             });
         };
                                 

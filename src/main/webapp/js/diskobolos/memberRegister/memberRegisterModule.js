@@ -53,7 +53,7 @@ memberRegisterModule.controller('memberRegisterController', function (
                 
         $scope.editData = function (id) {
             
-            $rootScope.selectedMemberRegister = _.find($scope.sports, function (obj) {
+            $rootScope.selectedMemberRegister = _.find($scope.memberRegisters, function (obj) {
                 return obj.id === id;
             });
             
@@ -61,13 +61,13 @@ memberRegisterModule.controller('memberRegisterController', function (
             $rootScope.$broadcast('selectedMemberRegister', $rootScope.selectedMemberRegister);
 
             var modalInstance = $uibModal.open({
-                templateUrl: 'views/modal_example1.html',
+                templateUrl: 'views/memberRegisterModal.html',
                 controller: 'MemberRegisterModalCtrl',
                 scope: $scope
             });
             
             modalInstance.result.then(function (response) {
-                console.log('Modal name', 'modal_example1.html');                
+                console.log('Modal name', 'memberRegisterModal.html');                
             });
         };
                                 
@@ -82,10 +82,10 @@ memberRegisterModule.controller('MemberRegisterModalCtrl', function (
         _) {
               
         $scope.data = {};
-        $scope.data.email = $rootScope.selectedMemberRegister.name;
+        $scope.data.name = $rootScope.selectedMemberRegister.name;
 		
         $scope.ok = function () {            
-            console.log('Email: ' + $scope.data.email);
+            console.log('Name: ' + $scope.data.name);
             $uibModalInstance.close();
         };
 
