@@ -45,38 +45,38 @@ sportModule.controller('sportController', function (
     $scope.getSports = function () {
 
         SportDataFactory.getAllSports({}, function (response) {
-            //success
-            $scope.sports = response.sports;
+                    //success
+                    $scope.sports = response.sports;
 
-            if (_.isArray($scope.sports) && $scope.sports.length > 0) {
+                    if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
-                for (var i = 0; i < $scope.sports.length; i++) {
-                    $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
+                        for (var i = 0; i < $scope.sports.length; i++) {
+                            $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
 
-                    $scope.sports[i].nationalSportsFederation = '';
-                    $scope.sports[i].internationalFederation = '';
-                    $scope.sports[i].iocSportAccord = '';
+                            $scope.sports[i].nationalSportsFederation = '';
+                            $scope.sports[i].internationalFederation = '';
+                            $scope.sports[i].iocSportAccord = '';
 
-                    for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
+                            for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
 
-                        switch ($scope.nomenclatureOfSports[j].category) {
-                            case 'NATIONAL_SPORTS_FEDERATION':
-                                $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                break;
-                            case 'INTERNATIONAL_FEDERATION':
-                                $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                break;
-                            case 'IOC_SPORTACCORD':
-                                $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                break;
-                            default:
-                                break;
+                                switch ($scope.nomenclatureOfSports[j].category) {
+                                    case 'NATIONAL_SPORTS_FEDERATION':
+                                        $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                        break;
+                                    case 'INTERNATIONAL_FEDERATION':
+                                        $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                        break;
+                                    case 'IOC_SPORTACCORD':
+                                        $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
                         }
-                    }
-                }
 
-            }
-        },
+                    }
+                },
                 function (error) {
                     //fail
                     $scope.error = error;
@@ -145,10 +145,11 @@ sportModule.controller('SportModalCtrl', function (
 
         // prepare data for storing            
         $scope.sportDto.id = $rootScope.selectedSport.id;
-        $scope.sportDto.name = $rootScope.selectedSport.name;
+        $scope.sportDto.name = $scope.data.name;
         $scope.sportDto.nomenclatureOfSports.push({category: 'NATIONAL_SPORTS_FEDERATION', data: $scope.data.nationalSportsFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'INTERNATIONAL_FEDERATION', data: $scope.data.internationalFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'IOC_SPORTACCORD', data: $scope.data.iocSportAccords});
+        $scope.sportDto.removedNomenclatureItems = $scope.findRemovedItems($scope.sportDto.nomenclatureOfSports);
 
         SportDataFactory.editSelectedSport($scope.sportDto, function (response) {
 
@@ -186,12 +187,10 @@ sportModule.controller('SportModalCtrl', function (
                                                 break;
                                         }
                                     }
-                                }
-                
-                            }                            
-        
+                                }                
+                            }
+                            
                             $rootScope.$broadcast('sports', $scope.sports);
-        
                         },
                         function (error) {
                             //fail
@@ -205,6 +204,39 @@ sportModule.controller('SportModalCtrl', function (
 //                growl.error("Error during editing sport data for ID number " + $scope.sportDto.id, {title: 'Error'});
                 });
         $uibModalInstance.close();
+    };
+    
+    $scope.findRemovedItems = function(nomenclatureOfSportsItems) {
+        $scope.addedNomenclatureItems = [];
+        $scope.removedNomenclatureItems = [];
+        
+            for (var i = 0; i < $rootScope.selectedSport.nomenclatureOfSports.length; i++) {
+                for(var j = 0; j < nomenclatureOfSportsItems.length; j++) {                                                                                                     
+                    for(var k = 0; k < nomenclatureOfSportsItems[j].data.length; k++) {
+                        
+                        var addedNomenclatureItemObj = _.find($scope.addedNomenclatureItems, function (obj) {
+                            return obj.id === nomenclatureOfSportsItems[j].data[k].id;
+                        });
+                        
+                        if(_.isUndefined(addedNomenclatureItemObj)) {                         
+                            $scope.addedNomenclatureItems.push(nomenclatureOfSportsItems[j].data[k]);
+                        }                        
+                    }
+                }
+            }
+            
+            for(var n = 0; n < $scope.selectedSport.nomenclatureOfSports.length; n++) {
+                
+                var addedNomenclatureItemObj = _.find($scope.addedNomenclatureItems, function (obj) {
+                    return obj.id === $scope.selectedSport.nomenclatureOfSports[n].id;
+                });
+                
+                if(_.isUndefined(addedNomenclatureItemObj)) {                   
+                    $scope.removedNomenclatureItems.push($scope.selectedSport.nomenclatureOfSports[n]);
+                }
+            }
+        
+        return $scope.removedNomenclatureItems;
     };
 
     $scope.cancel = function () {
