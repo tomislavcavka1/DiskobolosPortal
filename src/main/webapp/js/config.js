@@ -217,9 +217,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
                     },
                     {
-                            name: 'ngTagsInput',
-                            files: ['js/plugins/ngTags//ng-tags-input.min.js', 'css/plugins/ngTags/ng-tags-input-custom.min.css']
-                      }
+                        name: 'ngTagsInput',
+                        files: ['js/plugins/ngTags//ng-tags-input.min.js', 'css/plugins/ngTags/ng-tags-input-custom.min.css']
+                     },
+                     {
+                         insertBefore: '#loadBefore',
+                         name: 'toaster',
+                         files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                       }
                     ]);
             }
         }

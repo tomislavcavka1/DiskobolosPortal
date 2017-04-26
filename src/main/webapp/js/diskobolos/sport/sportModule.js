@@ -82,6 +82,19 @@ sportModule.controller('sportController', function (
                     $scope.error = error;
                 });
     };
+    
+    $scope.createData = function () {
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/sportsModal.html',
+            controller: 'CreateSportModalCtrl',
+            scope: $scope
+        });
+
+        modalInstance.result.then(function (response) {
+            console.log('Modal for creation of a new sport item: ', 'sportsModal.html');
+        });
+    };
 
     $scope.editData = function (id) {
 
@@ -94,9 +107,30 @@ sportModule.controller('sportController', function (
 
         var modalInstance = $uibModal.open({
             templateUrl: 'views/sportsModal.html',
-            controller: 'SportModalCtrl',
+            controller: 'EditSportModalCtrl',
             scope: $scope
         });
+
+        modalInstance.result.then(function (response) {
+            console.log('Modal name', 'sportsModal.html');
+        });
+    };
+    
+    $scope.deleteData = function (id) {
+
+        $rootScope.selectedSport = _.find($scope.sports, function (obj) {
+            return obj.id === id;
+        });
+
+        //broadcast selected sport
+        $rootScope.$broadcast('selectedSport', $rootScope.selectedSport);
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/common/confirmationModal.html',
+            controller: 'DeleteSportModalCtrl',
+            scope: $scope
+        });
+
 
         modalInstance.result.then(function (response) {
             console.log('Modal name', 'sportsModal.html');
@@ -107,12 +141,13 @@ sportModule.controller('sportController', function (
 });
 
 
-sportModule.controller('SportModalCtrl', function (
+sportModule.controller('EditSportModalCtrl', function (
         $scope,
         $rootScope,
         $uibModalInstance,
         _,
-        SportDataFactory) {
+        SportDataFactory,
+        toaster) {
 
     $scope.data = {};
     $scope.data.name = $rootScope.selectedSport.name;
@@ -155,8 +190,14 @@ sportModule.controller('SportModalCtrl', function (
 
                 if (response.result === 200) {
                         console.log('Sport data is successfully edited.');
-        
-//                            growl.success("Sport data for ID number " + $scope.sportDto.id + " is successfully edited.", {title: 'Success'});
+                                                                        
+                        toaster.pop({
+                            type: 'info',
+                            title: 'Uspješna izmjena stavke',
+                            body: "Podaci za sport sa ID-em " + $scope.sportDto.id + " su uspješno izmijenjeni.",
+                            showCloseButton: true,
+                            timeout: 5000
+                        });
         
                         SportDataFactory.getAllSports({}, function (response) {
                             //success
@@ -200,8 +241,15 @@ sportModule.controller('SportModalCtrl', function (
                 },
                 function (error) {
                     //fail
-                    $scope.error = error;
-//                growl.error("Error during editing sport data for ID number " + $scope.sportDto.id, {title: 'Error'});
+                    $scope.error = error;                    
+                    
+                    toaster.pop({
+                        type: 'error',
+                        title: 'Greška',
+                        body: "Greška prilikom izmjene podataka za sport s ID-em " + $scope.sportDto.id,
+                        showCloseButton: true,
+                        timeout: 5000
+                    });
                 });
         $uibModalInstance.close();
     };
@@ -244,3 +292,185 @@ sportModule.controller('SportModalCtrl', function (
     };
 });
 
+
+sportModule.controller('CreateSportModalCtrl', function (
+        $scope,
+        $rootScope,
+        $uibModalInstance,
+        _,
+        SportDataFactory,
+        toaster) {
+            
+    $scope.data = {};            
+    
+    $scope.ok = function () {
+        // initialize data transfer object
+        $scope.sportDto = {};
+        $scope.sportDto.nomenclatureOfSports = [];
+
+        // prepare data for storing
+        $scope.sportDto.name = $scope.data.name;
+        $scope.sportDto.nomenclatureOfSports.push({category: 'NATIONAL_SPORTS_FEDERATION', data: $scope.data.nationalSportsFederations});
+        $scope.sportDto.nomenclatureOfSports.push({category: 'INTERNATIONAL_FEDERATION', data: $scope.data.internationalFederations});
+        $scope.sportDto.nomenclatureOfSports.push({category: 'IOC_SPORTACCORD', data: $scope.data.iocSportAccords});                
+
+        SportDataFactory.createSportData($scope.sportDto, function (response) {
+
+                    if (response.result === 200) {
+                        console.log('Sport data is successfully created.');
+                        
+                        toaster.pop({
+                            type: 'info',
+                            title: 'Uspješna kreiranje stavke',
+                            body: "Podaci za sport " + $scope.data.name + " su uspješno kreirani.",
+                            showCloseButton: true,
+                            timeout: 5000
+                        });
+                        
+                        SportDataFactory.getAllSports({}, function (response) {
+                            //success
+                            $scope.sports = response.sports;
+                            
+                            if (_.isArray($scope.sports) && $scope.sports.length > 0) {
+
+                                for (var i = 0; i < $scope.sports.length; i++) {
+                                    $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
+                
+                                    $scope.sports[i].nationalSportsFederation = '';
+                                    $scope.sports[i].internationalFederation = '';
+                                    $scope.sports[i].iocSportAccord = '';
+                
+                                    for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
+                
+                                        switch ($scope.nomenclatureOfSports[j].category) {
+                                            case 'NATIONAL_SPORTS_FEDERATION':
+                                                $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                break;
+                                            case 'INTERNATIONAL_FEDERATION':
+                                                $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                break;
+                                            case 'IOC_SPORTACCORD':
+                                                $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }                
+                            }
+                            
+                            $rootScope.$broadcast('sports', $scope.sports);
+                        },
+                        function (error) {
+                            //fail
+                            $scope.error = error;
+                        });
+                    }
+                },
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                    
+                    toaster.pop({
+                        type: 'error',
+                        title: 'Greška',
+                        body: "Greška prilikom kreiranja podataka za sport " + $scope.sportDto.name,
+                        showCloseButton: true,
+                        timeout: 5000
+                    });
+                });
+
+        // close modal view
+        $uibModalInstance.close();
+    };
+        
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+sportModule.controller('DeleteSportModalCtrl', function (
+        $scope,
+        $rootScope,
+        $uibModalInstance,
+        _,
+        SportDataFactory,
+        toaster) {
+
+        $scope.ok = function () {
+                      
+        SportDataFactory.deleteSportData($rootScope.selectedSport, function (response) {
+
+                    if (response.result === 200) {
+                        console.log('Sport data is successfully deleted.');
+
+                        toaster.pop({
+                            type: 'info',
+                            title: 'Uspješna brisanje stavke',
+                            body: "Podaci za sport " + $rootScope.selectedSport.name + " su uspješno izbrisani.",
+                            showCloseButton: true,
+                            timeout: 5000
+                        });
+                        
+                        SportDataFactory.getAllSports({}, function (response) {
+                            //success
+                            $scope.sports = response.sports;
+                            
+                            if (_.isArray($scope.sports) && $scope.sports.length > 0) {
+
+                                for (var i = 0; i < $scope.sports.length; i++) {
+                                    $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
+                
+                                    $scope.sports[i].nationalSportsFederation = '';
+                                    $scope.sports[i].internationalFederation = '';
+                                    $scope.sports[i].iocSportAccord = '';
+                
+                                    for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
+                
+                                        switch ($scope.nomenclatureOfSports[j].category) {
+                                            case 'NATIONAL_SPORTS_FEDERATION':
+                                                $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                break;
+                                            case 'INTERNATIONAL_FEDERATION':
+                                                $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                break;
+                                            case 'IOC_SPORTACCORD':
+                                                $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }                
+                            }
+                            
+                            $rootScope.$broadcast('sports', $scope.sports);
+                        },
+                        function (error) {
+                            //fail
+                            $scope.error = error;
+                        });
+                        
+                    }
+                },
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                    
+                    toaster.pop({
+                        type: 'error',
+                        title: 'Greška',
+                        body: "Greška prilikom brisanja podataka za sport " + $rootScope.selectedSport.name,
+                        showCloseButton: true,
+                        timeout: 5000
+                    });                    
+                });
+
+            // close modal view
+            $uibModalInstance.close();        
+        };        
+        
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+});

@@ -9,7 +9,9 @@ var mainAppServices = angular.module('mainAppServices', ['ngResource', 'configur
 mainAppServices.factory('SportDataFactory', ['$resource', 'ConfigConstants', function ($resource, ConfigConstants) {
         return $resource('', {}, {
             'getAllSports': {method: 'GET', url: ConfigConstants.ServerName['hostUrl'] + '/sports/all', isArray: false},
-            'editSelectedSport': {method: 'POST', url: ConfigConstants.ServerName['hostUrl'] + '/sports/edit'}
+            'editSelectedSport': {method: 'POST', url: ConfigConstants.ServerName['hostUrl'] + '/sports/edit'},
+            'createSportData': {method: 'POST', url: ConfigConstants.ServerName['hostUrl'] + '/sports/create'},
+            'deleteSportData': {method: 'POST', url: ConfigConstants.ServerName['hostUrl'] + '/sports/delete'}
         });
     }]);
 
