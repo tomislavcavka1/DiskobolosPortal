@@ -5,13 +5,24 @@
  */
 var sportModule = angular.module('sportModule', []);
 
+
+sportModule.constant('Constants', {
+    CrudActions: {
+        create: "CREATE",
+        edit: "EDIT",
+        delete: "DELETE"
+    }
+});
+
 sportModule.controller('sportController', function (
         $scope,
         $rootScope,
         _,
         SportDataFactory,
         $uibModal,
-        DTOptionsBuilder) {
+        DTOptionsBuilder,
+        SweetAlert,
+        toaster) {
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
@@ -124,16 +135,86 @@ sportModule.controller('sportController', function (
 
         //broadcast selected sport
         $rootScope.$broadcast('selectedSport', $rootScope.selectedSport);
+                
+        SweetAlert.swal({
+            title: "Da li ste sigurni da želite obrisati odabranu stavku?",
+            text: "Nakon brisanja podaci će zauvijek biti izbrisani!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Potvrdi",
+            cancelButtonText: "Odustani",
+            closeOnConfirm: true,
+            closeOnCancel: true },
+        function (isConfirm) {
+            if (isConfirm) {
+                  SportDataFactory.deleteSportData($rootScope.selectedSport, function (response) {
 
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/common/confirmationModal.html',
-            controller: 'DeleteSportModalCtrl',
-            scope: $scope
-        });
+                      if (response.result === 200) {
+                          console.log('Sport data is successfully deleted.');
 
+                          toaster.pop({
+                              type: 'info',
+                              title: 'Uspješna brisanje stavke',
+                              body: "Podaci za sport " + $rootScope.selectedSport.name + " su uspješno izbrisani.",
+                              showCloseButton: true,
+                              timeout: 5000
+                          });
 
-        modalInstance.result.then(function (response) {
-            console.log('Modal name', 'sportsModal.html');
+                          SportDataFactory.getAllSports({}, function (response) {
+                              //success
+                              $scope.sports = response.sports;
+
+                              if (_.isArray($scope.sports) && $scope.sports.length > 0) {
+
+                                  for (var i = 0; i < $scope.sports.length; i++) {
+                                      $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
+
+                                      $scope.sports[i].nationalSportsFederation = '';
+                                      $scope.sports[i].internationalFederation = '';
+                                      $scope.sports[i].iocSportAccord = '';
+
+                                      for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
+
+                                          switch ($scope.nomenclatureOfSports[j].category) {
+                                              case 'NATIONAL_SPORTS_FEDERATION':
+                                                  $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                  break;
+                                              case 'INTERNATIONAL_FEDERATION':
+                                                  $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                  break;
+                                              case 'IOC_SPORTACCORD':
+                                                  $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                                  break;
+                                              default:
+                                                  break;
+                                          }
+                                      }
+                                  }                
+                              }
+
+                              $rootScope.$broadcast('sports', $scope.sports);
+                          },
+                          function (error) {
+                              //fail
+                              $scope.error = error;
+                          });
+
+                      }
+                  },
+                  function (error) {
+                      //fail
+                      $scope.error = error;
+
+                      toaster.pop({
+                          type: 'error',
+                          title: 'Greška',
+                          body: "Greška prilikom brisanja podataka za sport " + $rootScope.selectedSport.name,
+                          showCloseButton: true,
+                          timeout: 5000
+                      });                    
+                  });
+              }
         });
     };
 
@@ -147,8 +228,10 @@ sportModule.controller('EditSportModalCtrl', function (
         $uibModalInstance,
         _,
         SportDataFactory,
-        toaster) {
+        toaster,
+        Constants) {
 
+    $scope.crudAction = Constants.CrudActions['edit'];
     $scope.data = {};
     $scope.data.name = $rootScope.selectedSport.name;
 
@@ -299,8 +382,10 @@ sportModule.controller('CreateSportModalCtrl', function (
         $uibModalInstance,
         _,
         SportDataFactory,
-        toaster) {
+        toaster,
+        Constants) {
             
+    $scope.crudAction = Constants.CrudActions['create'];
     $scope.data = {};            
     
     $scope.ok = function () {
@@ -387,90 +472,4 @@ sportModule.controller('CreateSportModalCtrl', function (
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-});
-
-sportModule.controller('DeleteSportModalCtrl', function (
-        $scope,
-        $rootScope,
-        $uibModalInstance,
-        _,
-        SportDataFactory,
-        toaster) {
-
-        $scope.ok = function () {
-                      
-        SportDataFactory.deleteSportData($rootScope.selectedSport, function (response) {
-
-                    if (response.result === 200) {
-                        console.log('Sport data is successfully deleted.');
-
-                        toaster.pop({
-                            type: 'info',
-                            title: 'Uspješna brisanje stavke',
-                            body: "Podaci za sport " + $rootScope.selectedSport.name + " su uspješno izbrisani.",
-                            showCloseButton: true,
-                            timeout: 5000
-                        });
-                        
-                        SportDataFactory.getAllSports({}, function (response) {
-                            //success
-                            $scope.sports = response.sports;
-                            
-                            if (_.isArray($scope.sports) && $scope.sports.length > 0) {
-
-                                for (var i = 0; i < $scope.sports.length; i++) {
-                                    $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
-                
-                                    $scope.sports[i].nationalSportsFederation = '';
-                                    $scope.sports[i].internationalFederation = '';
-                                    $scope.sports[i].iocSportAccord = '';
-                
-                                    for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
-                
-                                        switch ($scope.nomenclatureOfSports[j].category) {
-                                            case 'NATIONAL_SPORTS_FEDERATION':
-                                                $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                                break;
-                                            case 'INTERNATIONAL_FEDERATION':
-                                                $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                                break;
-                                            case 'IOC_SPORTACCORD':
-                                                $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                                break;
-                                            default:
-                                                break;
-                                        }
-                                    }
-                                }                
-                            }
-                            
-                            $rootScope.$broadcast('sports', $scope.sports);
-                        },
-                        function (error) {
-                            //fail
-                            $scope.error = error;
-                        });
-                        
-                    }
-                },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-                    
-                    toaster.pop({
-                        type: 'error',
-                        title: 'Greška',
-                        body: "Greška prilikom brisanja podataka za sport " + $rootScope.selectedSport.name,
-                        showCloseButton: true,
-                        timeout: 5000
-                    });                    
-                });
-
-            // close modal view
-            $uibModalInstance.close();        
-        };        
-        
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
 });

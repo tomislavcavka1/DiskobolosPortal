@@ -1,7 +1,9 @@
 <div class="inmodal">
     <div class="modal-header">
-        <i class="fa fa-edit modal-icon"></i>
-        <p class="modal-title">Izmjena podataka</p>
+        <i class="fa fa-edit modal-icon" ng-show="crudAction === 'EDIT'"></i>
+        <i class="fa fa-plus-square modal-icon" ng-show="crudAction === 'CREATE'"></i>                
+        <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
+        <p class="modal-title" ng-show="crudAction === 'CREATE'">Kreiraj novu stavku</p>
     </div>
     <div class="modal-body">
 
@@ -22,13 +24,13 @@
         <div class="form-group">
             <label>Priznati od IOC-a, članovi SPORTACCORD-a</label>
             <tags-input ng-model="data.iocSportAccords"></tags-input>
-</div>
+        </div>
 
 
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-    <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
-</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+    </div>
 </div>
 
