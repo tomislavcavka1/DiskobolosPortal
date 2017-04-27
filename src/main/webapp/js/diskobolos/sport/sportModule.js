@@ -5,7 +5,6 @@
  */
 var sportModule = angular.module('sportModule', []);
 
-
 sportModule.constant('Constants', {
     CrudActions: {
         create: "CREATE",
