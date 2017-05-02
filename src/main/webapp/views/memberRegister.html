@@ -27,7 +27,7 @@
 
                         <div class="col-lg-12">
                             <div class="form-group pull-right">
-                                <button class="btn btn-primary " type="button"><i class="fa fa-plus"></i>&nbsp;Novi unos</button>
+                                <button class="btn btn-primary " type="button" ng-click="createData()"><i class="fa fa-plus"></i>&nbsp;Novi unos</button>
                             </div>
 
                         </div>
@@ -36,14 +36,22 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Address</th>                            
+                                <th>Naziv</th>  
+                                <th>Adresa</th>
+                                <th>OIB</th>
+                                <th>Datum pristupanja</th>
+                                <th>Predsjednik</th>
                                 <th>promjeni/izbriši</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="memberRegister in memberRegisters">
                                 <td>{{ memberRegister.id}}</td>
-                                <td>{{ memberRegister.address}}</td>                            
+                                <td>{{ memberRegister.name}}</td>
+                                <td>{{ memberRegister.address}}</td>
+                                <td>{{ memberRegister.oib}}</td>
+                                <td>{{ memberRegister.registrationDate}}</td>
+                                <td>{{ memberRegister.chairman}}</td>  
                                 <td class="edit-column">
                                     <button type="button" class="btn btn-primary " ng-click="editData(memberRegister.id)"><i class="fa fa-edit"></i> </button>
                                     <button type="button" class="btn btn-danger "><i class="fa fa-trash"></i> </button>

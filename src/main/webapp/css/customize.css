@@ -1,8 +1,6 @@
 /*
 
-
 Customize css
-
 
 */
 
@@ -212,4 +210,13 @@ table td.edit-column {
 
 .modal-body span{
     font-size: 13px;
+}
+
+/*
+ modal - memberRegister
+*/
+
+.memberRegisterModal {
+    width: 700px;
+    
 }

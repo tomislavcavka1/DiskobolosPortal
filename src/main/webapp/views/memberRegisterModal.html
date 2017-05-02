@@ -1,12 +1,14 @@
 <div class="inmodal">
     <div class="modal-header">
-        <i class="fa fa-edit modal-icon"></i>
-        <p class="modal-title">Izmjena podataka</p>
+        <i class="fa fa-edit modal-icon" ng-show="crudAction === 'EDIT'"></i>
+        <i class="fa fa-plus-square modal-icon" ng-show="crudAction === 'CREATE'"></i>                
+        <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
+        <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
     </div>
     <div class="modal-body">
 
         <div class="form-group">
-            <label>Redni broj</label> <input type="text"  class="form-control" ng-model="data.name">
+            <label>Redni broj</label> <input type="text"  class="form-control" ng-model="data.id">
         </div>
 
          <div class="form-group">
@@ -14,10 +16,10 @@
         </div>
         
           <div class="form-group">
-            <label>Adresa</label> <input type="text"  class="form-control" ng-model="data.name">
+            <label>Adresa</label> <input type="text"  class="form-control" ng-model="data.memberRegister.address">
         </div>
           <div class="form-group">
-            <label>Lokacija</label> <input type="text"  class="form-control" ng-model="data.name">
+            <label>Lokacija</label> <input type="text"  class="form-control" ng-model="data.location">
         </div>
           <div class="form-group">
             <label>Broj telefona 1</label> <input type="text"  class="form-control" ng-model="data.name">
@@ -49,19 +51,29 @@
          <div class="form-group">
             <label>Tajnik</label> <input type="text"  class="form-control" ng-model="data.name">
         </div>
-        <div class="input-group date">
+        <div class="form-group" id="data_1">
             <label>Datum mandata od</label>
-                <input class="form-control ng-pristine ng-valid ng-scope ng-not-empty ng-touched" date-time="" ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD" type="datetime">
+
+            <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
-         <div class="input-group date">
+        </div>
+         <div class="form-group" id="data_1">
             <label>Datum mandata do</label>
-                <input class="form-control ng-pristine ng-valid ng-scope ng-not-empty ng-touched" date-time="" ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD" type="datetime">
+
+            <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
+        </div>
         
          <div class="form-group">
-            <label>Datum registriranja kluba</label> <input type="text"  class="form-control" ng-model="data.name">
+            <label>Datum registriranja kluba</label>
+             <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
         </div>
         
           
