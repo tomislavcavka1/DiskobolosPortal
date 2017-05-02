@@ -5,9 +5,14 @@
  */
 var configuration = angular.module('configuration', []);
      
-configuration.constant('ConfigConstants', {
+configuration.constant('AppConstants', {
      ServerName: {
         hostUrl: 'http://localhost:8080/'
+    },
+    CrudActions: {
+        create: "CREATE",
+        edit: "EDIT",
+        delete: "DELETE"
     }
 });
 

@@ -62,6 +62,7 @@ memberRegisterModule.controller('memberRegisterController', function (
 
             var modalInstance = $uibModal.open({
                 templateUrl: 'views/memberRegisterModal.html',
+                size: 'lg',
                 controller: 'MemberRegisterModalCtrl',
                 scope: $scope
             });
@@ -79,7 +80,10 @@ memberRegisterModule.controller('MemberRegisterModalCtrl', function (
         $scope,
         $rootScope,
         $uibModalInstance,        
-        _) {
+        _,
+        AppConstants) {
+            
+        $scope.crudAction = AppConstants.CrudActions['edit'];
               
         $scope.data = {};
         $scope.data.name = $rootScope.selectedMemberRegister.name;

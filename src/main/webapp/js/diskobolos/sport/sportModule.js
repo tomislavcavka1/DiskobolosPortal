@@ -5,14 +5,6 @@
  */
 var sportModule = angular.module('sportModule', []);
 
-sportModule.constant('Constants', {
-    CrudActions: {
-        create: "CREATE",
-        edit: "EDIT",
-        delete: "DELETE"
-    }
-});
-
 sportModule.controller('sportController', function (
         $scope,
         $rootScope,
@@ -228,9 +220,9 @@ sportModule.controller('EditSportModalCtrl', function (
         _,
         SportDataFactory,
         toaster,
-        Constants) {
+        AppConstants) {
 
-    $scope.crudAction = Constants.CrudActions['edit'];
+    $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
     $scope.data.name = $rootScope.selectedSport.name;
 
@@ -382,9 +374,9 @@ sportModule.controller('CreateSportModalCtrl', function (
         _,
         SportDataFactory,
         toaster,
-        Constants) {
+        AppConstants) {
             
-    $scope.crudAction = Constants.CrudActions['create'];
+    $scope.crudAction = AppConstants.CrudActions['create'];
     $scope.data = {};            
     
     $scope.ok = function () {
