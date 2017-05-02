@@ -6,85 +6,121 @@
         <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
     </div>
     <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Redni broj</label> <input type="text"  class="form-control" ng-model="data.id">
+                </div>
 
-        <div class="form-group">
-            <label>Redni broj</label> <input type="text"  class="form-control" ng-model="data.id">
-        </div>
+            </div>
 
-         <div class="form-group">
-            <label>Naziv</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-        
-          <div class="form-group">
-            <label>Adresa</label> <input type="text"  class="form-control" ng-model="data.memberRegister.address">
-        </div>
-          <div class="form-group">
-            <label>Lokacija</label> <input type="text"  class="form-control" ng-model="data.location">
-        </div>
-          <div class="form-group">
-            <label>Broj telefona 1</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-          <div class="form-group">
-            <label>Broj telefona 2</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-          <div class="form-group">
-            <label>FAX</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>FAX</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>Matični broj</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>OIB</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>Registarski broj</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>Broj iz registra neprofitnih organizacija</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>Predsjednik</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-         <div class="form-group">
-            <label>Tajnik</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-        <div class="form-group" id="data_1">
-            <label>Datum mandata od</label>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Naziv</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
 
-            <div class="input-group date">
-                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <div class="form-group">
+                    <label>Adresa</label> <input type="text"  class="form-control" ng-model="data.memberRegister.address">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Lokacija</label> <input type="text"  class="form-control" ng-model="data.location">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Broj telefona 1</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Broj telefona 2</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FAX</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FAX</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Matični broj</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>OIB</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Registarski broj</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Broj iz registra neprofitnih organizacija</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Predsjednik</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Tajnik</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" id="data_1">
+                    <label>Datum mandata od</label>
+
+                    <div class="input-group date">
+                        <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" id="data_1">
+                    <label>Datum mandata do</label>
+
+                    <div class="input-group date">
+                        <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Datum registriranja kluba</label>
+                    <div class="input-group date">
+                        <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Kategorija članstva</label> <input type="text"  class="form-control" ng-model="data.name">
+                </div>
             </div>
         </div>
-         <div class="form-group" id="data_1">
-            <label>Datum mandata do</label>
-
-            <div class="input-group date">
-                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            </div>
-        </div>
-        
-         <div class="form-group">
-            <label>Datum registriranja kluba</label>
-             <div class="input-group date">
-                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            </div>
-        </div>
-        
-          
-         <div class="form-group">
-            <label>Kategorija članstva</label> <input type="text"  class="form-control" ng-model="data.name">
-        </div>
-
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-    <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
-</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+    </div>
 </div>
 
