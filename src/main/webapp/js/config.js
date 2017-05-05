@@ -258,6 +258,18 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'datatables.buttons',
                                 files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            },
+                            {
+                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                            },
+                            {
+                                name: 'oitozero.ngSweetAlert',
+                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
                             }
                         ]);
                     }
@@ -281,6 +293,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'datatables',
                                 files: ['js/plugins/dataTables/angular-datatables.min.js']
+                            },
+                            {
+                                files: ['js/plugins/moment/moment.min.js']
                             },
                             {
                                 name: 'datePicker',

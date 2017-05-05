@@ -17,9 +17,12 @@ mainAppServices.factory('SportDataFactory', ['$resource', 'AppConstants', functi
 
 
 // Services responsible for creation of membership category, fetching membership category etc.
-mainAppServices.factory('MembershpCategoryDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
+mainAppServices.factory('MembershipCategoryDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
         return $resource('', {}, {
-            'getAllMembershipCategories': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/categories/all', isArray: false}
+            'getAllMembershipCategories': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/categories/all', isArray: false},
+            'editSelectedMembershipCategory': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/categories/edit'},
+            'createMembershipCategoryData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/categories/create'},
+            'deleteMembershipCategoryData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/categories/delete'}
         });
     }]);
 

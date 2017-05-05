@@ -7,13 +7,7 @@
     </div>
     <div class="modal-body">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Redni broj</label> <input type="text"  class="form-control" ng-model="data.id">
-                </div>
-
-            </div>
-
+            
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Naziv</label> <input type="text"  class="form-control" ng-model="data.name">
@@ -87,7 +81,7 @@
                     <label>Datum mandata od</label>
 
                     <div class="input-group date">
-                        <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <input type="datetime" class="form-control" date-time ng-model="data.sampleDate1" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -97,7 +91,7 @@
                     <label>Datum mandata do</label>
 
                     <div class="input-group date">
-                        <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <input type="datetime" class="form-control" date-time ng-model="data.sampleDate2" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -106,7 +100,7 @@
                 <div class="form-group">
                     <label>Datum registriranja kluba</label>
                     <div class="input-group date">
-                        <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <input type="datetime" class="form-control" date-time ng-model="data.sampleDate3" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>

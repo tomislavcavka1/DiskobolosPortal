@@ -40,10 +40,10 @@ memberRegisterModule.controller('memberRegisterController', function (
       $scope.memberRegisters = {};            
                     
       $scope.getMemberRegisters = function () {
-                  
+                            
       MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
                 //success
-                $scope.memberRegisters = response.memberRegisters;           
+                $scope.memberRegisters = response.memberRegisters;          
             },
             function (error) {
                 //fail
@@ -56,10 +56,10 @@ memberRegisterModule.controller('memberRegisterController', function (
             $rootScope.selectedMemberRegister = _.find($scope.memberRegisters, function (obj) {
                 return obj.id === id;
             });
-            
+                                    
             //broadcast selected sport
             $rootScope.$broadcast('selectedMemberRegister', $rootScope.selectedMemberRegister);
-
+                        
             var modalInstance = $uibModal.open({
                 templateUrl: 'views/memberRegisterModal.html',
                 size: 'lg',
@@ -81,13 +81,13 @@ memberRegisterModule.controller('MemberRegisterModalCtrl', function (
         $rootScope,
         $uibModalInstance,        
         _,
-        AppConstants) {
+        AppConstants) {                    
             
         $scope.crudAction = AppConstants.CrudActions['edit'];
-              
+                                      
         $scope.data = {};
-        $scope.data.name = $rootScope.selectedMemberRegister.name;
-		
+        $scope.data = $rootScope.selectedMemberRegister;        
+                		
         $scope.ok = function () {            
             console.log('Name: ' + $scope.data.name);
             $uibModalInstance.close();

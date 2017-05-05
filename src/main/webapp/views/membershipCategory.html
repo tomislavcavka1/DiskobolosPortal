@@ -1,3 +1,5 @@
+<toaster-container></toaster-container>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Kategorija članstva</h2>
@@ -46,7 +48,7 @@
                                 <td>{{ membershipCategory.description}}</td>                            
                                 <td class="edit-column">
                                     <button type="button" class="btn btn-primary " ng-click="editData(membershipCategory.id)"><i class="fa fa-edit"></i> </button>
-                                    <button type="button" class="btn btn-danger "><i class="fa fa-trash"></i> </button>
+                                    <button type="button" class="btn btn-danger " ng-click="deleteData(membershipCategory.id)"><i class="fa fa-trash"></i> </button>
                                 </td>
                             </tr>
                         </tbody>
