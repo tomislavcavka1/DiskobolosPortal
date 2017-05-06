@@ -290,6 +290,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
                             },
                             {
+                                files: ['js/plugins/moment/moment.min.js']
+                            },
+                            {
                                 serie: true,
                                 name: 'datatables',
                                 files: ['js/plugins/dataTables/angular-datatables.min.js']

@@ -12,89 +12,90 @@ memberRegisterModule.controller('memberRegisterController', function (
         MemberRegisterDataFactory,
         $uibModal,
         DTOptionsBuilder) {
-            
-      $scope.dtOptions = DTOptionsBuilder.newOptions()
-        .withDOM('<"html5buttons"B>lTfgitp')
-        .withButtons([
-            {extend: 'copy'},
-            {extend: 'csv'},
-            {extend: 'excel', title: 'ExampleFile'},
-            {extend: 'pdf', title: 'ExampleFile'},
 
-            {extend: 'print',
-                customize: function (win){
-                    $(win.document.body).addClass('white-bg');
-                    $(win.document.body).css('font-size', '10px');
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withDOM('<"html5buttons"B>lTfgitp')
+            .withButtons([
+                {extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'print',
+                    customize: function (win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
 
-                    $(win.document.body).find('table')
-                        .addClass('compact')
-                        .css('font-size', 'inherit');
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                    }
                 }
-            }
-        ]);
-            
-      $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
-           $rootScope.selectedMemberRegister = selectedMemberRegister;
-      });
-            
-      $scope.memberRegisters = {};            
-                    
-      $scope.getMemberRegisters = function () {
-                            
-      MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
-                //success
-                $scope.memberRegisters = response.memberRegisters;          
-            },
-            function (error) {
-                //fail
-                $scope.error = error;
-            });
-        };
-                
-        $scope.editData = function (id) {
-            
-            $rootScope.selectedMemberRegister = _.find($scope.memberRegisters, function (obj) {
-                return obj.id === id;
-            });
-                                    
-            //broadcast selected sport
-            $rootScope.$broadcast('selectedMemberRegister', $rootScope.selectedMemberRegister);
-                        
-            var modalInstance = $uibModal.open({
-                templateUrl: 'views/memberRegisterModal.html',
-                size: 'lg',
-                controller: 'MemberRegisterModalCtrl',
-                scope: $scope
-            });
-            
-            modalInstance.result.then(function (response) {
-                console.log('Modal name', 'memberRegisterModal.html');                
-            });
-        };
-                                
-        $scope.getMemberRegisters();
+            ]);
+
+    $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
+        $rootScope.selectedMemberRegister = selectedMemberRegister;
+    });
+
+    $scope.memberRegisters = {};
+
+    $scope.getMemberRegisters = function () {
+
+        MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
+            //success
+            $scope.memberRegisters = response.memberRegisters;
+        },
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                });
+    };
+
+    $scope.editData = function (id) {
+
+        $rootScope.selectedMemberRegister = _.find($scope.memberRegisters, function (obj) {
+            return obj.id === id;
+        });
+
+        //broadcast selected sport
+        $rootScope.$broadcast('selectedMemberRegister', $rootScope.selectedMemberRegister);
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/memberRegisterModal.html',
+            size: 'lg',
+            controller: 'MemberRegisterModalCtrl',
+            scope: $scope
+        });
+
+        $scope.sampleDate = new Date();
+
+        modalInstance.result.then(function (response) {
+            console.log('Modal name', 'memberRegisterModal.html');
+        });
+    };
+
+    $scope.getMemberRegisters();
 });
 
 
 memberRegisterModule.controller('MemberRegisterModalCtrl', function (
         $scope,
         $rootScope,
-        $uibModalInstance,        
+        $uibModalInstance,
         _,
-        AppConstants) {                    
-            
-        $scope.crudAction = AppConstants.CrudActions['edit'];
-                                      
-        $scope.data = {};
-        $scope.data = $rootScope.selectedMemberRegister;        
-                		
-        $scope.ok = function () {            
-            console.log('Name: ' + $scope.data.name);
-            $uibModalInstance.close();
-        };
+        AppConstants) {
 
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
+    $scope.crudAction = AppConstants.CrudActions['edit'];
+
+    $scope.data = {};
+    $scope.data.name = $rootScope.selectedMemberRegister.name;
+
+    $scope.ok = function () {
+        console.log('Name: ' + $scope.data.name);
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 
