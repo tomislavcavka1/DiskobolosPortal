@@ -30,7 +30,8 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+        <button type="button" class="btn btn-primary" ng-show="crudAction === 'EDIT'" ng-click="ok()">Spremi promjene</button>
+        <button type="button" class="btn btn-primary" ng-show="crudAction === 'CREATE'" ng-click="ok()">Kreiraj novu stavku</button>
     </div>
 </div>
 

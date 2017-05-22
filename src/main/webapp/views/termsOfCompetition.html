@@ -14,7 +14,7 @@
 
     </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="evaluationController">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
@@ -24,65 +24,14 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-6 b-r">
+                        <div class="col-sm-6 b-r" >
                             <div class="well">
-                                <div class="form-group">
-                                    <p>Prijavitelj je upisan u Registar udruga Republike Hrvatske/Sudski registar te u Registar neprofitnih organizacija pri Ministarstvu financija/pri Trgovačkom sudu</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Djeluje na području Zadra najmanje dvije godine</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Ima sjedište ili prebivalište u Zadru</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Vodi transparentno financijsko poslovanje u skladu sa zakonskim propisima </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Prijavitelj je osigurao ljudske i materijalne resurse za provedbu prijavljenoga programa/aktivnosti</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Prijavitelj  je upisan u registar sportskih djelatnosti </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
+                                <div class="form-group" ng-repeat="evaluationQuestion in evaluationQuestions">
+                                    <p>{{evaluationQuestion.label}}</p>                                                                       
+                                    <label ng-repeat="item in evaluationQuestion.items">
+                                        <input icheck type="radio" name="{{evaluationQuestion.question}}" ng-model="answers[evaluationQuestion.question]" /> {{item.value}} </label>                                 
+                                </div>                                
                             </div>
-
-
-
                         </div>
                         <div class="col-sm-6">
                             <div class="well">

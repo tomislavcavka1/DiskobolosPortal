@@ -7,114 +7,129 @@
     </div>
     <div class="modal-body">
         <div class="row">
-            
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Naziv</label> <input type="text"  class="form-control" ng-model="data.name">
                 </div>
             </div>
             <div class="col-md-6">
-
                 <div class="form-group">
-                    <label>Adresa</label> <input type="text"  class="form-control" ng-model="data.memberRegister.address">
+                    <label>Adresa</label> <input type="text" class="form-control" ng-model="data.address" ng-blur="findCoordinatesForAddress(data.address)" ng-autocomplete >
                 </div>
-            </div>
-
+            </div>            
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Lokacija</label> <input type="text"  class="form-control" ng-model="data.location">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Broj telefona 1</label> <input type="text"  class="form-control" ng-model="data.name">
-                </div>
-
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Broj telefona 2</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Lokacija</label> 
+                    <ui-select ng-model="location.selected" theme="bootstrap">
+                        <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="location in locations | filter: $select.search">
+                            <div ng-bind-html="location.name | highlight: $select.search"></div>
+                            <small ng-bind-html="location.postalCode | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>FAX</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Broj telefona 1</label> <input type="text"  class="form-control" ng-model="data.phone1">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>FAX</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Broj telefona 2</label> <input type="text"  class="form-control" ng-model="data.phone2">
+                </div>
+            </div>            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FAX</label> <input type="text"  class="form-control" ng-model="data.fax">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Matični broj</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Matični broj</label> <input type="text"  class="form-control" ng-model="data.identificationNumber">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>OIB</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>OIB</label> <input type="text"  class="form-control" ng-model="data.oib">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Registarski broj</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Registarski broj</label> <input type="text"  class="form-control" ng-model="data.registerNumber">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Broj iz registra neprofitnih organizacija</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Broj iz registra neprofitnih organizacija</label> <input type="text"  class="form-control" ng-model="data.numberOfNonProfitOrg">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Predsjednik</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Predsjednik</label> <input type="text"  class="form-control" ng-model="data.chairman">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Tajnik</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Tajnik</label> <input type="text"  class="form-control" ng-model="data.secretary">
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group" id="data_1">
+                <div class="form-group" id="dataFrom">
                     <label>Datum mandata od</label>
-
                     <div class="input-group date">
-                        <input type="datetime" class="form-control" date-time ng-model="data.sampleDate1" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <input type="datetime" class="form-control" date-time ng-model="data.dateFrom" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group" id="data_1">
+                <div class="form-group" id="dataTo">
                     <label>Datum mandata do</label>
-
                     <div class="input-group date">
-                        <input type="datetime" class="form-control" date-time ng-model="data.sampleDate2" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <input type="datetime" class="form-control" date-time ng-model="data.dateTo" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" id="registrationDate">
                 <div class="form-group">
                     <label>Datum registriranja kluba</label>
                     <div class="input-group date">
-                        <input type="datetime" class="form-control" date-time ng-model="data.sampleDate3" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                        <input type="datetime" class="form-control" date-time ng-model="data.registrationDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Kategorija članstva</label> <input type="text"  class="form-control" ng-model="data.name">
+                    <label>Kategorija članstva</label>
+                    <ui-select ng-model="membershipCategory.selected" theme="bootstrap">
+                        <ui-select-match>{{$select.selected.description}}</ui-select-match>
+                        <ui-select-choices repeat="membershipCategory in membershipCategories | filter: $select.search">
+                            <div ng-bind-html="membershipCategory.description | highlight: $select.search"></div>                            
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Broj računa</label>
+                    <tags-input ng-model="data.bankAccountsTags"></tags-input> <!-- ng-iban="[HR]" -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Elektronička pošta</label>
+                    <tags-input ng-model="data.emailsTags"></tags-input>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+        <button type="button" class="btn btn-primary" ng-show="crudAction === 'EDIT'" ng-click="ok()">Spremi promjene</button>
+        <button type="button" class="btn btn-primary" ng-show="crudAction === 'CREATE'" ng-click="ok()">Kreiraj novu stavku</button>
     </div>
 </div>
 

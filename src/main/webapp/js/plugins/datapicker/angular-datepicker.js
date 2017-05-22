@@ -30,7 +30,7 @@
 
 //Moment format filter.
     Module.filter('mFormat', function () {
-        return function (m, format, tz) {
+        return function (m, format, tz) {            
             if (moment !== undefined && !(moment.isMoment(m))) {
                 return moment(m).format(format);
             }

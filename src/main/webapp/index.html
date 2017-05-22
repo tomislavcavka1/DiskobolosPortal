@@ -55,6 +55,16 @@
         <!-- Custom and plugin javascript -->
         <script src="js/inspinia.js"></script>
 
+        <!--
+         You need to include this script on any page that has a Google Map.
+         When using Google Maps on your own site you MUST signup for your own API key at:
+         https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+         After your sign up replace the key in the URL below..
+        -->
+        <!-- Google Maps JavaScript API -->
+        <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>-->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCXTkT2PvfMdXqgMIxgMg9rDPBT2psHfE&v=3.27&libraries=places&language=hr"></script>
+        
         <!-- Main Angular scripts-->
         <!--<script src="js/angular/angular.min.js"></script>-->
         <script src="https://code.angularjs.org/1.4.8/angular.js"></script>
@@ -65,7 +75,14 @@
         <script src="js/angular-translate/angular-translate.min.js"></script>
         <script src="js/ui-router/angular-ui-router.min.js"></script>
         <script src="js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
-        <script src="js/plugins/angular-idle/angular-idle.js"></script>
+        <script src="js/plugins/angular-idle/angular-idle.js"></script>        
+            
+        <!-- Anglar App Script -->
+        <script src="js/app.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/translations.js"></script>
+        <script src="js/directives.js"></script>
+        <script src="js/controllers.js"></script>
         <!-- Diskobolos -->        
         <script src="js/diskobolos/configuration/configuration.js"></script>
         <script src="js/diskobolos/services/mainAppServices.js"></script>        
@@ -73,23 +90,10 @@
         <script src="js/diskobolos/util/underscore.js"></script>
         <script src="js/diskobolos/util/underscoreService.js"></script>
         <script src="js/diskobolos/membershipCategory/membershipCategoryModule.js"></script>  
-        <script src="js/diskobolos/memberRegister/memberRegisterModule.js"></script>      
+        <script src="js/diskobolos/memberRegister/memberRegisterModule.js"></script>
+        <script src="js/plugins/google-api/ngAutocomplete.js"></script>
+        <script src="js/diskobolos/evaluation/evaluationModule.js"></script>
         <!-- Diskobolos -->
-
-        <!--
-         You need to include this script on any page that has a Google Map.
-         When using Google Maps on your own site you MUST signup for your own API key at:
-         https://developers.google.com/maps/documentation/javascript/tutorial#api_key
-         After your sign up replace the key in the URL below..
-        -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script>
-
-        <!-- Anglar App Script -->
-        <script src="js/app.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/translations.js"></script>
-        <script src="js/directives.js"></script>
-        <script src="js/controllers.js"></script>
 
     </body>
 </html>

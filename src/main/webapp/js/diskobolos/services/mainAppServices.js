@@ -29,6 +29,23 @@ mainAppServices.factory('MembershipCategoryDataFactory', ['$resource', 'AppConst
 // Services responsible for creation of member register, fetching member register etc.
 mainAppServices.factory('MemberRegisterDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
         return $resource('', {}, {
-            'getAllMemberRegisters': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/all', isArray: false}
+            'getAllMemberRegisters': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/all', isArray: false},
+            'editSelectedMemberRegister': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/edit'},
+            'createMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/create'},
+            'deleteMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/delete'}
+        });
+    }]);
+
+// Services responsible for creation of location, fetching location etc.
+mainAppServices.factory('LocationDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
+        return $resource('', {}, {
+            'getAllLocations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/locations/all', isArray: false}            
+        });
+    }]);
+
+// Services responsible for creation of evaluation, fetching evaluation etc.
+mainAppServices.factory('EvaluationDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
+        return $resource('', {}, {
+            'getAllEvaluationQuestions': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/all', isArray: false}
         });
     }]);

@@ -296,10 +296,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'datatables',
                                 files: ['js/plugins/dataTables/angular-datatables.min.js']
-                            },
-                            {
-                                files: ['js/plugins/moment/moment.min.js']
-                            },
+                            },                            
                             {
                                 name: 'datePicker',
                                 files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
@@ -308,6 +305,34 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'datatables.buttons',
                                 files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                            },                            
+                            {
+                                name: 'ui.select',
+                                files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                            },
+                            {
+                                name: 'ngTagsInput',
+                                files: ['js/plugins/ngTags//ng-tags-input.min.js', 'css/plugins/ngTags/ng-tags-input-custom.min.css']
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            },
+                            {
+                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                            },
+                            {
+                                name: 'oitozero.ngSweetAlert',
+                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                            },
+                            {
+                                name: 'mm.iban',
+                                files: ['js/diskobolos/validations/ng-iban.js']
+                            },
+                            {
+                                name: 'ngAutocomplete',
+                                files: ['js/plugins/google-api/ngAutocomplete.js']
                             }
                         ]);
                     }
@@ -334,6 +359,20 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         return $ocLazyLoad.load([
                             {
                                 files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                            },
+                            {
+                                serie: true,
+                                files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                            },                            
+                            {
+                                serie: true,
+                                name: 'datatables',
+                                files: ['js/plugins/dataTables/angular-datatables.min.js']
+                            },                           
+                            {
+                                serie: true,
+                                name: 'datatables.buttons',
+                                files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
                             }
                         ]);
                     }

@@ -15,8 +15,10 @@
         'underscore',
         'sportModule',
         'membershipCategoryModule',
-        'memberRegisterModule'
-    ])
+        'memberRegisterModule',
+        'ngAutocomplete',              // google autocomplete
+        'evaluationModule'
+    ]);
 })();
 
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad
