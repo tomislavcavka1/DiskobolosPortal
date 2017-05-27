@@ -1,10 +1,13 @@
+<toaster-container></toaster-container>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Uvjeti natječaja - osnovni uvjeti za administrativno vrednovanje udruga </h2>
+        <h2>Uvjeti natječaja</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
             </li>
+
             <li class="active">
                 <strong>Uvjeti natječaja</strong>
             </li>
@@ -14,230 +17,54 @@
 
     </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="evaluationController">
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="evaluationController3">
+
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Opći uvjeti
-                    </h5>
-                </div>
+
                 <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-6 b-r" >
-                            <div class="well">
-                                <div class="form-group" ng-repeat="evaluationQuestion in evaluationQuestions">
-                                    <p>{{evaluationQuestion.label}}</p>                                                                       
-                                    <label ng-repeat="item in evaluationQuestion.items">
-                                        <input icheck type="radio" name="{{evaluationQuestion.question}}" ng-model="answers[evaluationQuestion.question]" /> {{item.value}} </label>                                 
-                                </div>                                
+                    <div class="row ibox-header">
+
+
+                        <div class="col-lg-12">
+                            <div class="form-group pull-right">
+                                <button class="btn btn-primary " type="button" ng-click="createData()"><i class="fa fa-plus"></i>&nbsp;Novi unos</button>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="well">
-                                <div class="form-group">
-                                    <p>Prijavitelj je član gradskog, županijskog i nacionalnog sportskog saveza odnosno odgovarajuće udruge udružene u Hrvatski olimpijski odbor ukoliko isti postoje (isključujući uvjet??) </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Sudjeluje u sustavu natjecanja pripadajućeg nacionalnog saveza</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Predan plan i program rada za sljedeću kalendarsku godinu </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Predano izvješće o radu za proteklu kalendarsku godinu dostavljeno Športskoj zajednici Grada Zadra </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Predan financijski plan za proteklu kalendarsku godinu dostavljen Športskoj zajednici Grada Zadra </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-
-                            </div>
-
-
 
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <table datatable="ng" dt-options="dtOptions"  class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>RB</th>
+                                <th>Klub</th>
+                                <th>Zadovoljio uvjete</th>
+                                <th>lorem</th>
+                                
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="sport in sports">
+                                <td>{{sport.id}}</td>
+                                <td>{{sport.name}}</td>
+                                <td>{{sport.nationalSportsFederation}}</td>
+                                <td>{{sport.internationalFederation}}</td>
+                                <td>{{sport.iocSportAccord}}</td>
+                                <td class="edit-column">
+                                    <button type="button" class="btn btn-primary " ng-click="editData(sport.id)"><i class="fa fa-edit"></i> </button>
+                                    <button type="button" class="btn btn-danger " ng-click="deleteData(sport.id)"><i class="fa fa-trash"></i> </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Opći uvjeti - dokumentacija
-                    </h5>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-6 b-r">
-                            <div class="well">
-                                <h3>Izvadak iz registra - preslika:  </h3>
-                                <div class="form-group">
-                                    <p>a) za udruge: izvadak iz Registra udruga Republike Hrvatske ili preslika važećeg Rješenja o upisu u Registar udruga Republike Hrvatske </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>b) za trgovačka društva:  izvadak iz sudskog Registra ne stariji od 6 mjeseci </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Preslika isprave kojom se dokazuje stručna osposobljenost osoba koje će realizirati prijavljeni program (diploma i licenca za trenere) </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Kopija zapisnika sa zadnje sjednice Skupštine  i potvrda da udruga djeluje u mandatu</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Preslika obavijesti o upisu u Registar športskih djelatnosti </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Potvrdu o upisu u Registar neprofitnih organizacija (za udruge)</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="well">
-                                <div class="form-group">
-                                    <p>Prijedlog programa uz detaljno obrazloženje - obrasci</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Potvrda o istinitosti i točnosti podataka </p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Automatsko isključivanje članica</h5>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="well">
-
-
-                                <div class="form-group">
-                                    <p>Strukovna udruga čiji rad/djelatnost nije direktno ili indirektno vezana za sport</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Udruga koje je u stečaju</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <p>Udruge čiji je jedan od osnivača politička stranka</p>
-
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> DA </label>
-                                    <label>
-                                        <input icheck type="radio" name="radioTest" ng-model="main.check8"> NE </label>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>

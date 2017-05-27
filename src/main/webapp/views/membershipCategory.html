@@ -47,8 +47,10 @@
                                 <td>{{ membershipCategory.id}}</td>
                                 <td>{{ membershipCategory.description}}</td>                            
                                 <td class="edit-column">
+                                    <div class="btn-group">
                                     <button type="button" class="btn btn-primary " ng-click="editData(membershipCategory.id)"><i class="fa fa-edit"></i> </button>
                                     <button type="button" class="btn btn-danger " ng-click="deleteData(membershipCategory.id)"><i class="fa fa-trash"></i> </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

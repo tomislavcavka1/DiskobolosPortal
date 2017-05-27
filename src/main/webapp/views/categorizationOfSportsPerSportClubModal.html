@@ -1,0 +1,406 @@
+<div class="inmodal">
+    <div class="modal-header">        
+        <i class="fa fa-edit modal-icon" ng-show="crudAction === 'EDIT'"></i>
+        <i class="fa fa-plus-square modal-icon" ng-show="crudAction === 'CREATE'"></i>                
+        <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
+        <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
+    </div>
+    <div class="modal-body">
+
+               <div class="ibox float-e-margins">
+                   
+                    
+                    <div class="ibox-content">
+                         <div class="row ibox-header">
+                          <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Odaberite klub za vrednovanje</label>
+                            <select class="form-control m-b" name="account">
+                                <option selected>...</option>
+                                <option value="option 2">option 2</option>
+                                <option value="option 3">option 3</option>
+                                <option value="option 4">option 4</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    
+                  
+                        </div>
+                        
+                        <div class="row">
+                             <div class="col-md-12">
+                                <div class="row">
+                            <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    1. Kategorizacija prema broju registriranih klubova u nacionalnom savezu
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <label class="m-b">1. Kategorizacija prema broju registriranih klubova u nacionalnom savezu
+</label>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> športski klubovi registrirani više od 50                             </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športski klubovi registrirani od 26 - 49                                               </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športski klubovi registrirani od 15 - 25                                               </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športski klubovi registrirani od 9 - 14                                                </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športski klubovi registrirani manje od 9                                               </label>
+                                    </div>
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    2. Kategorizacija prema vrsti športa
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                     <label class="m-b">2. Kategorizacija prema vrsti športa
+</label>
+                                   
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> olimpijski šport </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> neolimpijski šport</label>
+                                    </div>
+                                    
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    3. Kategorizacija prema zastupljenosti dobnih kategorija
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                     <label class="m-b">3. Kategorizacija prema zastupljenosti dobnih kategorija</label>
+                                   
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour">seniori, juniori, kadeti, predkadeti i športska škola                         </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> seniori, juniori, kadeti i športska škola                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> seniori, juniori i kadeti                                                   </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> juniori, kadeti i športska. škola                                             label>
+                                    </div>
+                                   
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                   4. Kategorizacija prema rangu sustava natjecanja
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                     <label class="m-b">4. Kategorizacija prema rangu sustava natjecanja
+</label>
+                                   
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour">1. HR liga (natjecanje seniora, juniora i kadeta)                     </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 1. HR liga (natjecanje juniora i kadeta</label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 1. HR liga (turnirski sustav natjecanja)                             </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 2. HR liga (natjecanje seniora, juniora i kadeta)                  </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 3. HR liga (natjecanje seniora, juniora i kadeta)                </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> međužupanijska liga             </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> županijska liga (natjecanje seniora, juniora i kadeta)                                        </label>
+                                    </div>
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                                </div>
+                             </div>
+                            
+                             <div class="col-md-12">
+                                <div class="row">
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                   5. Kategorizacija prema broju članova ekipe koja se natječe
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <label class="m-b">5. Kategorizacija prema broju članova ekipe koja se natječe 
+</label>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> broj članova ekipe u natjecanju više od 15                                                                    </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj članova ekipe 10 - 15                                                                     </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj članova ekipe do 9 natjecatelja                                                                       </label>
+                                    </div>
+        
+                                    
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+                                    6. Kategorizacija prema masovnosti u športskim školama
+                                </div>
+                               
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <label class="m-b">6. Kategorizacija prema masovnosti u športskim školama
+</label>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> broj djece u športskim školama više od 200                                          </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj djece u športskim školama više od 200                                         </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj djece u športskim školama od 150 - 200                                         </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj djece u športskim školama od 100 - 150                                           </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj djece u športskim školama od 50 - 100  </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj djece u športskim školama do 20 - 50                                                     </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> broj djece u športskim školama do 20                                                     </label>
+                                    </div>
+                                 
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    7. Kategorizacija prema stručnim kadrovima
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <label class="m-b">7. Kategorizacija prema stručnim kadrovima
+</label>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> športska udruga više od 5 trenera (S, J, K, P i šp. škola)                     </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športska udruga 3-5 trenera (S, J, K i šp. škola ) </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športska udruga 2-3 trenera (J, K i šp. škola )                             </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> športska udruga angažiran samo jedan trener za sve uzraste                    </label>
+                                    </div>
+                                     <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> bez trenera                  </label>
+                                    </div>
+                                 
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    8.Kategorizacija prema tradiciji Udruge u Gradu Zadru
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <label class="m-b">8.Kategorizacija prema tradiciji Udruge u Gradu Zadru
+</label>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> od 51 godinu
+</label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 26-50 godina
+ </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 10-25 godina
+ </label>
+                                    </div>
+                                   
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                                    
+                                </div>
+                             </div>
+                            
+                             <div class="col-md-12">
+                                <div class="row">
+                            
+                              <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                   9.Koeficijnt kategorije sporta
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <label class="m-b">9.Koeficijnt kategorije sporta
+</label>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> I. kategorija </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> II. kategorija </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> III. kategorija </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> IV. kategorija </label>
+                                    </div>
+                                 
+                                    <span class="badge badge-primary">Bodovi : 0</span>
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                          
+                           
+                            
+                            
+                             <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3>Ukupni bodovi :</h3>
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                    <span class="badge badge-info">  <h3>Bodovi : 0</h3></span>
+                                    
+                                </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                                    
+                                </div>
+                             </div>
+                          
+                        </div>
+                    </div>
+                </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+    </div>
+</div>

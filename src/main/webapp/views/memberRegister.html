@@ -34,30 +34,44 @@
 
                         </div>
                     </div>
-                    <table datatable="ng" dt-options="dtOptions"  class="table table-striped table-bordered table-hover dataTables-example">
+                    <table datatable="ng" dt-options="dtOptions" dt-instance="vm.dtInstance"  class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>ID</th>
-                                <th>Naziv</th>  
-                                <th>Adresa</th>
+                                <th>Tel 1</th>
+                                <th>Tel 2</th>
+                                <th>Fax</th>
+                                <th>Identifikacijski broj</th>
                                 <th>OIB</th>
-                                <th>Datum pristupanja</th>
-                                <th>Predsjednik</th>                                
+                                <th>Registracijski broj</th>
+                                <th>numberOfNonProfitOrg</th>
+                                <th>chairman</th>
+                                <th>secretary</th>
+                                <th>Datum mandata od</th>
                                 <th>promjeni/izbriši</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="memberRegister in memberRegisters">
+                                <td><a class="green-shortinfo" href="javascript:;" ng-click="childInfo(user, $event)" title="Click to view more"><i class="glyphicon glyphicon-chevron-down"></a></td>
                                 <td>{{ memberRegister.id}}</td>
-                                <td>{{ memberRegister.name}}</td>
-                                <td>{{ memberRegister.address}}</td>
+                                <td>{{ memberRegister.phone1}}</td>
+                                <td>{{ memberRegister.phone2}}</td>
+                                <td>{{ memberRegister.fax}}</td>
+                                <td>{{ memberRegister.identificationNumber}}</td>
                                 <td>{{ memberRegister.oib}}</td>
-                                <td>{{ memberRegister.registrationDate}}</td>
-                                <td>{{ memberRegister.chairman}}</td>                                
+                                <td>{{ memberRegister.registerNumber}}</td>
+                                <td>{{ memberRegister.numberOfNonProfitOrg}}</td>
+                                <td>{{ memberRegister.chairman}}</td>
+                                <td>{{ memberRegister.secretary}}</td>
+                                <td>{{ memberRegister.dateFrom}}</td>
                                 <td class="edit-column">
-                                    <button type="button" class="btn btn-primary " ng-click="editData(memberRegister.id)"><i class="fa fa-edit"></i> </button>
-                                    <button type="button" class="btn btn-danger " ng-click="deleteData(memberRegister.id)"><i class="fa fa-trash"></i> </button>
-                                    <button type="button" class="btn btn-info "><i class="fa fa-search"></i> </button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary " ng-click="editData(memberRegister.id)"><i class="fa fa-edit"></i> </button>
+                                        <button type="button" class="btn btn-danger " ng-click="deleteData(memberRegister.id)"><i class="fa fa-trash"></i> </button>
+                                        <button type="button" class="btn btn-info "><i class="fa fa-search"></i> </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

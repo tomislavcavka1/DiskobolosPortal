@@ -208,12 +208,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 serie: true,
                                 name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.min.js']
+                                files: ['js/plugins/dataTables/angular-datatables.min.js' , 'https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.js' , 'https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.css']
                             },
                             {
                                 serie: true,
                                 name: 'datatables.buttons',
-                                files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                                files: ['https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js' ]
                             },
                             {
                                 name: 'ngTagsInput',
@@ -292,20 +292,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 files: ['js/plugins/moment/moment.min.js']
                             },
-                            {
+                             {
                                 serie: true,
                                 name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.min.js']
-                            },                            
-                            {
-                                name: 'datePicker',
-                                files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                                files: ['js/plugins/dataTables/angular-datatables.min.js' , 'https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.js' , 'https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.css']
                             },
                             {
                                 serie: true,
                                 name: 'datatables.buttons',
-                                files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
-                            },                            
+                                files: ['https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js' ]
+                            },
+                            {
+                                name: 'datePicker',
+                                files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                            },
+                           
                             {
                                 name: 'ui.select',
                                 files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
@@ -363,16 +364,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 serie: true,
                                 files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
-                            },                            
+                            },
                             {
                                 serie: true,
                                 name: 'datatables',
                                 files: ['js/plugins/dataTables/angular-datatables.min.js']
-                            },                           
+                            },
                             {
                                 serie: true,
                                 name: 'datatables.buttons',
                                 files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                            },
+                            {
+                                files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
                             }
                         ]);
                     }

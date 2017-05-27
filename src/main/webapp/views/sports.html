@@ -39,11 +39,11 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Naziv</th>
+                                <th >Naziv</th>
                                 <th>Nacionalni sportski savez/<br/>članstvo u HOO-u</th>
                                 <th>Međunarodna federacija</th>
                                 <th>Priznati od IOC-a, <br/>članovi SPORTACCORD-a</th>
-                                <td>Promijeni/izbriši</td>
+                                <td style="display:block !important;">Promijeni/izbriši</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,8 +54,10 @@
                                 <td>{{sport.internationalFederation}}</td>
                                 <td>{{sport.iocSportAccord}}</td>
                                 <td class="edit-column">
+                                    <div class="btn-group">
                                     <button type="button" class="btn btn-primary " ng-click="editData(sport.id)"><i class="fa fa-edit"></i> </button>
                                     <button type="button" class="btn btn-danger " ng-click="deleteData(sport.id)"><i class="fa fa-trash"></i> </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

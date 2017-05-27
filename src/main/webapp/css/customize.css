@@ -204,12 +204,50 @@ table td.edit-column {
     text-align: center;
 }
 
+table.dataTable {
+    border-collapse: separate;
+    clear: both;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    max-width: none;
+    width: 100% !important;
+}
+
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+    background-color: #888 !important;
+    border: 2px solid white;
+    border-radius: 14px;
+    box-shadow: 0 0 3px #444;
+    box-sizing: content-box;
+    color: white;
+    content: "+";
+    display: block;
+    font-family: "Courier New",Courier,monospace;
+    height: 14px;
+    left: 9px;
+    line-height: 14px;
+    position: absolute;
+    text-align: center;
+    top: 11px;
+    width: 14px;
+}
+
+table.dataTable .green-shortinfo {
+    color: #1ab394;
+    
+}
+
 /************************
         modal
 ************************/
 
 .modal-body span{
     font-size: 13px;
+}
+
+.modal-xlg {
+    width: 1200px;
 }
 
 /*
