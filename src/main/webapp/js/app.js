@@ -17,7 +17,9 @@
         'membershipCategoryModule',
         'memberRegisterModule',
         'ngAutocomplete',              // google autocomplete
-        'evaluationModule'
+        'evaluationModule',
+        'authenticationModule',
+        'angular-jwt'
     ]);
 })();
 

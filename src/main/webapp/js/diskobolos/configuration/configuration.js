@@ -16,4 +16,14 @@ configuration.constant('AppConstants', {
     }
 });
 
+configuration.constant('AUTH_EVENTS', {
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized'
+});
+ 
+configuration.constant('USER_ROLES', {
+  admin: 'admin_role',
+  public: 'public_role'
+});
+
 

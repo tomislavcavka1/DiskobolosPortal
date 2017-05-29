@@ -12,7 +12,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     IdleProvider.idle(5); // in seconds
     IdleProvider.timeout(120); // in seconds
 
-    $urlRouterProvider.otherwise("sports");
+    $urlRouterProvider.otherwise("login");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -25,6 +25,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 abstract: true,
                 url: "/dashboards",
                 templateUrl: "views/common/content.html",
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                name: 'authenticationModule',
+                                files: ['js/diskobolos/login/authenticationModule.js']
+                            }
+                        ]);
+                    }
+                }
             })
             .state('dashboards.dashboard_1', {
                 url: "/dashboard_1",
@@ -429,24 +439,58 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('usefulLinks.registerOfNonprofitOrganizations', {
                 url: "/registerOfNonprofitOrganizations",
                 templateUrl: "views/registerOfNonprofitOrganizations.html",
-                data: {pageTitle: 'registra_neprotifabilnih_organizacija'}
+                data: {pageTitle: 'registra_neprotifabilnih_organizacija'}                
             })
 
             /*
              Login
              */
-
             .state('login', {
                 url: "/login",
                 templateUrl: "views/login.html",
-                data: {pageTitle: 'Login', specialClass: 'login-bg'}
-            })
+                data: {pageTitle: 'Login', specialClass: 'login-bg'},
+                params: { 
+                   'toState': 'content.sports', // default state to proceed to after login
+                   'toParams': {}
+                },
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([                            
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            }
+                        ]);
+                    }
+                }
+            });
 
 
 }
 angular
         .module('inspinia')
         .config(config)
-        .run(function ($rootScope, $state) {
-            $rootScope.$state = $state;
-        });
+        .run(function ($rootScope, $state, _, sessionStorageService) {
+            // register listener to watch state changes
+            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+            console.log("stateChangeStart from: " + fromState.name + " to: " + toState.name);
+            if (toState.name === "login") {
+               // do nothing in case when net state is login
+               return;
+            }
+            // get token from the session
+            sessionStorageService.getJwtToken().then(function (token) {
+                if (token === null || _.isUndefined(token)) {
+                    // no logged user, we should be going to #login
+                    if (next.name !== "login") {                        
+                        $state.go("login");
+                    }
+                }            
+            }, function (response) {              
+                // in case we get an error we need to redirect to the login page and clean data from the session                
+                $state.go("login");
+                sessionStorageService.removeJwtToken();
+            });
+     });
+});

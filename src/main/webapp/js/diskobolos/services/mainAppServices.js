@@ -49,3 +49,67 @@ mainAppServices.factory('EvaluationDataFactory', ['$resource', 'AppConstants', f
             'getAllEvaluationQuestions': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/all', isArray: false}
         });
     }]);
+
+// services responsible for authentication functionality
+mainAppServices.factory('UserAuthenticationFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
+        return $resource('', {}, {
+            'authenticateUser': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/authentication/login', isArray: false}
+        });
+    }]);
+
+// Services responsible for session storage of data.
+mainAppServices.service('sessionStorageService', ['$window', '$q', '$http', function ($window, $q, $http) {
+        this.setJwtToken = function (token) {
+            $window.localStorage.setItem('jwtToken', token);
+            // Set the token as header for your requests!
+            $http.defaults.headers.common['X-Auth-Token'] = {"Authorization": token};
+        },
+        this.getJwtToken = function () {
+            if ($window.localStorage.getItem('jwtToken')) {                    
+                return $q.when($window.localStorage.getItem('jwtToken'));
+            } else {
+                var deferred = $q.defer();
+                deferred.reject('No Login User');
+                return deferred.promise;
+            }
+        };
+        this.removeJwtToken = function () {
+            $http.defaults.headers.common['X-Auth-Token'] = undefined;
+            $window.localStorage.removeItem('jwtToken');
+        };        
+}]);
+
+// intercepts HTTP reponses errors during authentication
+mainAppServices.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
+  return {
+    responseError: function (response) {
+      $rootScope.$broadcast({
+        401: AUTH_EVENTS.notAuthenticated,
+        403: AUTH_EVENTS.notAuthorized
+      }[response.status], response);
+      return $q.reject(response);
+    }
+  };
+});
+ 
+mainAppServices.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('AuthInterceptor');
+  
+  $httpProvider.interceptors.push(['$q', '$location', '$window', function($q, $location, $window) {
+            return {
+                'request': function (config) {
+                    config.headers = config.headers || {};
+                    if ($window.localStorage !== undefined) {
+                        config.headers.Authorization = $window.localStorage.jwtToken;
+                    }
+                    return config;
+                },
+                'responseError': function(response) {
+                    if(response.status === 401) {
+                        $location.path('/login');
+                    }
+                    return $q.reject(response);
+                }
+            };
+        }]);
+});
