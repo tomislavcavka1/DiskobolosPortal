@@ -5,33 +5,37 @@
         <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
         <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
     </div>
-    <div class="modal-body">
+    <form name="sport">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Naziv</label> <input type="text" name="name" ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Upišite naziv" class="form-control" ng-model="data.name">
+            </div>
+            <div ng-messages="sport.name.$error">            
+                <p ng-message="required">Naziv je obavezno polje</p>
+                <p ng-message="minlength">Minimalna duljina naziva je 1.</p>
+                <p ng-message="maxlength">Maksimalna duljina naziva je 100.</p>
+            </div>
 
-        <div class="form-group">
-            <label>Naziv</label> <input type="text" placeholder="Upišite naziv" class="form-control" ng-model="data.name">
+            <div class="form-group">
+                <label>Nacionalni sportski savez</label>
+                <tags-input ng-model="data.nationalSportsFederations"></tags-input>
+            </div>
+
+            <div class="form-group">
+                <label>Međunarodna federacija</label>
+                <tags-input ng-model="data.internationalFederations"></tags-input>
+            </div>
+
+            <div class="form-group">
+                <label>Priznati od IOC-a, članovi SPORTACCORD-a</label>
+                <tags-input ng-model="data.iocSportAccords"></tags-input>
+            </div>        
         </div>
-
-        <div class="form-group">
-            <label>Nacionalni sportski savez</label>
-            <tags-input ng-model="data.nationalSportsFederations"></tags-input>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
+            <button type="submit" class="btn btn-primary" ng-show="crudAction === 'EDIT'" ng-click="sport.$valid && ok()">Spremi promjene</button>
+            <button type="submit" class="btn btn-primary" ng-show="crudAction === 'CREATE'" ng-click="sport.$valid && ok()">Kreiraj novu stavku</button>
         </div>
-
-        <div class="form-group">
-            <label>Međunarodna federacija</label>
-            <tags-input ng-model="data.internationalFederations"></tags-input>
-        </div>
-
-        <div class="form-group">
-            <label>Priznati od IOC-a, članovi SPORTACCORD-a</label>
-            <tags-input ng-model="data.iocSportAccords"></tags-input>
-        </div>
-
-
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-        <button type="button" class="btn btn-primary" ng-show="crudAction === 'EDIT'" ng-click="ok()">Spremi promjene</button>
-        <button type="button" class="btn btn-primary" ng-show="crudAction === 'CREATE'" ng-click="ok()">Kreiraj novu stavku</button>
-    </div>
+    </form>
 </div>
 
