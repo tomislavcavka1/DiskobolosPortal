@@ -14,7 +14,7 @@ memberRegisterModule.controller('memberRegisterController', function (
         MemberRegisterDataFactory,
         $uibModal,
         DTOptionsBuilder,
-        DTColumnBuilder,
+        DTColumnDefBuilder,
         $compile,
         LocationDataFactory,
         MembershipCategoryDataFactory,
@@ -69,7 +69,7 @@ memberRegisterModule.controller('memberRegisterController', function (
             row.child($compile('<div tmpl class="clearfix"></div>')(scope)).show();
             tr.addClass('shown');
         }
-    }
+    };
 
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -95,7 +95,16 @@ memberRegisterModule.controller('memberRegisterController', function (
                                 .css('font-size', 'inherit');
                     }
                 }
-            ]);
+            ])
+            .withOption(
+                    'responsive', true
+             );
+
+
+    $scope.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
+
+    ];
 
     $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
         $rootScope.selectedMemberRegister = selectedMemberRegister;

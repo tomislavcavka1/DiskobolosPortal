@@ -305,7 +305,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                              {
                                 serie: true,
                                 name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.min.js' , 'https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.js' , 'https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.css']
+                                files: ['js/plugins/dataTables/angular-datatables.js' , 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js' , 'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css']
                             },
                             {
                                 serie: true,
