@@ -83,7 +83,7 @@ sportModule.controller('sportController', function (
     $scope.$on('selectedSport', function (ev, selectedSport) {
         $rootScope.selectedSport = selectedSport;
     });
-
+    
     $scope.sports = {};
 
     $scope.$on('sports', function (ev, sports) {

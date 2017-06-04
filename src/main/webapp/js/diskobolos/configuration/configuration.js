@@ -26,4 +26,10 @@ configuration.constant('USER_ROLES', {
   public: 'public_role'
 });
 
-
+configuration.constant('ROLE_PERMISSION_LEVEL', {
+  veryHigh: 'VERY_HIGH',
+  high: 'HIGH',
+  medium: 'MEDIUM',
+  small: 'SMALL',
+  verySmall: 'VERY_SMALL'
+});

@@ -4,15 +4,15 @@
             <li class="nav-header">
 
                 <div class="profile-element" uib-dropdown>
-                  <div align="center"> <img alt="image" class="sidebar-logo"  src="img/logo.png"/></div> 
-                    
+                    <div align="center"> <img alt="image" class="sidebar-logo"  src="img/logo.png"/></div> 
+
                     <a uib-dropdown-toggle href>
-                            <span class="clear">
-                                <span class="block m-t-xs">
-                                    <strong class="font-bold">Helena Dobrović</strong>
-                             </span>
-                                <span class="text-muted text-xs block">Administrator <b class="caret"></b></span>
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold"><p ng-bind="authenticatedUser.username"></p></strong>
                             </span>
+                            <span class="text-muted text-xs block"><p ng-bind="authenticatedUser.role.authority"></p><b class="caret"></b></span>
+                        </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
                         <li><a ui-sref="app.profile">Profile</a></li>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                   <img alt="image" class="logo-icon"  src="img/logo-icon.png"/>
+                    <img alt="image" class="logo-icon"  src="img/logo-icon.png"/>
                 </div>
             </li>
             <li ng-class="{active: $state.includes('dashboards')}">
@@ -51,7 +51,7 @@
                     <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfNonprofitOrganizations">Registar neprofitnih organizacija</a></li>
                     <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfCroatianRepublicAssociations">Registar udruga Republike Hrvatske</a></li>
                     <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfSportsActivities">Registar sportskih djelatnosti </a></li>
-                   
+
                 </ul>
             </li>
 
@@ -61,10 +61,10 @@
                     <li ui-sref-active="active"><a ui-sref="evaluation.termsOfCompetition">Uvjeti natječaja</a></li>
                     <li ui-sref-active="active"><a ui-sref="evaluation.rankingAndCategorizationOfSpors">Rangiranje i kategorizacija sportova</a></li>
                     <li ui-sref-active="active"><a ui-sref="evaluation.categorizationOfSportsPerSportClub">Kategorizacija sporta za sportske klubove</a></li>
-                   
+
                 </ul>
             </li>
-            
+
         </ul>
 
     </div>
