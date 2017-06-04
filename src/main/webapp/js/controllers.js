@@ -57,7 +57,7 @@
  *
  */
 function MainCtrl($http) {
-
+    
     /**
      * countries - Used as duallistbox in form advanced view
      */
@@ -348,7 +348,7 @@ function MainCtrl($http) {
         options: {
             fill: ["#1ab394", "#d7d7d7"]
         }
-    };
+    };    
 };
 
 
