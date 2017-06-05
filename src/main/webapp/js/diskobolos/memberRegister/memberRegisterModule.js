@@ -42,50 +42,58 @@ memberRegisterModule.controller('memberRegisterController', function (
         "oAria": {
             "sSortAscending": ": aktiviraj za rastući poredak",
             "sSortDescending": ": aktiviraj za padajući poredak"
+        },
+        "oSelect": {
+            "sRows": "% lorem lorem"
+            
         }
     };
 
-    $scope.vm = {};
-    $scope.vm.dtInstance = {};
-
-
-    $scope.childInfo = function (user, event) {
-
-        var scope = $scope.$new(true);
-        scope.user = user;
-
-        var link = angular.element(event.currentTarget),
-                icon = link.find('.glyphicon'),
-                tr = link.parent().parent(),
-                table = $scope.vm.dtInstance.DataTable,
-                row = table.row(tr);
-        //
-        if (row.child.isShown()) {
-            icon.removeClass('glyphicon glyphicon-chevron-up').addClass('glyphicon glyphicon-chevron-down');
-            row.child.hide();
-            tr.removeClass('shown');
-        } else {
-            icon.removeClass('glyphicon glyphicon-chevron-down').addClass('glyphicon glyphicon-chevron-up');
-            row.child($compile('<div tmpl class="clearfix"></div>')(scope)).show();
-            tr.addClass('shown');
-        }
-    };
-
-
+    
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
             .withLanguage(language)
             .withOption('order', [0, 'asc'])
             .withPaginationType('full_numbers')
             .withButtons([
-                {extend: 'colvis', text: 'Prikaz polja u tablici', columns: [1, 2, 3, 4]},
-                {extend: 'copy', text: 'Kopiraj'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile', exportOptions: {
-                        columns: [1, 2, 3, 4]
+                {extend: 'selectAll', text: 'Označi sve', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
                     }},
-                {extend: 'print', text: 'Ispis',
+                {extend: 'selectNone', text: 'Odznači sve', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
+                    }},
+                {extend: 'colvis', text: '<i class="fa fa-list-ul" aria-hidden="true"></i> Prikaz polja u tablici',
+                    columns: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]},
+                {extend: 'copy', text: '<i class="fa fa-files-o"></i> Kopiraj', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
+                    }},
+                {extend: 'csv', text: '<i class="fa fa-file-text-o"></i> CSV', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
+                    }},
+                {extend: 'excel', text: '<i class="fa fa-file-excel-o"></i> Excel', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
+                    }},
+                {extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i> PDF', orientation: 'landscape',
+                    pageSize: 'LEGAL', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
+                    }},
+                {extend: 'print', text: '<i class="fa fa-print"></i> Ispis', exportOptions: {
+                        columns: ':visible:not(.not-export-col)', modifier: {
+                            selected: true
+                        }
+                    },
                     customize: function (win) {
                         $(win.document.body).addClass('white-bg');
                         $(win.document.body).css('font-size', '10px');
@@ -94,12 +102,16 @@ memberRegisterModule.controller('memberRegisterController', function (
                                 .addClass('compact')
                                 .css('font-size', 'inherit');
                     }
-                }
+                }               
             ])
+            
+            .withOption(
+                    'select', true
+                    )
+
             .withOption(
                     'responsive', true
-             );
-
+                    );
 
     $scope.dtColumnDefs = [
         DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)

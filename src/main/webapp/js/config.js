@@ -227,12 +227,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 serie: true,
                                 name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.min.js' , 'https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.js' , 'https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.css']
+                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
+                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
+                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
                                 serie: true,
                                 name: 'datatables.buttons',
-                                files: ['https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js' ]
+                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
                                 name: 'ngTagsInput',
@@ -275,12 +277,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 serie: true,
                                 name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.min.js']
+                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
+                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
+                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
                                 serie: true,
                                 name: 'datatables.buttons',
-                                files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
                                 insertBefore: '#loadBefore',
@@ -318,18 +322,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                              {
                                 serie: true,
                                 name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.js' , 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js' , 'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css']
+                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
+                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
+                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
                                 serie: true,
                                 name: 'datatables.buttons',
-                                files: ['https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js' ]
+                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
                                 name: 'datePicker',
                                 files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
-                            },
-                           
+                            },                           
                             {
                                 name: 'ui.select',
                                 files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
@@ -452,6 +457,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/registerOfNonprofitOrganizations",
                 templateUrl: "views/registerOfNonprofitOrganizations.html",
                 data: {pageTitle: 'registra_neprotifabilnih_organizacija'}                
+            })
+            
+            /*
+             Profile
+             */
+            .state('content.profile', {
+                    url: "/profile",
+                    templateUrl: "views/profile.html",
+                    data: {pageTitle: 'Profile'},
+                    resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                             {
+                                name: 'ngImgCrop',
+                                files: ['js/plugins/ngImgCrop/ng-img-crop.js','css/plugins/ngImgCrop/ng-img-crop.css']
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            }
+                        ]);
+                    }
+                }
             })
 
             /*
