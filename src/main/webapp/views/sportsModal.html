@@ -10,10 +10,10 @@
             <div class="form-group">
                 <label>Naziv</label> <input type="text" name="name" ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Upišite naziv" class="form-control" ng-model="data.name">
             </div>
-            <div ng-messages="sport.name.$error">            
-                <p ng-message="required">Naziv je obavezno polje</p>
-                <p ng-message="minlength">Minimalna duljina naziva je 1.</p>
-                <p ng-message="maxlength">Maksimalna duljina naziva je 100.</p>
+            <div class="validation-msg" ng-messages="sport.name.$error">            
+                <p ng-message="required">*Naziv je obavezno polje</p>
+                <p ng-message="minlength">*Minimalna duljina naziva je 1.</p>
+                <p ng-message="maxlength">*Maksimalna duljina naziva je 100.</p>
             </div>
 
             <div class="form-group">

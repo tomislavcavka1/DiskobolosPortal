@@ -34,28 +34,37 @@
 
                         </div>
                     </div>
-                    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" dt-instance="vm.dtInstance"  class="table table-striped table-bordered table-hover dataTables-example">
+                    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>ID</th>
-                                <th>Tel 1</th>
-                                <th>Tel 2</th>
-                                <th>Fax</th>
-                                <th>Identifikacijski broj</th>
+                                <th>Naziv</th>
+                                <th>Adresa</th>
+                                <th>Lokacija</th>
+                                <th>Broj telefona 1</th>
+                                <th>Broj telefona 2</th>
+                                <th>FAX</th>
+                                <th>Matični broj</th>
                                 <th>OIB</th>
-                                <th>Registracijski broj</th>
-                                <th>numberOfNonProfitOrg</th>
-                                <th>chairman</th>
-                                <th>secretary</th>
-                                <th>Datum mandata od</th>                                
-                                <th>promjeni/izbriši</th>
+                                <th>Registarski broj</th>
+                                <th>Broj iz registra neprofitnih organizacija</th>
+                                <th>Predsjednik</th>
+                                <th>Tajnik</th>
+                                <th>Datum mandata od</th>
+                                <th>Datum mandata do</th> 
+                                <th>Datum registriranja kluba</th> 
+                                <th>Kategorija članstva</th> 
+                                <th>Broj računa</th> 
+                                <th>Elektronička pošta</th> 
+                                <th class="not-export-col">promjeni/izbriši</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="memberRegister in memberRegisters">
-                                <td><a class="green-shortinfo" href="javascript:;" ng-click="childInfo(user, $event)" title="Click to view more"><i class="glyphicon glyphicon-chevron-down"></a></td>
                                 <td>{{ memberRegister.id}}</td>
+                                <td>{{ memberRegister.name}}</td>
+                                <td>{{ memberRegister.address}}</td>
+                                <td>{{ memberRegister.location.name}}</td>
                                 <td>{{ memberRegister.phone1}}</td>
                                 <td>{{ memberRegister.phone2}}</td>
                                 <td>{{ memberRegister.fax}}</td>
@@ -66,11 +75,15 @@
                                 <td>{{ memberRegister.chairman}}</td>
                                 <td>{{ memberRegister.secretary}}</td>
                                 <td>{{ memberRegister.dateFrom}}</td>
+                                <td>{{ memberRegister.dateTo}}</td>
+                                <td>{{ memberRegister.registrationDate}}</td>
+                                <td>{{ memberRegister.membershipCategory.description}}</td>
+                                <td>{{ memberRegister.bankAccountsTags}}</td>
+                                <td>{{ memberRegister.emailsTags}}</td>
                                 <td class="edit-column">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary " ng-click="editData(memberRegister.id)"><i class="fa fa-edit"></i> </button>
                                         <button type="button" class="btn btn-danger " ng-click="deleteData(memberRegister.id)"><i class="fa fa-trash"></i> </button>
-                                        <button type="button" class="btn btn-info "><i class="fa fa-search"></i> </button>
                                     </div>
                                 </td>
                             </tr>
