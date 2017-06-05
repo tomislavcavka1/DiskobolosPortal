@@ -43,7 +43,7 @@ memberRegisterModule.controller('memberRegisterController', function (
             "sSortAscending": ": aktiviraj za rastući poredak",
             "sSortDescending": ": aktiviraj za padajući poredak"
         }
-    }
+    };
 
     $scope.vm = {};
     $scope.vm.dtInstance = {};

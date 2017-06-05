@@ -199,7 +199,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('content', {
                 abstract: true,
                 url: "",
-                templateUrl: "views/common/content.html"
+                templateUrl: "views/common/content.html",
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([                            
+                            {
+                                files: ['js/diskobolos/login/authenticationModule.js']
+                            }
+                        ]);
+                    }
+                }
             })
 
             .state('content.sports', {
@@ -357,7 +366,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             /*
              Vrednovanje
              */
-
             .state('evaluation', {
                 abstract: true,
                 url: "",
@@ -475,7 +483,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 angular
         .module('inspinia')
         .config(config)
-        .run(function ($rootScope, $state, _, sessionStorageService) {
+        .run(function ($rootScope, $state, _, sessionStorageService, jwtHelper, ROLE_PERMISSION_LEVEL) {
             // register listener to watch state changes
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
             console.log("stateChangeStart from: " + fromState.name + " to: " + toState.name);
@@ -484,17 +492,35 @@ angular
                return;
             }
             // get token from the session
-            sessionStorageService.getJwtToken().then(function (token) {
+            sessionStorageService.getJwtToken().then(function (token) { 
                 if (token === null || _.isUndefined(token)) {
                     // no logged user, we should be going to #login
                     if (next.name !== "login") {                        
                         $state.go("login");
                     }
-                }            
+                } else {                   
+                    var jwtObj = jwtHelper.decodeToken(token);
+                    // fill in authenticatedUser object
+                    $rootScope.authenticatedUser = {
+                        userId: undefined,
+                        roles: [],
+                        username: '',
+                        role: ''
+                    };
+                    $rootScope.authenticatedUser.userId = jwtObj.uid;
+                    for (var i = 0; i < jwtObj.aut.length; i++) {
+                        $rootScope.authenticatedUser.roles.push(jwtObj.aut[i]);
+                    }
+                    $rootScope.authenticatedUser.username = jwtObj.sub;
+                    // find role with the highest permission level
+                    $rootScope.authenticatedUser.role = _.find($rootScope.authenticatedUser.roles, function (obj) {
+                        return obj.permissionLevel === ROLE_PERMISSION_LEVEL.veryHigh;
+                    });         
+                }
             }, function (response) {              
                 // in case we get an error we need to redirect to the login page and clean data from the session                
                 $state.go("login");
                 sessionStorageService.removeJwtToken();
             });
-     });
+    });
 });

@@ -1,15 +1,16 @@
 <!-- Wrapper-->
-<div id="wrapper">
+<div id="wrapper" ng-controller="authenticationController">
 
-    <!-- Navigation -->
-    <div ng-controller="authenticationController" ng-include="'views/common/navigation.html'"></div>
+    <!-- Navigation -->    
+    <!--<navigation></navigation>-->    
+    <div ng-include="'views/common/navigation.html'"></div>
 
     <!-- Page wraper -->
-    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->    
     <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
 
-        <!-- Page wrapper -->
-        <div ng-controller="authenticationController" ng-include="'views/common/topnavbar.html'"></div>
+        <!-- Page wrapper -->    
+        <div ng-include="'views/common/topnavbar.html'"></div>
 
         <!-- Main view  -->
         <div ui-view></div>

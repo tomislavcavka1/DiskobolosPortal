@@ -19,8 +19,9 @@
         'ngAutocomplete',              // google autocomplete
         'evaluationModule',
         'authenticationModule',
-        'angular-jwt'
+        'angular-jwt',
+        'templateModule',
+        'shareDataModule'
     ]);
 })();
-
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad
