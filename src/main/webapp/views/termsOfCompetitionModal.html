@@ -16,13 +16,14 @@
                         <div class="row ibox-header">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Odaberite klub za vrednovanje</label>
-                                    <select class="form-control m-b" name="account">
-                                        <option selected>...</option>
-                                        <option value="option 2">option 2</option>
-                                        <option value="option 3">option 3</option>
-                                        <option value="option 4">option 4</option>
-                                    </select>
+                                    <label>Odaberite klub za vrednovanje</label>                                    
+                                    <ui-select ng-model="memberRegister.selected" theme="bootstrap">
+                                        <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                                        <ui-select-choices repeat="memberRegister in memberRegisters | filter: $select.search">
+                                            <div ng-bind-html="memberRegister.name | highlight: $select.search"></div>
+                                            <small ng-bind-html="memberRegister.address | highlight: $select.search"></small>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
 
                             </div>
@@ -37,7 +38,7 @@
                                     <div class="form-group" ng-repeat="evaluationQuestion in evaluationQuestions">
                                         <p>{{evaluationQuestion.label}}</p>                                                                       
                                         <label ng-repeat="item in evaluationQuestion.items">
-                                            <input icheck type="radio" name="{{evaluationQuestion.question}}" ng-model="answers[evaluationQuestion.question]" /> {{item.value}} </label>                                 
+                                                <input icheck type="radio" name="{{evaluationQuestion.question}}" ng-model="answers[evaluationQuestion.question]" ng-value="item"/> {{item.value}} </label>
                                     </div>                                
                                 </div>
                             </div>

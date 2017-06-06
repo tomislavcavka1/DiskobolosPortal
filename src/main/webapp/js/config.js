@@ -24,17 +24,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('dashboards', {
                 abstract: true,
                 url: "/dashboards",
-                templateUrl: "views/common/content.html",
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            {
-                                name: 'authenticationModule',
-                                files: ['js/diskobolos/login/authenticationModule.js']
-                            }
-                        ]);
-                    }
-                }
+                templateUrl: "views/common/content.html"
             })
             .state('dashboards.dashboard_1', {
                 url: "/dashboard_1",
@@ -404,6 +394,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             },
                             {
                                 files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                            },
+                            {
+                                name: 'ui.select',
+                                files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
                             }
                         ]);
                     }

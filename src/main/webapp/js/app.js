@@ -22,7 +22,8 @@
         'angular-jwt',
         'templateModule',
         'shareDataModule',
-        'profileModule'
+        'profileModule',
+        'toaster'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

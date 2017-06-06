@@ -1,0 +1,119 @@
+<div class="inmodal">
+    <div class="modal-header">        
+        <i class="fa fa-edit modal-icon" ng-show="crudAction === 'EDIT'"></i>
+        <i class="fa fa-plus-square modal-icon" ng-show="crudAction === 'CREATE'"></i>                
+        <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
+        <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-content">                        
+                        <h5>Opći uvjeti
+                        </h5>
+                        <div class="row">                            
+                            <div class="col-sm-6">
+                                <div class="well">
+                                    <div class="form-group" ng-repeat="evaluationQuestion in generalConditionsFirstPart">
+                                        <p>{{evaluationQuestion.questionDef.label}}</p>
+                                        <label ng-repeat="item in evaluationQuestion.questionDef.items">
+                                            <div ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-value="item.id"/> {{item.value}} 
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="well">
+                                    <div class="form-group" ng-repeat="evaluationQuestion in generalConditionsSecondPart">
+                                        <p>{{evaluationQuestion.questionDef.label}}</p>
+                                        <label ng-repeat="item in evaluationQuestion.questionDef.items">
+                                            <div ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-value="item.id"/> {{item.value}} 
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-content">
+                        <h5>Opći uvjeti - dokumentacija
+                        </h5>
+                        <div class="row">
+                            <div class="col-sm-6 b-r">
+                                <div class="well">
+                                    <h3>Izvadak iz registra - preslika:  </h3>
+                                    <div class="form-group" ng-repeat="evaluationQuestion in generalConditionsDocumentationFirstPart">
+                                        <p>{{evaluationQuestion.questionDef.label}}</p>
+                                        <label ng-repeat="item in evaluationQuestion.questionDef.items">
+                                            <div ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-value="item.id"/> {{item.value}} 
+                                            </div>
+                                        </label>
+
+                                        <div>
+                                            <div ng-show="evaluationQuestion.questionDef.question === 'EXTRACT_FROM_THE_REGISTER_OF_REPUBLIC_CROATIA'" class="fileinput fileinput-new" data-provides="fileinput">
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span>
+                                                    <span class="fileinput-exists">Change</span><input type="file" name="..."/></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                                            </div> 
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="well">
+                                    <div class="form-group" ng-repeat="evaluationQuestion in generalConditionsDocumentationSecondPart">
+                                        <p>{{evaluationQuestion.questionDef.label}}</p>
+                                        <label ng-repeat="item in evaluationQuestion.questionDef.items">
+                                            <div ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-value="item.id"/> {{item.value}} 
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-content">
+                        <h5>Automatsko isključivanje članica</h5>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="well">
+                                    <div class="form-group" ng-repeat="evaluationQuestion in automaticDeactivationOfAMember">
+                                        <p>{{evaluationQuestion.questionDef.label}}</p>
+                                        <label ng-repeat="item in evaluationQuestion.questionDef.items">
+                                            <div ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-value="item.id"/> {{item.value}} 
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
+    </div>
+</div>

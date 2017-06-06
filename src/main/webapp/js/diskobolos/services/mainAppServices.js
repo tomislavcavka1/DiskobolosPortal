@@ -32,7 +32,8 @@ mainAppServices.factory('MemberRegisterDataFactory', ['$resource', 'AppConstants
             'getAllMemberRegisters': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/all', isArray: false},
             'editSelectedMemberRegister': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/edit'},
             'createMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/create'},
-            'deleteMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/delete'}
+            'deleteMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/delete'},
+            'getMemberRegisterById': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/getMemberRegisterById/:memberRegisterId', params:{memberRegisterId: '@memberRegisterId'}}
         });
     }]);
 
@@ -46,7 +47,11 @@ mainAppServices.factory('LocationDataFactory', ['$resource', 'AppConstants', fun
 // Services responsible for creation of evaluation, fetching evaluation etc.
 mainAppServices.factory('EvaluationDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
         return $resource('', {}, {
-            'getAllEvaluationQuestions': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/all', isArray: false}
+            'getAllEvaluationQuestions': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/all', isArray: false},
+            'storeEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/create'},
+            'fetchMemberRegistersWithAssociatedEvaluations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchMemberRegistersWithAssociatedEvaluations', isArray: false},
+            'fetchEvaluationAnswersByMemberRegisterId': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchEvaluationAnswersByMemberRegisterId/:memberRegisterId', params:{memberRegisterId: '@memberRegisterId'}},
+            'editEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/edit'}
         });
     }]);
 
