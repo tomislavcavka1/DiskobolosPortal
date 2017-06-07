@@ -23,7 +23,8 @@
         'templateModule',
         'shareDataModule',
         'profileModule',
-        'toaster'
+        'toaster',
+        'sportsBuildingsModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

@@ -5,18 +5,28 @@
         <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
         <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
     </div>
-    <div class="modal-body">
+    <form name="membershipCategory">
+        <div class="modal-body">
 
-        <div class="form-group">
-            <label>Naziv</label> <input type="text" placeholder="Upišite naziv" class="form-control" ng-model="data.description">
+            <div class="form-group valid">
+                <label>Naziv</label> <input type="text" name="description" ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Upišite naziv" class="form-control" ng-model="data.description">
+                <div class="validation-msg" ng-messages="membershipCategory.description.$error">            
+                    <p ng-message="required">*Naziv je obavezno polje</p>
+                    <p ng-message="minlength">*Minimalna duljina naziva je 1.</p>
+                    <p ng-message="maxlength">*Maksimalna duljina naziva je 100.</p>
+                </div>
+            </div>
+
+
+
+
+
+
         </div>
-
-
-
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Spremi promjene</button>
-    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" ng-disabled="membershipCategory.$invalid" ng-click="cancel()">Zatvori</button>
+            <button type="button" class="btn btn-primary" ng-disabled="membershipCategory.$invalid" ng-click="ok()">Spremi promjene</button>
+        </div>
+    </form>
 </div>
 

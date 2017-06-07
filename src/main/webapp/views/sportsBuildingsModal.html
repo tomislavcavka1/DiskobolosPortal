@@ -1,0 +1,43 @@
+<div class="inmodal">
+    <div class="modal-header">        
+        <i class="fa fa-search modal-icon" ng-show="viewMode === 'READ_MODE_ONLY'"></i>
+        <p class="modal-title" ng-show="viewMode === 'READ_MODE_ONLY'">Detalji</p>
+    </div>
+    <form name="sportsBuildings">
+        <div class="modal-body">
+            <div class="form-group valid">
+                <label>Naziv</label> 
+                <p>{{data.naziv}}</p>
+            </div>
+            <div class="form-group valid">
+                <label>Upravitelj</label> 
+                <p>{{data.upravitelj}}</p>
+            </div>
+            <div class="form-group valid">
+                <label>Adresa</label> 
+                <p>{{data.adresa}}</p>
+            </div>
+            <div class="form-group valid">
+                <label>Kontakt broj</label>
+                <p>{{data.kontaktbroj}}</p>
+            </div>
+            <div class="form-group valid">
+                <label>Email</label>
+                <p><a ng-href="mailto:{{data.email}}">{{data.email}}</a></p>
+            </div>
+            <div class="form-group valid">
+                <label>Web</label>
+                <p><a ng-href="{{data.web}}" target="_blank">{{data.web}}</a></p>
+            </div>
+            <div class="form-group valid">
+                <label>Galerija</label> 
+                <img style="width:100%" ng-src="{{data.slika}}">
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" ng-disabled="membershipCategory.$invalid" ng-click="cancel()">Zatvori</button>
+        </div>
+    </form>
+</div>
+

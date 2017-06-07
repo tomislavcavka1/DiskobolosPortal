@@ -12,7 +12,10 @@ configuration.constant('AppConstants', {
     CrudActions: {
         create: "CREATE",
         edit: "EDIT",
-        delete: "DELETE"
+        delete: "DELETE"        
+    },
+    ViewMode: {
+        readModeOnly: "READ_MODE_ONLY"
     }
 });
 

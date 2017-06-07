@@ -1,0 +1,251 @@
+[
+{
+        "id": 0,
+        "naziv": "Atletski stadion na Višnjiku",
+        "upravitelj": "",
+        "adresa": "Splitska 3, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Atletski_stadion_na_Visnjiku.jpg"
+        },
+{
+        "id": 1,
+        "naziv": "Bazen Kolovare",
+        "upravitelj": "",
+        "adresa": "Kolovare bb, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Bazen_Kolovare.jpg"
+},
+{
+        "id": 2,
+        "naziv": "Bočalište Crvene kuće u Zadru",
+        "upravitelj": "",
+        "adresa": "",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Bocaliste_Crvene kuce_u_Zadru.jpg"
+},
+{
+        "id": 3,
+        "naziv": "Đil",
+        "upravitelj": "",
+        "adresa": "Ravnice 2,  23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/.jpg"
+},
+{
+        "id": 4,
+        "naziv": "Dvorana Športske škole Loptica ",
+        "upravitelj": "Dječja sportska škola Loptica ",
+        "adresa": "Put Stanova bb, 23000 Zadar ",
+        "kontaktbroj": "+385 98 685 502",
+        "email": "lopticazd@gmail.com",
+        "web": "http://loptica-zadar.webnode.hr",
+        "slika": "../img/sportsBuildings/dil.jpg"
+},
+{
+        "id": 5,
+        "naziv": "Dvorana ŠRC Višnjik ",
+        "upravitelj": "",
+        "adresa": "Splitska ul. 38, 23000 Zadar ",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Dvorana_SRC_Visnjik.jpg"
+}, {
+        "id": 6,
+        "naziv": "Dvorana STK Donat ",
+        "upravitelj": "",
+        "adresa": "Ul. Benka Benkovića, 23000 Zadar ",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Dvorana_STK_Donat.jpg"
+}, {
+        "id": 7,
+        "naziv": "Dvorana Teakwondo klub Zadar",
+        "upravitelj": "",
+        "adresa": "Put Stanova 5, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Dvorana_Teakwondo_kluba_Zadar.jpg"
+}, {
+        "id": 8,
+        "naziv": "Dvorana Vodovod ",
+        "upravitelj": "Vodovod Zadar",
+        "adresa": "Ul. Špire Brusine 17, 23000, Zadar ",
+        "kontaktbroj": "385 (023) 282 900 (centrala) ",
+        "email": "vodovod1@vodovod-zadar.hr ",
+        "web": "http://www.vodovod-zadar.hr ",
+        "slika": "../img/sportsBuildings/dvorana_vodovod.jpg"
+}, {
+        "id": 9,
+        "naziv": "Dvorana Jazine ",
+        "upravitelj": "KK ZADAR ",
+        "adresa": "Obala kralja Tomislava 2, 23000 Zadar ",
+        "kontaktbroj": "",
+        "email": "info@kkzadar.net ",
+        "web": "http://www.kkzadar.net ",
+        "slika": "../img/sportsBuildings/Dvorana_Jazine.jpg"
+}, {
+        "id": 10,
+        "naziv": "Dvorana Mocire ",
+        "upravitelj": "",
+        "adresa": "Ul. Bruna Bušića 7, 23000, Zadar ",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Dvorana_Mocire.jpg"
+}, {
+        "id": 11,
+        "naziv": "Dvorana Višnjik ",
+        "upravitelj": "ŠPORTSKI CENTAR VIŠNJIK ",
+        "adresa": "Splitska 3, 23000 Zadar",
+        "kontaktbroj": "+385 023 494 860 ",
+        "email": "info@visnjik.hr ",
+        "web": "http://peka.visnjik.hr/hr/  ",
+        "slika": "../img/sportsBuildings/Dvorana_Visnjik.jpg"
+}, {
+        "id": 12,
+        "naziv": "Fitness Omnia ",
+        "upravitelj": "Fitness Omnia ",
+        "adresa": "Domovinskog rata bb, 23000 Zadar ",
+        "kontaktbroj": "023/302-066",
+        "email": "omniarezervacije@gmail.com",
+        "web": "http://www.omnia-fitness.com",
+        "slika": "../img/sportsBuildings/.jpg"
+}, {
+        "id": 13,
+        "naziv": "Igralište Stanko Baričević Šole",
+        "upravitelj": "",
+        "adresa": "Crno",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Fitness_centar_Omnia.jpg"
+}, {
+        "id": 14,
+        "naziv": "Kuglana Mocire",
+        "upravitelj": "",
+        "adresa": "Kuglana, Ul. Bruna Bušića 3, 23000, Zadar",
+        "kontaktbroj": "+385023240122 ",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Kuglana_Mocire.jpg"
+}, {
+        "id": 15,
+        "naziv": "Nogometno igralište Bagat",
+        "upravitelj": "",
+        "adresa": "Ul. Benka Benkovića, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Nogometno_igraliste_Bagat.jpg"
+}, {
+        "id": 16,
+        "naziv": "Nogometno igralište Sima",
+        "upravitelj": "",
+        "adresa": "Splitska 3, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Igraliate_Stanko_Baricevic _sole_Crno.jpg"
+}, {
+        "id": 17,
+        "naziv": "Plivalište Višnjik",
+        "upravitelj": "ŠPORTSKI CENTAR VIŠNJIK",
+        "adresa": "Splitska 3, 23000 Zadar",
+        "kontaktbroj": "+ 385 023 494 870",
+        "email": "info@visnjik.hr",
+        "web": "http://peka.visnjik.hr/hr/ ",
+        "slika": "../img/sportsBuildings/Plivaliste_Visnjik.jpg"
+}, {
+        "id": 18,
+        "naziv": "Ravnice",
+        "upravitelj": "",
+        "adresa": " Ravnice 2, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Ravnice.jpg"
+}, {
+        "id": 19,
+        "naziv": "Šepurine",
+        "upravitelj": "",
+        "adresa": "Zračna luka Zadar-Zaton, 23232, Zaton",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/sepurine.jpg"
+}, {
+        "id": 20,
+        "naziv": " ŠRC Franko Lisica",
+        "upravitelj": "",
+        "adresa": " Trg kneza Višeslava 6c, 23 000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Igraliste_SRC_Franka_Lisice.jpg"
+}, {
+"id": 21,
+        "naziv": "Stadion NK Zadar",
+        "upravitelj": "",
+        "adresa": "Stadion Stanovi, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Stadion_NK_Zadar.jpg"
+}, {
+"id": 22,
+        "naziv": "Streljana Žmirići",
+        "upravitelj": "",
+        "adresa": "Put Nina, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Streljana_Zmirici.jpg"
+}, {
+"id": 23,
+        "naziv": "Teniski tereni Zadar",
+        "upravitelj": "",
+        "adresa": "Borik, Ul. Tina Ujevića 32, 23000 Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Teniski_tereni_Zadar.jpg"
+}, {
+"id": 24,
+        "naziv": "Uskok",
+        "upravitelj": "",
+        "adresa": "Obala kneza Trpimira 55, 23000, Zadar ",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Uskok.jpg"
+}, {
+"id": 25,
+        "naziv": "Veslački dom",
+        "upravitelj": "",
+        "adresa": "Obala kneza Branimira 6A, 23000, Zadar",
+        "kontaktbroj": "",
+        "email": "",
+        "web": "",
+        "slika": "../img/sportsBuildings/Veslacki_dom.jpg"
+}, {
+"id": 26,
+        "naziv": "Dvorana Krešimir Ćosić ",
+        "upravitelj": "ŠPORTSKI CENTAR VIŠNJIK ",
+        "adresa": "Splitska 3, 23000 Zadar",
+        "kontaktbroj": "385 023 494 873 ",
+        "email": "info@visnjik.hr ",
+        "web": "http://peka.visnjik.hr/hr/ ",
+        "slika": "../img/sportsBuildings/dvorana_kresimir_cosic.jpg"
+}
+]

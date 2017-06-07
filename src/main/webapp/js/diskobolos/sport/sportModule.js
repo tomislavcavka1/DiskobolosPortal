@@ -4,7 +4,6 @@
  * @author Tomislav Čavka
  */
 var sportModule = angular.module('sportModule', []);
-
 sportModule.controller('sportController', function (
         $scope,
         $rootScope,
@@ -15,10 +14,6 @@ sportModule.controller('sportController', function (
         DTColumnDefBuilder,
         SweetAlert,
         toaster) {
-
-
-
-
 
     var language = {
         "sEmptyTable": "Nema podataka u tablici",
@@ -41,11 +36,23 @@ sportModule.controller('sportController', function (
         "oAria": {
             "sSortAscending": ": aktiviraj za rastući poredak",
             "sSortDescending": ": aktiviraj za padajući poredak"
+        },
+        select: {
+            rows: {
+                _: "%d retka izabrana",
+                0: "0 redaka izabrano",
+                1: "1 redak izabran"
+            }
+        },
+        buttons: {
+            copyTitle: 'Kopirali ste',
+            copyKeys: '',
+            copySuccess: {
+                _: '%d linije kopirano',
+                1: '1 linija kopirana'
+            }
         }
     };
-
-
-
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
@@ -53,18 +60,18 @@ sportModule.controller('sportController', function (
             .withOption('order', [0, 'asc'])
             .withPaginationType('full_numbers')
             .withButtons([
-                {extend: 'selectAll', text: 'Selektiraj sva polja', exportOptions: {
+                {extend: 'selectAll', text: 'Označi sve', exportOptions: {
                         columns: ':visible:not(.not-export-col)', modifier: {
                             selected: true
                         }
                     }},
-                {extend: 'selectNone', text: 'Ukloni selektirana polja', exportOptions: {
+                {extend: 'selectNone', text: 'Odznači sve', exportOptions: {
                         columns: ':visible:not(.not-export-col)', modifier: {
                             selected: true
                         }
                     }},
                 {extend: 'colvis', text: '<i class="fa fa-list-ul" aria-hidden="true"></i> Prikaz polja u tablici',
-                    columns: [2, 3, 4, 5]},
+                    columns: [1, 2, 3, 4]},
                 {extend: 'copy', text: '<i class="fa fa-files-o"></i> Kopiraj', exportOptions: {
                         columns: ':visible:not(.not-export-col)', modifier: {
                             selected: true
@@ -80,8 +87,7 @@ sportModule.controller('sportController', function (
                             selected: true
                         }
                     }},
-                {extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i> PDF', orientation: 'landscape',
-                    pageSize: 'LEGAL', exportOptions: {
+                {extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i> PDF', exportOptions: {
                         columns: ':visible:not(.not-export-col)', modifier: {
                             selected: true
                         }
@@ -94,53 +100,45 @@ sportModule.controller('sportController', function (
                     customize: function (win) {
                         $(win.document.body).addClass('white-bg');
                         $(win.document.body).css('font-size', '10px');
-
                         $(win.document.body).find('table')
                                 .addClass('compact')
                                 .css('font-size', 'inherit');
                     }
                 }
             ])
+
+
             .withOption(
                     'select', true
                     )
 
             .withOption(
                     'responsive', true
-                    )
-            ;
+                    );
 
     $scope.dtColumnDefs = [
         DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
 
     ];
-            
-
     $scope.$on('selectedSport', function (ev, selectedSport) {
         $rootScope.selectedSport = selectedSport;
     });
-    
     $scope.sports = {};
-
     $scope.$on('sports', function (ev, sports) {
         $scope.sports = sports;
     });
-
     $scope.getSports = function () {
 
         SportDataFactory.getAllSports({}, function (response) {
             //success
             $scope.sports = response.sports;
-
             if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                 for (var i = 0; i < $scope.sports.length; i++) {
                     $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
-
                     $scope.sports[i].nationalSportsFederation = '';
                     $scope.sports[i].internationalFederation = '';
                     $scope.sports[i].iocSportAccord = '';
-
                     for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
 
                         switch ($scope.nomenclatureOfSports[j].category) {
@@ -166,7 +164,6 @@ sportModule.controller('sportController', function (
                     $scope.error = error;
                 });
     };
-
     $scope.createData = function () {
 
         var modalInstance = $uibModal.open({
@@ -174,41 +171,33 @@ sportModule.controller('sportController', function (
             controller: 'CreateSportModalCtrl',
             scope: $scope
         });
-
         modalInstance.result.then(function (response) {
             console.log('Modal for creation of a new sport item: ', 'sportsModal.html');
         });
     };
-
     $scope.editData = function (id) {
 
         $rootScope.selectedSport = _.find($scope.sports, function (obj) {
             return obj.id === id;
         });
-
         //broadcast selected sport
         $rootScope.$broadcast('selectedSport', $rootScope.selectedSport);
-
         var modalInstance = $uibModal.open({
             templateUrl: 'views/sportsModal.html',
             controller: 'EditSportModalCtrl',
             scope: $scope
         });
-
         modalInstance.result.then(function (response) {
             console.log('Modal name', 'sportsModal.html');
         });
     };
-
     $scope.deleteData = function (id) {
 
         $rootScope.selectedSport = _.find($scope.sports, function (obj) {
             return obj.id === id;
         });
-
         //broadcast selected sport
         $rootScope.$broadcast('selectedSport', $rootScope.selectedSport);
-
         SweetAlert.swal({
             title: "Da li ste sigurni da želite obrisati odabranu stavku?",
             text: "Nakon brisanja podaci će zauvijek biti izbrisani!",
@@ -225,7 +214,6 @@ sportModule.controller('sportController', function (
 
                             if (response.result === 200) {
                                 console.log('Sport data is successfully deleted.');
-
                                 toaster.pop({
                                     type: 'info',
                                     title: 'Uspješna brisanje stavke',
@@ -233,20 +221,16 @@ sportModule.controller('sportController', function (
                                     showCloseButton: true,
                                     timeout: 5000
                                 });
-
                                 SportDataFactory.getAllSports({}, function (response) {
                                     //success
                                     $scope.sports = response.sports;
-
                                     if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                                         for (var i = 0; i < $scope.sports.length; i++) {
                                             $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
-
                                             $scope.sports[i].nationalSportsFederation = '';
                                             $scope.sports[i].internationalFederation = '';
                                             $scope.sports[i].iocSportAccord = '';
-
                                             for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
 
                                                 switch ($scope.nomenclatureOfSports[j].category) {
@@ -272,13 +256,11 @@ sportModule.controller('sportController', function (
                                             //fail
                                             $scope.error = error;
                                         });
-
                             }
                         },
                                 function (error) {
                                     //fail
                                     $scope.error = error;
-
                                     toaster.pop({
                                         type: 'error',
                                         title: 'Greška',
@@ -290,11 +272,8 @@ sportModule.controller('sportController', function (
                     }
                 });
     };
-
     $scope.getSports();
 });
-
-
 sportModule.controller('EditSportModalCtrl', function (
         $scope,
         $rootScope,
@@ -307,11 +286,9 @@ sportModule.controller('EditSportModalCtrl', function (
     $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
     $scope.data.name = $rootScope.selectedSport.name;
-
     $scope.data.nationalSportsFederations = [];
     $scope.data.internationalFederations = [];
     $scope.data.iocSportAccords = [];
-
     for (var j = 0; j < $rootScope.selectedSport.nomenclatureOfSports.length; j++) {
 
         switch ($rootScope.selectedSport.nomenclatureOfSports[j].category) {
@@ -333,7 +310,6 @@ sportModule.controller('EditSportModalCtrl', function (
         // initialize data transfer object
         $scope.sportDto = {};
         $scope.sportDto.nomenclatureOfSports = [];
-
         // prepare data for storing            
         $scope.sportDto.id = $rootScope.selectedSport.id;
         $scope.sportDto.name = $scope.data.name;
@@ -341,12 +317,10 @@ sportModule.controller('EditSportModalCtrl', function (
         $scope.sportDto.nomenclatureOfSports.push({category: 'INTERNATIONAL_FEDERATION', data: $scope.data.internationalFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'IOC_SPORTACCORD', data: $scope.data.iocSportAccords});
         $scope.sportDto.removedNomenclatureItems = $scope.findRemovedItems($scope.sportDto.nomenclatureOfSports);
-
         SportDataFactory.editSelectedSport($scope.sportDto, function (response) {
 
             if (response.result === 200) {
                 console.log('Sport data is successfully edited.');
-
                 toaster.pop({
                     type: 'info',
                     title: 'Uspješna izmjena stavke',
@@ -354,20 +328,16 @@ sportModule.controller('EditSportModalCtrl', function (
                     showCloseButton: true,
                     timeout: 5000
                 });
-
                 SportDataFactory.getAllSports({}, function (response) {
                     //success
                     $scope.sports = response.sports;
-
                     if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                         for (var i = 0; i < $scope.sports.length; i++) {
                             $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
-
                             $scope.sports[i].nationalSportsFederation = '';
                             $scope.sports[i].internationalFederation = '';
                             $scope.sports[i].iocSportAccord = '';
-
                             for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
 
                                 switch ($scope.nomenclatureOfSports[j].category) {
@@ -398,7 +368,6 @@ sportModule.controller('EditSportModalCtrl', function (
                 function (error) {
                     //fail
                     $scope.error = error;
-
                     toaster.pop({
                         type: 'error',
                         title: 'Greška',
@@ -409,11 +378,9 @@ sportModule.controller('EditSportModalCtrl', function (
                 });
         $uibModalInstance.close();
     };
-
     $scope.findRemovedItems = function (nomenclatureOfSportsItems) {
         $scope.addedNomenclatureItems = [];
         $scope.removedNomenclatureItems = [];
-
         for (var i = 0; i < $rootScope.selectedSport.nomenclatureOfSports.length; i++) {
             for (var j = 0; j < nomenclatureOfSportsItems.length; j++) {
                 for (var k = 0; k < nomenclatureOfSportsItems[j].data.length; k++) {
@@ -421,7 +388,6 @@ sportModule.controller('EditSportModalCtrl', function (
                     var addedNomenclatureItemObj = _.find($scope.addedNomenclatureItems, function (obj) {
                         return obj.id === nomenclatureOfSportsItems[j].data[k].id;
                     });
-
                     if (_.isUndefined(addedNomenclatureItemObj)) {
                         $scope.addedNomenclatureItems.push(nomenclatureOfSportsItems[j].data[k]);
                     }
@@ -434,7 +400,6 @@ sportModule.controller('EditSportModalCtrl', function (
             var addedNomenclatureItemObj = _.find($scope.addedNomenclatureItems, function (obj) {
                 return obj.id === $scope.selectedSport.nomenclatureOfSports[n].id;
             });
-
             if (_.isUndefined(addedNomenclatureItemObj)) {
                 $scope.removedNomenclatureItems.push($scope.selectedSport.nomenclatureOfSports[n]);
             }
@@ -442,13 +407,10 @@ sportModule.controller('EditSportModalCtrl', function (
 
         return $scope.removedNomenclatureItems;
     };
-
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 });
-
-
 sportModule.controller('CreateSportModalCtrl', function (
         $scope,
         $rootScope,
@@ -460,23 +422,19 @@ sportModule.controller('CreateSportModalCtrl', function (
 
     $scope.crudAction = AppConstants.CrudActions['create'];
     $scope.data = {};
-
     $scope.ok = function () {
         // initialize data transfer object
         $scope.sportDto = {};
         $scope.sportDto.nomenclatureOfSports = [];
-
         // prepare data for storing
         $scope.sportDto.name = $scope.data.name;
         $scope.sportDto.nomenclatureOfSports.push({category: 'NATIONAL_SPORTS_FEDERATION', data: $scope.data.nationalSportsFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'INTERNATIONAL_FEDERATION', data: $scope.data.internationalFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'IOC_SPORTACCORD', data: $scope.data.iocSportAccords});
-
         SportDataFactory.createSportData($scope.sportDto, function (response) {
 
             if (response.result === 200) {
                 console.log('Sport data is successfully created.');
-
                 toaster.pop({
                     type: 'info',
                     title: 'Uspješna kreiranje stavke',
@@ -484,20 +442,16 @@ sportModule.controller('CreateSportModalCtrl', function (
                     showCloseButton: true,
                     timeout: 5000
                 });
-
                 SportDataFactory.getAllSports({}, function (response) {
                     //success
                     $scope.sports = response.sports;
-
                     if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                         for (var i = 0; i < $scope.sports.length; i++) {
                             $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
-
                             $scope.sports[i].nationalSportsFederation = '';
                             $scope.sports[i].internationalFederation = '';
                             $scope.sports[i].iocSportAccord = '';
-
                             for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
 
                                 switch ($scope.nomenclatureOfSports[j].category) {
@@ -528,7 +482,6 @@ sportModule.controller('CreateSportModalCtrl', function (
                 function (error) {
                     //fail
                     $scope.error = error;
-
                     toaster.pop({
                         type: 'error',
                         title: 'Greška',
@@ -537,11 +490,9 @@ sportModule.controller('CreateSportModalCtrl', function (
                         timeout: 5000
                     });
                 });
-
         // close modal view
         $uibModalInstance.close();
     };
-
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };

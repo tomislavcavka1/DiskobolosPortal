@@ -43,13 +43,24 @@ memberRegisterModule.controller('memberRegisterController', function (
             "sSortAscending": ": aktiviraj za rastući poredak",
             "sSortDescending": ": aktiviraj za padajući poredak"
         },
-        "oSelect": {
-            "sRows": "% lorem lorem"
-            
+        select: {
+            rows: {
+                _: "%d retka izabrana",
+                0: "0 redaka izabrano",
+                1: "1 redak izabran"
+            }
+        },
+        buttons: {
+            copyTitle: 'Kopirali ste',
+            copyKeys: '',
+            copySuccess: {
+                _: '%d linije kopirano',
+                1: '1 linija kopirana'
+            }
         }
     };
 
-    
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
             .withLanguage(language)
@@ -102,9 +113,9 @@ memberRegisterModule.controller('memberRegisterController', function (
                                 .addClass('compact')
                                 .css('font-size', 'inherit');
                     }
-                }               
+                }
             ])
-            
+
             .withOption(
                     'select', true
                     )

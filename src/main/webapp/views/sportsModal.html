@@ -7,14 +7,16 @@
     </div>
     <form name="sport">
         <div class="modal-body">
-            <div class="form-group">
-                <label>Naziv</label> <input type="text" name="name" ng-required="true" ng-minlength="1" ng-maxlength="100" placeholder="Upišite naziv" class="form-control" ng-model="data.name">
-            </div>
+            <div class="form-group valid" ng-class="{ 'has-error': sport.name.$invalid }">
+                <label>Naziv</label> <input type="text" name="name" required="true" ng-minlength="2" ng-maxlength="100" placeholder="Upišite naziv" class="form-control" ng-model="data.name">
+            
             <div class="validation-msg" ng-messages="sport.name.$error">            
                 <p ng-message="required">*Naziv je obavezno polje</p>
-                <p ng-message="minlength">*Minimalna duljina naziva je 1.</p>
+                <p ng-message="minlength">*Minimalna duljina naziva su dva znaka</p>
                 <p ng-message="maxlength">*Maksimalna duljina naziva je 100.</p>
             </div>
+            </div>
+            
 
             <div class="form-group">
                 <label>Nacionalni sportski savez</label>
@@ -33,8 +35,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-            <button type="submit" class="btn btn-primary" ng-show="crudAction === 'EDIT'" ng-click="sport.$valid && ok()">Spremi promjene</button>
-            <button type="submit" class="btn btn-primary" ng-show="crudAction === 'CREATE'" ng-click="sport.$valid && ok()">Kreiraj novu stavku</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="sport.$invalid" ng-show="crudAction === 'EDIT'" ng-click="sport.$valid && ok()">Spremi promjene</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="sport.$invalid" ng-show="crudAction === 'CREATE'" ng-click="sport.$valid && ok()">Kreiraj novu stavku</button>
         </div>
     </form>
 </div>

@@ -4,10 +4,17 @@ Customize css
 
 */
 
+
+
+.modal-body .valid {
+    position: relative;
+}
+
 .validation-msg p {
     color: red;
-    margin-left: 14px;
-    margin-top: -13px;
+    position: absolute;
+    right: 5px;
+    top: 3px;
 }
 
 .k-m-b {
@@ -258,6 +265,11 @@ table.dataTable .green-shortinfo {
 
 .modal-xlg {
     width: 1200px;
+}
+
+.inmodal .modal-icon {
+    color: #e2e3e3;
+    font-size: 50px;
 }
 
 /*
