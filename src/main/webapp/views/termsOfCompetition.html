@@ -44,8 +44,9 @@
                                 <td>{{termsOfCondition.registerNumber}}</td>
                                 <td>{{termsOfCondition.registrationDate}}</td>
                                 <td>
-                                    <span ng-show="termsOfCondition.isValid" class="label label-primary">Da</span>
-                                    <span ng-show="!termsOfCondition.isValid" class="label label-default">Ne</span>  
+                                    <span ng-show="termsOfCondition.termsOfConditionStatus === 'VALID'" class="label label-primary">Da</span>
+                                    <span ng-show="termsOfCondition.termsOfConditionStatus === 'INVALID'" class="label label-danger">Ne</span>  
+                                    <span ng-show="termsOfCondition.termsOfConditionStatus === 'NONE'" class="label label-default">Upitnik nije ispunjen</span>
                                 </td>
                                 <td class="edit-column">
                                     <button type="button" class="btn btn-primary " ng-click="editData(termsOfCondition.id)"><i class="fa fa-edit"></i> </button>
@@ -54,8 +55,6 @@
                             </tr>
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
         </div>

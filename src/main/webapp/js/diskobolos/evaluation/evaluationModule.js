@@ -443,21 +443,23 @@ evaluationModule.controller('EditTermsOfCompetitionModalCtrl', function (
           $scope.evaluationAnswersDto = {};
           $scope.evaluationAnswers = [];
           for(var question in $scope.answers) {
-              
-              $scope.evaluationAnswer = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
-                return obj.answer.evaluationQuestionDef.question === question;
-              });
-              
-              $scope.answerItem = _.find($scope.questionItems, function (obj) {
-                return obj.item.id === $scope.answers[question];
-              });
-              
-              var answer = {          
-                  id: _.isUndefined($scope.evaluationAnswer) ? undefined : $scope.evaluationAnswer.id,
-                  memberRegister: $rootScope.selectedMemberRegister,
-                  answer: $scope.answerItem.item
-              };
-              $scope.evaluationAnswers.push(answer);
+              // handle only questions that have answer
+              if(!_.isUndefined($scope.answers[question])) {         
+                $scope.evaluationAnswer = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
+                  return obj.answer.evaluationQuestionDef.question === question;
+                });
+
+                $scope.answerItem = _.find($scope.questionItems, function (obj) {
+                  return obj.item.id === $scope.answers[question];
+                });
+
+                var answer = {         
+                    id: _.isUndefined($scope.evaluationAnswer) ? undefined : $scope.evaluationAnswer.id,
+                    memberRegister: $rootScope.selectedMemberRegister,
+                    answer: _.isUndefined($scope.answerItem) ? undefined : $scope.answerItem.item
+                };
+                $scope.evaluationAnswers.push(answer);
+              }
           }
           
           $scope.evaluationAnswersDto.evaluationAnswers = $scope.evaluationAnswers;

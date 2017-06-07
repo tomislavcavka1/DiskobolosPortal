@@ -400,6 +400,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'ui.select',
                                 files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                             }
                         ]);
                     }
