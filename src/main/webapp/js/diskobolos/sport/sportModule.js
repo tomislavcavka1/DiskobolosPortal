@@ -4,6 +4,7 @@
  * @author Tomislav Čavka
  */
 var sportModule = angular.module('sportModule', []);
+
 sportModule.controller('sportController', function (
         $scope,
         $rootScope,
@@ -13,156 +14,68 @@ sportModule.controller('sportController', function (
         DTOptionsBuilder,
         DTColumnDefBuilder,
         SweetAlert,
-        toaster) {
-
-    var language = {
-        "sEmptyTable": "Nema podataka u tablici",
-        "sInfo": "Prikazano _START_ do _END_ od _TOTAL_ rezultata",
-        "sInfoEmpty": "Prikazano 0 do 0 od 0 rezultata",
-        "sInfoFiltered": "(filtrirano iz _MAX_ ukupnih rezultata)",
-        "sInfoPostFix": "",
-        "sInfoThousands": ",",
-        "sLengthMenu": "Prikaži _MENU_ rezultata po stranici",
-        "sLoadingRecords": "Dohvaćam...",
-        "sProcessing": "Obrađujem...",
-        "sSearch": "Pretraži:",
-        "sZeroRecords": "Ništa nije pronađeno",
-        "oPaginate": {
-            "sFirst": "Prva",
-            "sPrevious": "Nazad",
-            "sNext": "Naprijed",
-            "sLast": "Zadnja"
-        },
-        "oAria": {
-            "sSortAscending": ": aktiviraj za rastući poredak",
-            "sSortDescending": ": aktiviraj za padajući poredak"
-        },
-        select: {
-            rows: {
-                _: "%d retka izabrana",
-                0: "0 redaka izabrano",
-                1: "1 redak izabran"
-            }
-        },
-        buttons: {
-            copyTitle: 'Kopirali ste',
-            copyKeys: '',
-            copySuccess: {
-                _: '%d linije kopirano',
-                1: '1 linija kopirana'
-            }
-        }
-    };
+        toaster,
+        dataTableUtils) {
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
-            .withLanguage(language)
+            .withLanguage(dataTableUtils.getDataTableTranslations())
             .withOption('order', [0, 'asc'])
             .withPaginationType('full_numbers')
-            .withButtons([
-                {extend: 'selectAll', text: 'Označi sve', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    }},
-                {extend: 'selectNone', text: 'Odznači sve', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    }},
-                {extend: 'colvis', text: '<i class="fa fa-list-ul" aria-hidden="true"></i> Prikaz polja u tablici',
-                    columns: [1, 2, 3, 4]},
-                {extend: 'copy', text: '<i class="fa fa-files-o"></i> Kopiraj', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    }},
-                {extend: 'csv', text: '<i class="fa fa-file-text-o"></i> CSV', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    }},
-                {extend: 'excel', text: '<i class="fa fa-file-excel-o"></i> Excel', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    }},
-                {extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i> PDF', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    }},
-                {extend: 'print', text: '<i class="fa fa-print"></i> Ispis', exportOptions: {
-                        columns: ':visible:not(.not-export-col)', modifier: {
-                            selected: true
-                        }
-                    },
-                    customize: function (win) {
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ])
-
-
-            .withOption(
-                    'select', true
-                    )
-
-            .withOption(
-                    'responsive', true
-                    );
+            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4], false))
+            .withOption('select', true)
+            .withOption('responsive', true);
 
     $scope.dtColumnDefs = [
         DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
-
     ];
+    
     $scope.$on('selectedSport', function (ev, selectedSport) {
         $rootScope.selectedSport = selectedSport;
     });
+    
     $scope.sports = {};
+    
     $scope.$on('sports', function (ev, sports) {
         $scope.sports = sports;
     });
+    
     $scope.getSports = function () {
 
         SportDataFactory.getAllSports({}, function (response) {
-            //success
-            $scope.sports = response.sports;
-            if (_.isArray($scope.sports) && $scope.sports.length > 0) {
+             //success
+             $scope.sports = response.sports;
+             if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
-                for (var i = 0; i < $scope.sports.length; i++) {
-                    $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
-                    $scope.sports[i].nationalSportsFederation = '';
-                    $scope.sports[i].internationalFederation = '';
-                    $scope.sports[i].iocSportAccord = '';
-                    for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
+                 for (var i = 0; i < $scope.sports.length; i++) {
+                     $scope.nomenclatureOfSports = $scope.sports[i].nomenclatureOfSports;
+                     $scope.sports[i].nationalSportsFederation = '';
+                     $scope.sports[i].internationalFederation = '';
+                     $scope.sports[i].iocSportAccord = '';
+                     for (var j = 0; j < $scope.nomenclatureOfSports.length; j++) {
 
-                        switch ($scope.nomenclatureOfSports[j].category) {
-                            case 'NATIONAL_SPORTS_FEDERATION':
-                                $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                break;
-                            case 'INTERNATIONAL_FEDERATION':
-                                $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                break;
-                            case 'IOC_SPORTACCORD':
-                                $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
+                         switch ($scope.nomenclatureOfSports[j].category) {
+                             case 'NATIONAL_SPORTS_FEDERATION':
+                                 $scope.sports[i].nationalSportsFederation += (_.isEmpty($scope.sports[i].nationalSportsFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                 break;
+                             case 'INTERNATIONAL_FEDERATION':
+                                 $scope.sports[i].internationalFederation += (_.isEmpty($scope.sports[i].internationalFederation) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                 break;
+                             case 'IOC_SPORTACCORD':
+                                 $scope.sports[i].iocSportAccord += (_.isEmpty($scope.sports[i].iocSportAccord) ? '' : '/') + $scope.nomenclatureOfSports[j].value;
+                                 break;
+                             default:
+                                 break;
+                         }
+                     }
+                 }
 
-            }
+             }
         },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-                });
+        function (error) {
+            //fail
+            $scope.error = error;
+        });
     };
     $scope.createData = function () {
 

@@ -1,13 +1,12 @@
 /**
- * AngularJS controller responsible for fetching, creation, edit and deletion of the evaluation data.
+ * AngularJS controller responsible for fetching, creation, edit and deletion of the terms of competition data.
  * 
  * @author Tomislav Čavka
  */
-var evaluationModule = angular.module('evaluationModule', []);
+var termsOfCompetitionModule = angular.module('termsOfCompetitionModule', []);
 
-evaluationModule.controller('evaluationController', function (
+termsOfCompetitionModule.controller('evaluationController', function (
         $scope,
-        $rootScope,
         _,
         $uibModal,
         DTOptionsBuilder,
@@ -68,9 +67,8 @@ evaluationModule.controller('evaluationController', function (
 });
 
 
-evaluationModule.controller('CreateRankingAndCategorizationOfSportsModalCtrl', function (
+termsOfCompetitionModule.controller('CreateRankingAndCategorizationOfSportsModalCtrl', function (
         $scope,
-        $rootScope,
         $uibModalInstance,
         _,
         AppConstants) {
@@ -85,9 +83,8 @@ evaluationModule.controller('CreateRankingAndCategorizationOfSportsModalCtrl', f
 });
 
 
-evaluationModule.controller('evaluationController2', function (
+termsOfCompetitionModule.controller('evaluationController2', function (
         $scope,
-        $rootScope,
         _,
         $uibModal,
         DTOptionsBuilder,
@@ -148,9 +145,8 @@ evaluationModule.controller('evaluationController2', function (
 });
 
 
-evaluationModule.controller('CategorizationOfSportsPerSportClubModalCtrl', function (
+termsOfCompetitionModule.controller('CategorizationOfSportsPerSportClubModalCtrl', function (
         $scope,
-        $rootScope,
         $uibModalInstance,
         _,
         AppConstants) {
@@ -165,7 +161,7 @@ evaluationModule.controller('CategorizationOfSportsPerSportClubModalCtrl', funct
     };
 });
 
-evaluationModule.controller('termsOfCompetitionController', function (
+termsOfCompetitionModule.controller('termsOfCompetitionController', function (
         $scope,
         $rootScope,
         _,
@@ -281,9 +277,8 @@ evaluationModule.controller('termsOfCompetitionController', function (
 });
 
 
-evaluationModule.controller('TermsOfCompetitionModalCtrl', function (
-        $scope,
-        $rootScope,
+termsOfCompetitionModule.controller('TermsOfCompetitionModalCtrl', function (
+        $scope,        
         $uibModalInstance,
         _,
         AppConstants,
@@ -376,7 +371,7 @@ evaluationModule.controller('TermsOfCompetitionModalCtrl', function (
 });
 
 
-evaluationModule.controller('EditTermsOfCompetitionModalCtrl', function (
+termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function (
         $scope,
         $rootScope,
         $uibModalInstance,

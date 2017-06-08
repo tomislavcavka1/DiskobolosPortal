@@ -17,7 +17,7 @@
         'membershipCategoryModule',
         'memberRegisterModule',
         'ngAutocomplete',              // google autocomplete
-        'evaluationModule',
+        'termsOfCompetitionModule',
         'authenticationModule',
         'angular-jwt',
         'templateModule',

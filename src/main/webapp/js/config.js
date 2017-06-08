@@ -245,6 +245,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'ngMessages',
                                 files: ['js/angular/angular-messages.js']
+                            },
+                            {
+                                serie: true,
+                                name: 'dataTableUtilsModule',
+                                files: ['js/diskobolos/util/dataTableUtils.js']
                             }
                         ]);
                     }
@@ -287,6 +292,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'oitozero.ngSweetAlert',
                                 files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                            },
+                            {
+                                serie: true,
+                                name: 'dataTableUtilsModule',
+                                files: ['js/diskobolos/util/dataTableUtils.js']
                             }
                         ]);
                     }
@@ -352,7 +362,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'ngAutocomplete',
                                 files: ['js/plugins/google-api/ngAutocomplete.js']
-                            }
+                            },
+                            {
+                                serie: true,
+                                name: 'dataTableUtilsModule',
+                                files: ['js/diskobolos/util/dataTableUtils.js']
+                            }                          
                         ]);
                     }
                 }
