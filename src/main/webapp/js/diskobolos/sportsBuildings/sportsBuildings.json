@@ -7,7 +7,7 @@
         "kontaktbroj": "",
         "email": "",
         "web": "",
-        "slika": "../img/sportsBuildings/Atletski_stadion_na_Visnjiku.jpg"
+        "slika": "../img/sportsBuildings/atletski_stadion_visnjik.jpg"
         },
 {
         "id": 1,
@@ -27,7 +27,7 @@
         "kontaktbroj": "",
         "email": "",
         "web": "",
-        "slika": "../img/sportsBuildings/Bocaliste_Crvene kuce_u_Zadru.jpg"
+        "slika": "../img/sportsBuildings/Bocaliste_Crvene_kuce.jpg"
 },
 {
         "id": 3,
@@ -37,7 +37,7 @@
         "kontaktbroj": "",
         "email": "",
         "web": "",
-        "slika": "../img/sportsBuildings/.jpg"
+        "slika": "../img/sportsBuildings/dil.jpg"
 },
 {
         "id": 4,
@@ -47,7 +47,7 @@
         "kontaktbroj": "+385 98 685 502",
         "email": "lopticazd@gmail.com",
         "web": "http://loptica-zadar.webnode.hr",
-        "slika": "../img/sportsBuildings/dil.jpg"
+        "slika": "../img/sportsBuildings/dvorana_loptica.jpg"
 },
 {
         "id": 5,
@@ -120,7 +120,7 @@
         "kontaktbroj": "023/302-066",
         "email": "omniarezervacije@gmail.com",
         "web": "http://www.omnia-fitness.com",
-        "slika": "../img/sportsBuildings/.jpg"
+        "slika": "../img/sportsBuildings/Fitness_centar_Omnia.jpg"
 }, {
         "id": 13,
         "naziv": "Igralište Stanko Baričević Šole",
@@ -129,7 +129,7 @@
         "kontaktbroj": "",
         "email": "",
         "web": "",
-        "slika": "../img/sportsBuildings/Fitness_centar_Omnia.jpg"
+        "slika": "../img/sportsBuildings/Igraliste_Stanko_Baricevic_Sole_Crno.jpg"
 }, {
         "id": 14,
         "naziv": "Kuglana Mocire",
@@ -156,7 +156,7 @@
         "kontaktbroj": "",
         "email": "",
         "web": "",
-        "slika": "../img/sportsBuildings/Igraliate_Stanko_Baricevic _sole_Crno.jpg"
+        "slika": "../img/sportsBuildings/Nogometno_igraliste_Arbanasi.jpg"
 }, {
         "id": 17,
         "naziv": "Plivalište Višnjik",

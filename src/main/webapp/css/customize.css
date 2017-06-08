@@ -5,7 +5,6 @@ Customize css
 */
 
 
-
 .modal-body .valid {
     position: relative;
 }
@@ -19,6 +18,11 @@ Customize css
 
 .k-m-b {
     margin-bottom: 28px;
+}
+
+.page-heading {
+    border-top: 0 none;
+    padding: 0 10px 2px;
 }
 
 /************************
@@ -252,7 +256,30 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child::befor
 
 table.dataTable .green-shortinfo {
     color: #1ab394;
-    
+
+}
+
+table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
+    background: #1ab394 none repeat scroll 0 0;
+    color: #fff;
+    padding-right: 30px;
+}
+
+table.dataTable thead .sorting::after {
+    color: #fff;
+    content: "";
+    opacity: 0.5;
+}
+
+
+.html5buttons a {
+    box-shadow: none;
+    font-size: 12px;
+    padding: 6px 12px;
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+    color: #ffffff;
+    margin: 0 2px;
 }
 
 /************************
@@ -278,5 +305,5 @@ table.dataTable .green-shortinfo {
 
 .memberRegisterModal {
     width: 700px;
-    
+
 }

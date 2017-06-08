@@ -10,27 +10,23 @@ termsOfCompetitionModule.controller('evaluationController', function (
         _,
         $uibModal,
         DTOptionsBuilder,
-        EvaluationDataFactory) {
-            
-    $scope.dtOptions = DTOptionsBuilder.newOptions()
-    .withDOM('<"html5buttons"B>lTfgitp')
-    .withButtons([
-        {extend: 'copy'},
-        {extend: 'csv'},
-        {extend: 'excel', title: 'ExampleFile'},
-        {extend: 'pdf', title: 'ExampleFile'},
-        {extend: 'print',
-            customize: function (win) {
-                $(win.document.body).addClass('white-bg');
-                $(win.document.body).css('font-size', '10px');
+        DTColumnDefBuilder,
+        EvaluationDataFactory,
+        dataTableUtils) {
 
-                $(win.document.body).find('table')
-                        .addClass('compact')
-                        .css('font-size', 'inherit');
-            }
-        }
-    ]);
-    
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withDOM('<"html5buttons"B>lTfgitp')
+            .withLanguage(dataTableUtils.getDataTableTranslations())
+            .withOption('order', [0, 'asc'])
+            .withPaginationType('full_numbers')
+            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4, 5], false))
+            .withOption('select', true)
+            .withOption('responsive', true);
+
+    $scope.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
+    ];
+
     $scope.evaluationQuestions = {};
     $scope.answers = {};
 
@@ -40,16 +36,16 @@ termsOfCompetitionModule.controller('evaluationController', function (
             //success
             $scope.evaluationQuestions = response.evaluationDtoQuestions;
         },
-        function (error) {
-            //fail
-            $scope.error = error;
-        });
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                });
     };
-    
+
     // init call
     $scope.getEvaluationQuestions();
-    
-    
+
+
     $scope.createData = function () {
 
         var modalInstance = $uibModal.open({
@@ -63,7 +59,7 @@ termsOfCompetitionModule.controller('evaluationController', function (
             console.log('Modal for creation of a new Ranking And Categorization Of Sports item: ', 'rankingAndCategorizationOfSportsModal.html');
         });
     };
-    
+
 });
 
 
@@ -72,11 +68,11 @@ termsOfCompetitionModule.controller('CreateRankingAndCategorizationOfSportsModal
         $uibModalInstance,
         _,
         AppConstants) {
-            
+
     $scope.crudAction = AppConstants.CrudActions['create'];
-    $scope.data = {};            
-    
-     
+    $scope.data = {};
+
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
@@ -89,26 +85,26 @@ termsOfCompetitionModule.controller('evaluationController2', function (
         $uibModal,
         DTOptionsBuilder,
         EvaluationDataFactory) {
-            
-    $scope.dtOptions = DTOptionsBuilder.newOptions()
-    .withDOM('<"html5buttons"B>lTfgitp')
-    .withButtons([
-        {extend: 'copy'},
-        {extend: 'csv'},
-        {extend: 'excel', title: 'ExampleFile'},
-        {extend: 'pdf', title: 'ExampleFile'},
-        {extend: 'print',
-            customize: function (win) {
-                $(win.document.body).addClass('white-bg');
-                $(win.document.body).css('font-size', '10px');
 
-                $(win.document.body).find('table')
-                        .addClass('compact')
-                        .css('font-size', 'inherit');
-            }
-        }
-    ]);
-    
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withDOM('<"html5buttons"B>lTfgitp')
+            .withButtons([
+                {extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'print',
+                    customize: function (win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                    }
+                }
+            ]);
+
     $scope.evaluationQuestions = {};
     $scope.answers = {};
 
@@ -118,16 +114,16 @@ termsOfCompetitionModule.controller('evaluationController2', function (
             //success
             $scope.evaluationQuestions = response.evaluationDtoQuestions;
         },
-        function (error) {
-            //fail
-            $scope.error = error;
-        });
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                });
     };
-    
+
     // init call
     $scope.getEvaluationQuestions();
-    
-    
+
+
     $scope.createData = function () {
 
         var modalInstance = $uibModal.open({
@@ -141,7 +137,7 @@ termsOfCompetitionModule.controller('evaluationController2', function (
             console.log('Modal for creation of a new Ranking And Categorization Of Sports item: ', 'rankingAndCategorizationOfSportsModal.html');
         });
     };
-    
+
 });
 
 
@@ -150,12 +146,12 @@ termsOfCompetitionModule.controller('CategorizationOfSportsPerSportClubModalCtrl
         $uibModalInstance,
         _,
         AppConstants) {
-            
+
     $scope.crudAction = AppConstants.CrudActions['create'];
-    $scope.data = {};            
-    
-   
-        
+    $scope.data = {};
+
+
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
@@ -170,52 +166,52 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
         EvaluationDataFactory,
         toaster,
         MemberRegisterDataFactory) {
-            
+
     $scope.$on('selectedEvaluationAnswers', function (ev, selectedEvaluationAnswers) {
         $rootScope.selectedEvaluationAnswers = selectedEvaluationAnswers;
     });
-    
+
     $scope.termsOfConditions = {};
     $rootScope.selectedMemberRegister = {};
 
     $scope.$on('termsOfConditions', function (ev, termsOfConditions) {
         $scope.termsOfConditions = termsOfConditions;
     });
-    
+
     $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
         $rootScope.selectedMemberRegister = selectedMemberRegister;
     });
-            
-    $scope.dtOptions = DTOptionsBuilder.newOptions()
-    .withDOM('<"html5buttons"B>lTfgitp')
-    .withButtons([
-        {extend: 'copy'},
-        {extend: 'csv'},
-        {extend: 'excel', title: 'ExampleFile'},
-        {extend: 'pdf', title: 'ExampleFile'},
-        {extend: 'print',
-            customize: function (win) {
-                $(win.document.body).addClass('white-bg');
-                $(win.document.body).css('font-size', '10px');
 
-                $(win.document.body).find('table')
-                        .addClass('compact')
-                        .css('font-size', 'inherit');
-            }
-        }
-    ]);
-    
-    
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withDOM('<"html5buttons"B>lTfgitp')
+            .withButtons([
+                {extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'print',
+                    customize: function (win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                    }
+                }
+            ]);
+
+
     EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({}, function (response) {
-        
+
         $scope.termsOfConditions = response.termsOfConditionDtoJson;
-        
+
     },
-    function (error) {
-        //fail
-        $scope.error = error;
-    });
-                
+            function (error) {
+                //fail
+                $scope.error = error;
+            });
+
     $scope.createData = function () {
 
         var modalInstance = $uibModal.open({
@@ -229,36 +225,36 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
             console.log('Modal: ', 'termsOfCompetitionModal.html');
         });
     };
-    
+
     $scope.editData = function (id) {
 
         EvaluationDataFactory.fetchEvaluationAnswersByMemberRegisterId({memberRegisterId: id}, function (response) {
             $scope.evaluationAnswer = response.evaluationAnswersJson;
-            
+
             //broadcast selected member register item
             $rootScope.$broadcast('selectedEvaluationAnswers', $scope.evaluationAnswer);
-                        
-                MemberRegisterDataFactory.getMemberRegisterById({memberRegisterId: id}, function (response) {                
-                    //broadcast selected member register item
-                    $rootScope.$broadcast('selectedMemberRegister', response.memberRegister);
 
-                }, function (error) {
+            MemberRegisterDataFactory.getMemberRegisterById({memberRegisterId: id}, function (response) {
+                //broadcast selected member register item
+                $rootScope.$broadcast('selectedMemberRegister', response.memberRegister);
+
+            }, function (error) {
                 toaster.pop({
-                        type: 'error',
-                        title: 'Greška',
-                        body: "Greška prilikom dohvata članice registra",
-                        showCloseButton: true,
-                        timeout: 5000
-                    });
-                });            
-            
-            
+                    type: 'error',
+                    title: 'Greška',
+                    body: "Greška prilikom dohvata članice registra",
+                    showCloseButton: true,
+                    timeout: 5000
+                });
+            });
+
+
             var modalInstance = $uibModal.open({
                 templateUrl: 'views/editTermsOfCompetitionModal.html',
                 controller: 'EditTermsOfCompetitionModalCtrl',
                 size: 'xlg',
                 scope: $scope
-            });        
+            });
 
             modalInstance.result.then(function (response) {
                 console.log('Modal: ', 'termsOfCompetitionModal.html');
@@ -273,77 +269,77 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
             });
         });
     };
-    
+
 });
 
 
 termsOfCompetitionModule.controller('TermsOfCompetitionModalCtrl', function (
-        $scope,        
+        $scope,
         $uibModalInstance,
         _,
         AppConstants,
         EvaluationDataFactory,
         MemberRegisterDataFactory,
         toaster) {
-            
+
     $scope.crudAction = AppConstants.CrudActions['create'];
-    $scope.data = {};            
-    
+    $scope.data = {};
+
     $scope.evaluationQuestions = {};
-    $scope.answers = {};    
+    $scope.answers = {};
     // sets default value for location dropdown
     $scope.memberRegister = {selected: {}};
 
     $scope.getEvaluationQuestions = function () {
-        
+
         MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
             //success
-            $scope.memberRegisters = response.memberRegisters;   
-            
+            $scope.memberRegisters = response.memberRegisters;
+
             EvaluationDataFactory.getAllEvaluationQuestions({}, function (response) {
                 //success
                 $scope.evaluationQuestions = response.evaluationDtoQuestions;
             },
-            function (error) {
-                //fail
-                $scope.error = error;
-            });
+                    function (error) {
+                        //fail
+                        $scope.error = error;
+                    });
         },
-        function (error) {
-            //fail
-            $scope.error = error;
-        });       
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                });
     };
-    
+
     $scope.ok = function () {
-        
-          $scope.evaluationAnswers = [];
-          for(var question in $scope.answers) {             
-              var answer = {                  
-                  id: undefined,
-                  memberRegister: $scope.memberRegister.selected,
-                  answer: $scope.answers[question]
-              };
-              $scope.evaluationAnswers.push(answer);
-          }
-          
-          $scope.data.evaluationAnswers = $scope.evaluationAnswers;
-          
-          EvaluationDataFactory.storeEvaluationAnswers($scope.data, function (response) {
 
-                if (response.result === 200) {
-                        console.log('Evaluation answers are successfully added!');
+        $scope.evaluationAnswers = [];
+        for (var question in $scope.answers) {
+            var answer = {
+                id: undefined,
+                memberRegister: $scope.memberRegister.selected,
+                answer: $scope.answers[question]
+            };
+            $scope.evaluationAnswers.push(answer);
+        }
 
-                        toaster.pop({
-                            type: 'info',
-                            title: 'Uspješno kreiranje stavke',
-                            body: "Uvjeti natječaja za odabranu stavku su uspješno kreirani.",
-                            showCloseButton: true,
-                            timeout: 5000
-                        });
+        $scope.data.evaluationAnswers = $scope.evaluationAnswers;
 
-                    }
-                },
+        EvaluationDataFactory.storeEvaluationAnswers($scope.data, function (response) {
+
+            if (response.result === 200) {
+                console.log('Evaluation answers are successfully added!');
+
+                toaster.pop({
+                    type: 'info',
+                    title: 'Uspješno kreiranje stavke',
+                    body: "Uvjeti natječaja za odabranu stavku su uspješno kreirani.",
+                    showCloseButton: true,
+                    timeout: 5000
+                });
+
+            }
+        },
                 function (error) {
                     //fail
                     $scope.error = error;
@@ -356,18 +352,18 @@ termsOfCompetitionModule.controller('TermsOfCompetitionModalCtrl', function (
                         timeout: 5000
                     });
                 });
-        
-	// close modal view
-       $uibModalInstance.close();
+
+        // close modal view
+        $uibModalInstance.close();
     };
-       
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-    
+
     // init call
     $scope.getEvaluationQuestions();
-        
+
 });
 
 
@@ -377,10 +373,10 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
         $uibModalInstance,
         _,
         AppConstants,
-        EvaluationDataFactory,        
+        EvaluationDataFactory,
         toaster) {
-            
-    $scope.crudAction = AppConstants.CrudActions['edit'];    
+
+    $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
     $scope.data = $rootScope.selectedEvaluationAnswers;
     $scope.data.termsOfCompetitions = [];
@@ -391,100 +387,100 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
     $scope.generalConditionsDocumentationFirstPart = [];
     $scope.generalConditionsDocumentationSecondPart = [];
     $scope.automaticDeactivationOfAMember = [];
-    
+
     EvaluationDataFactory.getAllEvaluationQuestions({}, function (response) {
         //success
         $scope.evaluationQuestions = response.evaluationDtoQuestions;
-        
-        for (var i = 0; i < $scope.evaluationQuestions.length; i++) {                           
-                         
-              $scope.evaluationQuestions[i].initValue = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
+
+        for (var i = 0; i < $scope.evaluationQuestions.length; i++) {
+
+            $scope.evaluationQuestions[i].initValue = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
                 return obj.answer.evaluationQuestionDef.question === $scope.evaluationQuestions[i].question;
-              });
-              
-              for(var j=0; j < $scope.evaluationQuestions[i].items.length; j++) {                  
+            });
+
+            for (var j = 0; j < $scope.evaluationQuestions[i].items.length; j++) {
                 $scope.questionItems.push({item: $scope.evaluationQuestions[i].items[j]});
-              }
-              
-              switch ($scope.evaluationQuestions[i].group) {                                                 
-                  case 'GENERAL_CONDITIONS_1':
-                      $scope.generalConditionsFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
-                      break;
-                  case 'GENERAL_CONDITIONS_2':
-                      $scope.generalConditionsSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
-                      break;                  
-                  case 'GENERAL_CONDITIONS_DOCUMENTATION_1':
-                      $scope.generalConditionsDocumentationFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
-                      break;
-                  case 'GENERAL_CONDITIONS_DOCUMENTATION_2':
-                      $scope.generalConditionsDocumentationSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
-                      break;
-                  case 'AUTOMATIC_DEACTIVATION_OF_A_MEMBER':
-                      $scope.automaticDeactivationOfAMember.push({questionDef: $scope.evaluationQuestions[i]});
-                      break;                                            
-                  default:
-                      break;
-              }                          
-        }        
+            }
+
+            switch ($scope.evaluationQuestions[i].group) {
+                case 'GENERAL_CONDITIONS_1':
+                    $scope.generalConditionsFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'GENERAL_CONDITIONS_2':
+                    $scope.generalConditionsSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'GENERAL_CONDITIONS_DOCUMENTATION_1':
+                    $scope.generalConditionsDocumentationFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'GENERAL_CONDITIONS_DOCUMENTATION_2':
+                    $scope.generalConditionsDocumentationSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'AUTOMATIC_DEACTIVATION_OF_A_MEMBER':
+                    $scope.automaticDeactivationOfAMember.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                default:
+                    break;
+            }
+        }
     },
-    function (error) {
-        //fail
-        $scope.error = error;
-    });
-    
-    
+            function (error) {
+                //fail
+                $scope.error = error;
+            });
+
+
     $scope.ok = function () {
-          
-          $scope.evaluationAnswersDto = {};
-          $scope.evaluationAnswers = [];
-          for(var question in $scope.answers) {
-              // handle only questions that have answer
-              if(!_.isUndefined($scope.answers[question])) {         
+
+        $scope.evaluationAnswersDto = {};
+        $scope.evaluationAnswers = [];
+        for (var question in $scope.answers) {
+            // handle only questions that have answer
+            if (!_.isUndefined($scope.answers[question])) {
                 $scope.evaluationAnswer = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
-                  return obj.answer.evaluationQuestionDef.question === question;
+                    return obj.answer.evaluationQuestionDef.question === question;
                 });
 
                 $scope.answerItem = _.find($scope.questionItems, function (obj) {
-                  return obj.item.id === $scope.answers[question];
+                    return obj.item.id === $scope.answers[question];
                 });
 
-                var answer = {         
+                var answer = {
                     id: _.isUndefined($scope.evaluationAnswer) ? undefined : $scope.evaluationAnswer.id,
                     memberRegister: $rootScope.selectedMemberRegister,
                     answer: _.isUndefined($scope.answerItem) ? undefined : $scope.answerItem.item
                 };
                 $scope.evaluationAnswers.push(answer);
-              }
-          }
-          
-          $scope.evaluationAnswersDto.evaluationAnswers = $scope.evaluationAnswers;
-          
-          EvaluationDataFactory.editEvaluationAnswers($scope.evaluationAnswersDto, function (response) {
+            }
+        }
 
-                if (response.result === 200) {
-                        console.log('Evaluation answers are successfully edited!');
+        $scope.evaluationAnswersDto.evaluationAnswers = $scope.evaluationAnswers;
 
-                        toaster.pop({
-                            type: 'info',
-                            title: 'Uspješna izmjena stavke',
-                            body: "Uvjeti natječaja za odabranu stavku su uspješno izmijenjeni.",
-                            showCloseButton: true,
-                            timeout: 5000
-                        });
-                        
-                        EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({}, function (response) {
-        
-                            $scope.termsOfConditions = response.termsOfConditionDtoJson;
-                            
-                            $rootScope.$broadcast('termsOfConditions', $scope.termsOfConditions);
-        
-                        },
+        EvaluationDataFactory.editEvaluationAnswers($scope.evaluationAnswersDto, function (response) {
+
+            if (response.result === 200) {
+                console.log('Evaluation answers are successfully edited!');
+
+                toaster.pop({
+                    type: 'info',
+                    title: 'Uspješna izmjena stavke',
+                    body: "Uvjeti natječaja za odabranu stavku su uspješno izmijenjeni.",
+                    showCloseButton: true,
+                    timeout: 5000
+                });
+
+                EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({}, function (response) {
+
+                    $scope.termsOfConditions = response.termsOfConditionDtoJson;
+
+                    $rootScope.$broadcast('termsOfConditions', $scope.termsOfConditions);
+
+                },
                         function (error) {
                             //fail
                             $scope.error = error;
                         });
-                    }
-                },
+            }
+        },
                 function (error) {
                     //fail
                     $scope.error = error;
@@ -497,13 +493,13 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
                         timeout: 5000
                     });
                 });
-        
-	// close modal view
-       $uibModalInstance.close();
+
+        // close modal view
+        $uibModalInstance.close();
     };
-       
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-    
+
 });

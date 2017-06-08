@@ -1,22 +1,8 @@
 <toaster-container></toaster-container>
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Matična knjiga članica</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
+<!-- Page breadcrumb -->    
+<div ng-include="'views/common/breadcrumb.html'"></div>
 
-            <li class="active">
-                <strong>Matična knjiga članica</strong>
-            </li>
-        </ol>
-    </div>
-    <div class="col-lg-2">
-
-    </div>
-</div>
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="memberRegisterController">
 
     <div class="row">
@@ -41,8 +27,8 @@
                                 <th>Naziv</th>
                                 <th>Adresa</th>
                                 <th>Lokacija</th>
-                                <th>Broj telefona 1</th>
-                                <th>Broj telefona 2</th>
+                                <th>Kontakt broj</th>
+                                <th>Web</th>
                                 <th>FAX</th>
                                 <th>Matični broj</th>
                                 <th>OIB</th>
@@ -66,7 +52,7 @@
                                 <td>{{ memberRegister.address}}</td>
                                 <td>{{ memberRegister.location.name}}</td>
                                 <td>{{ memberRegister.phone1}}</td>
-                                <td>{{ memberRegister.phone2}}</td>
+                                <td><a ng-href="https://{{ memberRegister.phone2}}" target="_blank">{{ memberRegister.phone2}}</a></td>
                                 <td>{{ memberRegister.fax}}</td>
                                 <td>{{ memberRegister.identificationNumber}}</td>
                                 <td>{{ memberRegister.oib}}</td>

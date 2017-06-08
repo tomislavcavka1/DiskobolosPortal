@@ -43,16 +43,6 @@
             <li ui-sref-active="active">
                 <a ui-sref="content.memberRegister"><i class="fa fa-address-book-o"></i> <span class="nav-label">Matična knjiga članica</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('usefulLinks')}">
-                <a href="#"><i class="fa fa-bookmark-o"></i> <span class="nav-label">Korisni linkovi</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('usefulLinks')}">
-                    <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfNonprofitOrganizations">Registar neprofitnih organizacija</a></li>
-                    <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfCroatianRepublicAssociations">Registar udruga Republike Hrvatske</a></li>
-                    <li ui-sref-active="active"><a ui-sref="usefulLinks.registerOfSportsActivities">Registar sportskih djelatnosti </a></li>
-
-                </ul>
-            </li>
-
             <li ng-class="{active: $state.includes('evaluation')}">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Vrednovanje</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('evaluation')}">
@@ -66,6 +56,14 @@
             <li ui-sref-active="active">
                 <a ui-sref="content.sportsBuildings"><i class="fa fa-building"></i> <span class="nav-label">Registar sportskih građevina</span> </a>
             </li>
+            <li ui-sref-active="active">
+                <a ui-sref="content.registerOfNonprofitOrganizations"><i class="fa fa-sitemap"></i> <span class="nav-label">Registar neprofitnih organizacija</span> </a>
+            </li>
+            
+            <li ui-sref-active="active">
+                <a ui-sref="content.registerOfAssociationsCRO"><i class="fa fa-file-o"></i> <span class="nav-label">Registar udruga Republke Hrvatske</span> </a>
+            </li>
+            
 
         </ul>
 

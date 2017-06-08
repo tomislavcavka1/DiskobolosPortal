@@ -35,19 +35,19 @@
                                 <small ng-bind-html="location.postalCode | highlight: $select.search"></small>
                             </ui-select-choices>
                         </ui-select>
-                      <div class="validation-msg" ng-messages="memberRegister.test2.$error">            
+                        <div class="validation-msg" ng-messages="memberRegister.test2.$error">            
                             <p ng-message="required">*Lokacija je obavezno polje</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Broj telefona 1</label> <input type="text"  class="form-control" ng-model="data.phone1">
+                        <label>Kontakt broj</label> <input type="text"  class="form-control" ng-model="data.phone1">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Broj telefona 2</label> <input type="text"  class="form-control" ng-model="data.phone2">
+                        <label>Web</label> <input type="text"  class="form-control" ng-model="data.phone2">
                     </div>
                 </div>            
                 <div class="col-md-6">
@@ -132,7 +132,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Elektronička pošta</label>
-                        <tags-input ng-model="data.emailsTags"></tags-input>
+                        <tags-input type="email" name="email" ng-model="data.emailsTags"></tags-input>
                     </div>
                 </div>
             </div>

@@ -192,7 +192,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 templateUrl: "views/common/content.html",
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([                            
+                        return $ocLazyLoad.load([
                             {
                                 files: ['js/diskobolos/login/authenticationModule.js']
                             }
@@ -319,7 +319,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 files: ['js/plugins/moment/moment.min.js']
                             },
-                             {
+                            {
                                 serie: true,
                                 name: 'datatables',
                                 files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
@@ -334,7 +334,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'datePicker',
                                 files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
-                            },                           
+                            },
                             {
                                 name: 'ui.select',
                                 files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
@@ -367,7 +367,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'dataTableUtilsModule',
                                 files: ['js/diskobolos/util/dataTableUtils.js']
-                            }                          
+                            }
                         ]);
                     }
                 }
@@ -497,35 +497,40 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
 
             /*
-             Korisni linkovi
+             Registar neprofitnih organizacija
              */
 
-            .state('usefulLinks', {
-                abstract: true,
-                url: "",
-                templateUrl: "views/common/content.html"
-            })
-
-
-            .state('usefulLinks.registerOfNonprofitOrganizations', {
+            .state('content.registerOfNonprofitOrganizations', {
                 url: "/registerOfNonprofitOrganizations",
                 templateUrl: "views/registerOfNonprofitOrganizations.html",
-                data: {pageTitle: 'registra_neprotifabilnih_organizacija'}                
+                data: {pageTitle: 'registar_neprotifabilnih_organizacija'}
             })
+
+
+ /*
+             Registar udruga Republike Hrvatske
+             */
+
+            .state('content.registerOfAssociationsCRO', {
+                url: "/registerOfAssociationsCRO",
+                templateUrl: "views/registerOfAssociationsCRO.html",
+                data: {pageTitle: 'registar_udruga_republike_hrvatske'}
+            })
+            
             
             /*
              Profile
              */
             .state('content.profile', {
-                    url: "/profile",
-                    templateUrl: "views/profile.html",
-                    data: {pageTitle: 'Profile'},
-                    resolve: {
+                url: "/profile",
+                templateUrl: "views/profile.html",
+                data: {pageTitle: 'Profile'},
+                resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                             {
+                            {
                                 name: 'ngImgCrop',
-                                files: ['js/plugins/ngImgCrop/ng-img-crop.js','css/plugins/ngImgCrop/ng-img-crop.css']
+                                files: ['js/plugins/ngImgCrop/ng-img-crop.js', 'css/plugins/ngImgCrop/ng-img-crop.css']
                             },
                             {
                                 insertBefore: '#loadBefore',
@@ -536,7 +541,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     }
                 }
             })
-            
+
             /*
              Sports buildings
              */
@@ -578,13 +583,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/login",
                 templateUrl: "views/login.html",
                 data: {pageTitle: 'Login', specialClass: 'login-bg'},
-                params: { 
-                   'toState': 'content.sports', // default state to proceed to after login
-                   'toParams': {}
+                params: {
+                    'toState': 'content.sports', // default state to proceed to after login
+                    'toParams': {}
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([                            
+                        return $ocLazyLoad.load([
                             {
                                 insertBefore: '#loadBefore',
                                 name: 'toaster',
@@ -603,41 +608,41 @@ angular
         .run(function ($rootScope, $state, _, sessionStorageService, jwtHelper, ROLE_PERMISSION_LEVEL) {
             // register listener to watch state changes
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-            console.log("stateChangeStart from: " + fromState.name + " to: " + toState.name);
-            if (toState.name === "login") {
-               // do nothing in case when net state is login
-               return;
-            }
-            // get token from the session
-            sessionStorageService.getJwtToken().then(function (token) { 
-                if (token === null || _.isUndefined(token)) {
-                    // no logged user, we should be going to #login
-                    if (next.name !== "login") {                        
-                        $state.go("login");
-                    }
-                } else {                   
-                    var jwtObj = jwtHelper.decodeToken(token);
-                    // fill in authenticatedUser object
-                    $rootScope.authenticatedUser = {
-                        userId: undefined,
-                        roles: [],
-                        username: '',
-                        role: ''
-                    };
-                    $rootScope.authenticatedUser.userId = jwtObj.uid;
-                    for (var i = 0; i < jwtObj.aut.length; i++) {
-                        $rootScope.authenticatedUser.roles.push(jwtObj.aut[i]);
-                    }
-                    $rootScope.authenticatedUser.username = jwtObj.sub;
-                    // find role with the highest permission level
-                    $rootScope.authenticatedUser.role = _.find($rootScope.authenticatedUser.roles, function (obj) {
-                        return obj.permissionLevel === ROLE_PERMISSION_LEVEL.veryHigh;
-                    });         
+                console.log("stateChangeStart from: " + fromState.name + " to: " + toState.name);
+                if (toState.name === "login") {
+                    // do nothing in case when net state is login
+                    return;
                 }
-            }, function (response) {              
-                // in case we get an error we need to redirect to the login page and clean data from the session                
-                $state.go("login");
-                sessionStorageService.removeJwtToken();
+                // get token from the session
+                sessionStorageService.getJwtToken().then(function (token) {
+                    if (token === null || _.isUndefined(token)) {
+                        // no logged user, we should be going to #login
+                        if (next.name !== "login") {
+                            $state.go("login");
+                        }
+                    } else {
+                        var jwtObj = jwtHelper.decodeToken(token);
+                        // fill in authenticatedUser object
+                        $rootScope.authenticatedUser = {
+                            userId: undefined,
+                            roles: [],
+                            username: '',
+                            role: ''
+                        };
+                        $rootScope.authenticatedUser.userId = jwtObj.uid;
+                        for (var i = 0; i < jwtObj.aut.length; i++) {
+                            $rootScope.authenticatedUser.roles.push(jwtObj.aut[i]);
+                        }
+                        $rootScope.authenticatedUser.username = jwtObj.sub;
+                        // find role with the highest permission level
+                        $rootScope.authenticatedUser.role = _.find($rootScope.authenticatedUser.roles, function (obj) {
+                            return obj.permissionLevel === ROLE_PERMISSION_LEVEL.veryHigh;
+                        });
+                    }
+                }, function (response) {
+                    // in case we get an error we need to redirect to the login page and clean data from the session                
+                    $state.go("login");
+                    sessionStorageService.removeJwtToken();
+                });
             });
-    });
-});
+        });
