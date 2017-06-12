@@ -5,158 +5,6 @@
  */
 var termsOfCompetitionModule = angular.module('termsOfCompetitionModule', []);
 
-termsOfCompetitionModule.controller('evaluationController', function (
-        $scope,
-        _,
-        $uibModal,
-        DTOptionsBuilder,
-        DTColumnDefBuilder,
-        EvaluationDataFactory,
-        dataTableUtils) {
-
-    $scope.dtOptions = DTOptionsBuilder.newOptions()
-            .withDOM('<"html5buttons"B>lTfgitp')
-            .withLanguage(dataTableUtils.getDataTableTranslations())
-            .withOption('order', [0, 'asc'])
-            .withPaginationType('full_numbers')
-            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4, 5], false))
-            .withOption('select', true)
-            .withOption('responsive', true);
-
-    $scope.dtColumnDefs = [
-        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
-    ];
-
-    $scope.evaluationQuestions = {};
-    $scope.answers = {};
-
-    $scope.getEvaluationQuestions = function () {
-
-        EvaluationDataFactory.getAllEvaluationQuestions({}, function (response) {
-            //success
-            $scope.evaluationQuestions = response.evaluationDtoQuestions;
-        },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-                });
-    };
-
-    // init call
-    $scope.getEvaluationQuestions();
-
-
-    $scope.createData = function () {
-
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/rankingAndCategorizationOfSportsModal.html',
-            controller: 'CreateRankingAndCategorizationOfSportsModalCtrl',
-            size: 'xlg',
-            scope: $scope
-        });
-
-        modalInstance.result.then(function (response) {
-            console.log('Modal for creation of a new Ranking And Categorization Of Sports item: ', 'rankingAndCategorizationOfSportsModal.html');
-        });
-    };
-
-});
-
-
-termsOfCompetitionModule.controller('CreateRankingAndCategorizationOfSportsModalCtrl', function (
-        $scope,
-        $uibModalInstance,
-        _,
-        AppConstants) {
-
-    $scope.crudAction = AppConstants.CrudActions['create'];
-    $scope.data = {};
-
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
-
-
-termsOfCompetitionModule.controller('evaluationController2', function (
-        $scope,
-        _,
-        $uibModal,
-        DTOptionsBuilder,
-        EvaluationDataFactory) {
-
-    $scope.dtOptions = DTOptionsBuilder.newOptions()
-            .withDOM('<"html5buttons"B>lTfgitp')
-            .withButtons([
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-                {extend: 'print',
-                    customize: function (win) {
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ]);
-
-    $scope.evaluationQuestions = {};
-    $scope.answers = {};
-
-    $scope.getEvaluationQuestions = function () {
-
-        EvaluationDataFactory.getAllEvaluationQuestions({}, function (response) {
-            //success
-            $scope.evaluationQuestions = response.evaluationDtoQuestions;
-        },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-                });
-    };
-
-    // init call
-    $scope.getEvaluationQuestions();
-
-
-    $scope.createData = function () {
-
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/categorizationOfSportsPerSportClubModal.html',
-            controller: 'CategorizationOfSportsPerSportClubModalCtrl',
-            size: 'xlg',
-            scope: $scope
-        });
-
-        modalInstance.result.then(function (response) {
-            console.log('Modal for creation of a new Ranking And Categorization Of Sports item: ', 'rankingAndCategorizationOfSportsModal.html');
-        });
-    };
-
-});
-
-
-termsOfCompetitionModule.controller('CategorizationOfSportsPerSportClubModalCtrl', function (
-        $scope,
-        $uibModalInstance,
-        _,
-        AppConstants) {
-
-    $scope.crudAction = AppConstants.CrudActions['create'];
-    $scope.data = {};
-
-
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
-
 termsOfCompetitionModule.controller('termsOfCompetitionController', function (
         $scope,
         $rootScope,
@@ -165,7 +13,8 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
         DTOptionsBuilder,
         EvaluationDataFactory,
         toaster,
-        MemberRegisterDataFactory) {
+        MemberRegisterDataFactory,
+        QUESTIONNAIRE_TYPE) {
 
     $scope.$on('selectedEvaluationAnswers', function (ev, selectedEvaluationAnswers) {
         $rootScope.selectedEvaluationAnswers = selectedEvaluationAnswers;
@@ -200,35 +49,20 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
                     }
                 }
             ]);
-
-
-    EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({}, function (response) {
-
-        $scope.termsOfConditions = response.termsOfConditionDtoJson;
-
-    },
-            function (error) {
-                //fail
-                $scope.error = error;
-            });
-
-    $scope.createData = function () {
-
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/termsOfCompetitionModal.html',
-            controller: 'TermsOfCompetitionModalCtrl',
-            size: 'xlg',
-            scope: $scope
-        });
-
-        modalInstance.result.then(function (response) {
-            console.log('Modal: ', 'termsOfCompetitionModal.html');
-        });
+            
+    $scope.init = function() {
+        EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {        
+            $scope.termsOfConditions = response.evaluationQuestionDefJson;
+        },
+        function (error) {
+            //fail
+            $scope.error = error;
+        });        
     };
 
     $scope.editData = function (id) {
 
-        EvaluationDataFactory.fetchEvaluationAnswersByMemberRegisterId({memberRegisterId: id}, function (response) {
+        EvaluationDataFactory.findAllByMemberRegisterAndQuestionnaireType({memberRegisterId: id, questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {
             $scope.evaluationAnswer = response.evaluationAnswersJson;
 
             //broadcast selected member register item
@@ -269,103 +103,10 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
             });
         });
     };
+    
+    $scope.init();
 
 });
-
-
-termsOfCompetitionModule.controller('TermsOfCompetitionModalCtrl', function (
-        $scope,
-        $uibModalInstance,
-        _,
-        AppConstants,
-        EvaluationDataFactory,
-        MemberRegisterDataFactory,
-        toaster) {
-
-    $scope.crudAction = AppConstants.CrudActions['create'];
-    $scope.data = {};
-
-    $scope.evaluationQuestions = {};
-    $scope.answers = {};
-    // sets default value for location dropdown
-    $scope.memberRegister = {selected: {}};
-
-    $scope.getEvaluationQuestions = function () {
-
-        MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
-            //success
-            $scope.memberRegisters = response.memberRegisters;
-
-            EvaluationDataFactory.getAllEvaluationQuestions({}, function (response) {
-                //success
-                $scope.evaluationQuestions = response.evaluationDtoQuestions;
-            },
-                    function (error) {
-                        //fail
-                        $scope.error = error;
-                    });
-        },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-                });
-    };
-
-    $scope.ok = function () {
-
-        $scope.evaluationAnswers = [];
-        for (var question in $scope.answers) {
-            var answer = {
-                id: undefined,
-                memberRegister: $scope.memberRegister.selected,
-                answer: $scope.answers[question]
-            };
-            $scope.evaluationAnswers.push(answer);
-        }
-
-        $scope.data.evaluationAnswers = $scope.evaluationAnswers;
-
-        EvaluationDataFactory.storeEvaluationAnswers($scope.data, function (response) {
-
-            if (response.result === 200) {
-                console.log('Evaluation answers are successfully added!');
-
-                toaster.pop({
-                    type: 'info',
-                    title: 'Uspješno kreiranje stavke',
-                    body: "Uvjeti natječaja za odabranu stavku su uspješno kreirani.",
-                    showCloseButton: true,
-                    timeout: 5000
-                });
-
-            }
-        },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-
-                    toaster.pop({
-                        type: 'error',
-                        title: 'Greška',
-                        body: "Greška prilikom kreiranja uvjeta natječaj",
-                        showCloseButton: true,
-                        timeout: 5000
-                    });
-                });
-
-        // close modal view
-        $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-
-    // init call
-    $scope.getEvaluationQuestions();
-
-});
-
 
 termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function (
         $scope,
@@ -374,7 +115,8 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
         _,
         AppConstants,
         EvaluationDataFactory,
-        toaster) {
+        toaster,
+        QUESTIONNAIRE_TYPE) {
 
     $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
@@ -388,41 +130,41 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
     $scope.generalConditionsDocumentationSecondPart = [];
     $scope.automaticDeactivationOfAMember = [];
 
-    EvaluationDataFactory.getAllEvaluationQuestions({}, function (response) {
-        //success
-        $scope.evaluationQuestions = response.evaluationDtoQuestions;
+    EvaluationDataFactory.findAllByQuestionnaireType({questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {
+                //success
+                $scope.evaluationQuestions = response.evaluationDtoQuestions;
 
-        for (var i = 0; i < $scope.evaluationQuestions.length; i++) {
+                for (var i = 0; i < $scope.evaluationQuestions.length; i++) {
 
-            $scope.evaluationQuestions[i].initValue = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
-                return obj.answer.evaluationQuestionDef.question === $scope.evaluationQuestions[i].question;
-            });
+                    $scope.evaluationQuestions[i].initValue = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
+                        return obj.answer.evaluationQuestionDef.question === $scope.evaluationQuestions[i].question;
+                    });
 
-            for (var j = 0; j < $scope.evaluationQuestions[i].items.length; j++) {
-                $scope.questionItems.push({item: $scope.evaluationQuestions[i].items[j]});
-            }
+                    for (var j = 0; j < $scope.evaluationQuestions[i].items.length; j++) {
+                        $scope.questionItems.push({item: $scope.evaluationQuestions[i].items[j]});
+                    }
 
-            switch ($scope.evaluationQuestions[i].group) {
-                case 'GENERAL_CONDITIONS_1':
-                    $scope.generalConditionsFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
-                    break;
-                case 'GENERAL_CONDITIONS_2':
-                    $scope.generalConditionsSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
-                    break;
-                case 'GENERAL_CONDITIONS_DOCUMENTATION_1':
-                    $scope.generalConditionsDocumentationFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
-                    break;
-                case 'GENERAL_CONDITIONS_DOCUMENTATION_2':
-                    $scope.generalConditionsDocumentationSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
-                    break;
-                case 'AUTOMATIC_DEACTIVATION_OF_A_MEMBER':
-                    $scope.automaticDeactivationOfAMember.push({questionDef: $scope.evaluationQuestions[i]});
-                    break;
-                default:
-                    break;
-            }
-        }
-    },
+                    switch ($scope.evaluationQuestions[i].group) {
+                        case 'GENERAL_CONDITIONS_1':
+                            $scope.generalConditionsFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
+                            break;
+                        case 'GENERAL_CONDITIONS_2':
+                            $scope.generalConditionsSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
+                            break;
+                        case 'GENERAL_CONDITIONS_DOCUMENTATION_1':
+                            $scope.generalConditionsDocumentationFirstPart.push({questionDef: $scope.evaluationQuestions[i]});
+                            break;
+                        case 'GENERAL_CONDITIONS_DOCUMENTATION_2':
+                            $scope.generalConditionsDocumentationSecondPart.push({questionDef: $scope.evaluationQuestions[i]});
+                            break;
+                        case 'AUTOMATIC_DEACTIVATION_OF_A_MEMBER':
+                            $scope.automaticDeactivationOfAMember.push({questionDef: $scope.evaluationQuestions[i]});
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            },
             function (error) {
                 //fail
                 $scope.error = error;
@@ -457,30 +199,30 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
 
         EvaluationDataFactory.editEvaluationAnswers($scope.evaluationAnswersDto, function (response) {
 
-            if (response.result === 200) {
-                console.log('Evaluation answers are successfully edited!');
+                    if (response.result === 200) {
+                        console.log('Evaluation answers are successfully edited!');
 
-                toaster.pop({
-                    type: 'info',
-                    title: 'Uspješna izmjena stavke',
-                    body: "Uvjeti natječaja za odabranu stavku su uspješno izmijenjeni.",
-                    showCloseButton: true,
-                    timeout: 5000
-                });
-
-                EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({}, function (response) {
-
-                    $scope.termsOfConditions = response.termsOfConditionDtoJson;
-
-                    $rootScope.$broadcast('termsOfConditions', $scope.termsOfConditions);
-
-                },
-                        function (error) {
-                            //fail
-                            $scope.error = error;
+                        toaster.pop({
+                            type: 'info',
+                            title: 'Uspješna izmjena stavke',
+                            body: "Uvjeti natječaja za odabranu stavku su uspješno izmijenjeni.",
+                            showCloseButton: true,
+                            timeout: 5000
                         });
-            }
-        },
+
+                        EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {
+
+                                $scope.termsOfConditions = response.evaluationQuestionDefJson;
+
+                                $rootScope.$broadcast('termsOfConditions', $scope.termsOfConditions);
+
+                                },
+                                function (error) {
+                                    //fail
+                                    $scope.error = error;
+                                });
+                    }
+                },
                 function (error) {
                     //fail
                     $scope.error = error;

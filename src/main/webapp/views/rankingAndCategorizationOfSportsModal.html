@@ -7,405 +7,260 @@
     </div>
     <div class="modal-body">
 
-               <div class="ibox float-e-margins">
-                   
-                    
-                    <div class="ibox-content">
-                         <div class="row ibox-header">
-                          <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Odaberite sport za vrednovanje</label>
-                            <select class="form-control m-b" name="account">
-                                <option selected>...</option>
-                                <option value="option 2">option 2</option>
-                                <option value="option 3">option 3</option>
-                                <option value="option 4">option 4</option>
-                            </select>
-                        </div>
+        <div class="ibox float-e-margins">
 
-                    </div>
-                    
-                  
-                        </div>
-                        
+
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="row">
-                             <div class="col-md-12">
-                                <div class="row">
                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Kriterij razvijenosti sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- međunarodna federacija</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> do 100 </label>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Kriterij razvijenosti sporta
                                     </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 130 </label>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in criterionOfSportDevelopmentInternationalFederation">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 160 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 190 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> više od 190 </label>
-                                    </div>
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
 
                                 </div>
-
                             </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Kriterij razvijenosti sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- nacionalni savez </label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> do 75 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 150 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 225 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 300 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> više od 300 </label>
-                                    </div>
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
 
-                                </div>
-
-                            </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Kriterij razvijenosti sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- županijski savez</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> do 5 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 15 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 25 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 35 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> više od 35 </label>
-                                    </div>
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Kriterij razvijenosti sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- Grad Zadar</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> do 2 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 5 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 10 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> do 15 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> više od 15 </label>
-                                    </div>
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                                </div>
-                             </div>
-                            
-                             <div class="col-md-12">
-                                <div class="row">
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Javni status sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- interes javnosti</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 1</label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 3 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-        
-                                    
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Javni status sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- tradicija sporta u Gradu Zadru</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 1 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 3 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-                                 
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Javni status sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- olimpijski status sporta</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 0 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-                                 
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                   Javni status sporta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- važnost za nastavu TZK</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 1 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 3 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-                                   
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                                    
-                                </div>
-                             </div>
-                            
-                             <div class="col-md-12">
-                                <div class="row">
-                            
-                              <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Sportska kvaliteta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- broj kategoriziranih sportaša</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 0 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-                                 
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                            
-                              <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Sportska kvaliteta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- ostvareni sportski rezultati (RH)</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 1 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 3 </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-                                   
-                                   
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                           
                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Sportska kvaliteta
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <label class="m-b">- ostvareni sportski rezultati (GZD)</label>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.checkFour"> 1 </label>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Kriterij razvijenosti sporta
                                     </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 3 </label>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in criterionOfSportNationalAlliance">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label>
-                                            <input icheck type="radio" name="radioTest" ng-model="main.check8"> 5 </label>
-                                    </div>
-                                   
-                                   
-                                    <span class="badge badge-primary">Bodovi : 0</span>
-                                </div>
 
                                 </div>
-
                             </div>
-                        </div>
-                            
-                             <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3>Ukupni bodovi :</h3>
-                                </div>
-                                <div class="panel-body">
-                                     <div class="form-group">
-                                    <span class="badge badge-info">  <h3>Bodovi : 0</h3></span>
-                                    
-                                </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Kriterij razvijenosti sporta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in criterionOfSportCountyAlliance">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
 
                                 </div>
-
                             </div>
-                        </div>
-                                    
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Kriterij razvijenosti sporta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in criterionOfSportCityOfZadar">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+
                                 </div>
-                             </div>
-                          
+                            </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Javni status sporta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in publicInterestOfSportPublicInterest">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Javni status sporta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in publicInterestOfSportTownZadar">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Javni status sporta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in publicInterestOfSportOlympicStatus">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Javni status sporta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in publicInterestOfSportImportanceForTeachingTzk">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Sportska kvaliteta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in sportsQualityNumbeOfCategorizedAthletes">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Sportska kvaliteta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in sportsQualityAchievedSportsResultsInCroatia">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Sportska kvaliteta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-repeat="evaluationQuestion in sportsQualityAchievedSportsResultsInTownZadar">
+                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                                <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
+                                                    <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}} 
+                                                </label>
+                                            </div>
+                                            <span class="badge badge-primary">Bodovi : {{points[evaluationQuestion.questionDef.question]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3>Ukupni bodovi :</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <span class="badge badge-info">  <h3>Bodovi : {{sum}}</h3></span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </div>
 
 
 

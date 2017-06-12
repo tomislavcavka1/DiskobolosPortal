@@ -49,9 +49,10 @@ mainAppServices.factory('EvaluationDataFactory', ['$resource', 'AppConstants', f
         return $resource('', {}, {
             'getAllEvaluationQuestions': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/all', isArray: false},
             'storeEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/create'},
-            'fetchMemberRegistersWithAssociatedEvaluations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchMemberRegistersWithAssociatedEvaluations', isArray: false},
-            'fetchEvaluationAnswersByMemberRegisterId': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchEvaluationAnswersByMemberRegisterId/:memberRegisterId', params:{memberRegisterId: '@memberRegisterId'}},
-            'editEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/edit'}
+            'fetchMemberRegistersWithAssociatedEvaluations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchMemberRegistersWithAssociatedEvaluations/:questionnaireType', params:{questionnaireType: '@questionnaireType'}, isArray: false},
+            'findAllByMemberRegisterAndQuestionnaireType': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/findAllByMemberRegisterAndQuestionnaireType/:memberRegisterId/:questionnaireType', params:{memberRegisterId: '@memberRegisterId', questionnaireType: '@questionnaireType'}},
+            'editEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/edit'},
+            'findAllByQuestionnaireType': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/findAllByQuestionnaireType/:questionnaireType', params:{questionnaireType: '@questionnaireType'}}
         });
     }]);
 

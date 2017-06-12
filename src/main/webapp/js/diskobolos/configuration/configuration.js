@@ -36,3 +36,9 @@ configuration.constant('ROLE_PERMISSION_LEVEL', {
   small: 'SMALL',
   verySmall: 'VERY_SMALL'
 });
+
+
+configuration.constant('QUESTIONNAIRE_TYPE', {
+    termsOfCondition: 'TERMS_OF_CONDITION',
+    rankingAndCategorizationOfSports: 'RANKING_AND_CATEGORIZATION_OF_SPORTS'
+});

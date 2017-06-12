@@ -24,7 +24,9 @@
         'shareDataModule',
         'profileModule',
         'toaster',
-        'sportsBuildingsModule'
+        'sportsBuildingsModule',
+        'rankingAndCategorizationOfSportsModule',
+        'categorizationOfSportsPerSportClubModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

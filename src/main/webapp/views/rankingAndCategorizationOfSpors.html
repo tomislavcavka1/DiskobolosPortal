@@ -3,28 +3,18 @@
 <!-- Page breadcrumb -->    
 <div ng-include="'views/common/breadcrumb.html'"></div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="evaluationController">
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="rankingAndCategorizationOfSportsController">
 
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <div class="row ibox-header">
-
-
-                        <div class="col-lg-12">
-                            <div class="form-group pull-right">
-                                <button class="btn btn-primary " type="button" ng-click="createData()"><i class="fa fa-plus"></i>&nbsp;Novi unos</button>
-                            </div>
-
-                        </div>
-                    </div>
-
                     <table datatable="ng" dt-options="dtOptions"  class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
-                                <th>RB</th>
+                                <th>ID</th>
+                                <th>Klub</th>
                                 <td><strong>Kriterij razvijenosti sporta</strong> <br><br> Međunarodna federacija</td>
                                 <td><strong>Kriterij razvijenosti sporta</strong> <br><br>Nacionalni savez</td>
                                 <td><strong>Kriterij razvijenosti sporta</strong> <br><br>županijski savez</td>
@@ -37,20 +27,28 @@
                                 <td><strong>Sportska kvaliteta</strong> <br><br>Ostvareni sportski rezultati (RH)</td>
                                 <td><strong>Sportska kvaliteta</strong> <br><br>Ostvareni sportski rezultati (GZD)</td>
                                 <td><strong>UKUPNI BODOVI</strong></td>
-                                
-                                
+                                <th>promjeni/izbriši</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="sport in sports">
-                                <td>{{sport.id}}</td>
-                                <td>{{sport.name}}</td>
-                                <td>{{sport.nationalSportsFederation}}</td>
-                                <td>{{sport.internationalFederation}}</td>
-                                <td>{{sport.iocSportAccord}}</td>
+                            <tr ng-repeat="rankingAndCategorizationOfSport in rankingAndCategorizationOfSports">
+                                <td>{{rankingAndCategorizationOfSport.id}}</td>
+                                <td>{{rankingAndCategorizationOfSport.name}}</td>
+                                <td>{{rankingAndCategorizationOfSport.criterionOfSportInternationalFederation}}</td>
+                                <td>{{rankingAndCategorizationOfSport.criterionOfSportNationalAlliance}}</td>
+                                <td>{{rankingAndCategorizationOfSport.criterionOfSportCountyAlliance}}</td>
+                                <td>{{rankingAndCategorizationOfSport.criterionOfSportCityOfZadar}}</td>
+                                <td>{{rankingAndCategorizationOfSport.sportStatusOfPublicInterest}}</td>
+                                <td>{{rankingAndCategorizationOfSport.sportStatusTownZadar}}</td>
+                                <td>{{rankingAndCategorizationOfSport.olympicSportsStatus}}</td>
+                                <td>{{rankingAndCategorizationOfSport.importanceForTeachingTzk}}</td>
+                                <td>{{rankingAndCategorizationOfSport.sportsQualityNumberOfCategorizedAthletes}}</td>
+                                <td>{{rankingAndCategorizationOfSport.sportsQualityAccomplishedSportsResultsCroatia}}</td>
+                                <td>{{rankingAndCategorizationOfSport.sportsQualityAccomplishedSportsResultsTownOfZadar}}</td>
+                                <td>{{rankingAndCategorizationOfSport.totalPoints}}</td>
                                 <td class="edit-column">
-                                    <button type="button" class="btn btn-primary " ng-click="editData(sport.id)"><i class="fa fa-edit"></i> </button>
-                                    <button type="button" class="btn btn-danger " ng-click="deleteData(sport.id)"><i class="fa fa-trash"></i> </button>
+                                    <button type="button" class="btn btn-primary " ng-click="editData(rankingAndCategorizationOfSport.id)"><i class="fa fa-edit"></i> </button>
+                                    <button type="button" class="btn btn-danger " ng-click="deleteData(rankingAndCategorizationOfSport.id)"><i class="fa fa-trash"></i> </button>
                                 </td>
                             </tr>
                         </tbody>
