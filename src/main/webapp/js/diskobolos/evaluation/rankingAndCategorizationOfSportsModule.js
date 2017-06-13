@@ -50,10 +50,6 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
         $rootScope.selectedMemberRegister = selectedMemberRegister;
     });
     
-    $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
-        $rootScope.selectedMemberRegister = selectedMemberRegister;
-    });
-    
     $scope.$on('sum', function (ev, sum) {
         $rootScope.sum = sum;
     });
@@ -192,7 +188,10 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
 
                     for (var j = 0; j < $scope.evaluationQuestions[i].items.length; j++) {
                         $scope.questionItems.push({item: $scope.evaluationQuestions[i].items[j]});
-                    }                                        
+                    }
+                    
+                    $scope.points[$scope.evaluationQuestions[i].question] = !_.isUndefined($scope.evaluationQuestions[i].initValue) ? parseInt($scope.evaluationQuestions[i].initValue.answer.value) : undefined;
+                    $scope.totalPoints[$scope.evaluationQuestions[i].question] = !_.isUndefined($scope.evaluationQuestions[i].initValue) ? parseInt($scope.evaluationQuestions[i].initValue.answer.value) : undefined;
 
                     switch ($scope.evaluationQuestions[i].group) {
                         case 'INTERNATIONAL_FEDERATION':
@@ -250,21 +249,17 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         });
         
         $scope.points[question] = $scope.answerItem.item.value;
-        
-        $scope.totalPointsValue = _.find($scope.totalPoints, function (obj) {
-            return obj.key === question;
-        });
-        
-        if(!_.isUndefined($scope.totalPoints[question])) {       
-            if($scope.totalPoints[question] !== $scope.answerItem.item.value) {
-                    $scope.sum -= $scope.totalPoints[question];                    
-                    $scope.sum += $scope.answerItem.item.value;
-                    $scope.totalPoints[question] = $scope.answerItem.item.value;
+                
+        if(!_.isUndefined($scope.totalPoints[question])) {  
+            if($scope.totalPoints[question] !== $scope.answerItem.item.value) {                
+                $scope.sum -= $scope.totalPoints[question];                    
+                $scope.sum += $scope.answerItem.item.value;
+                $scope.totalPoints[question] = $scope.answerItem.item.value;
             }
-        } else {
-            $scope.totalPoints[question] = $scope.answerItem.item.value;
-            $rootScope.sum += $scope.totalPoints[question];
-        }
+        } else {                
+              $scope.totalPoints[question] = $scope.answerItem.item.value;            
+              $rootScope.sum += $scope.totalPoints[question];
+        }                                                
     };
     
     $scope.ok = function () {
