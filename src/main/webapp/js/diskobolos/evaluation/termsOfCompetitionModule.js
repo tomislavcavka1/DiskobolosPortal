@@ -14,7 +14,9 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
         EvaluationDataFactory,
         toaster,
         MemberRegisterDataFactory,
-        QUESTIONNAIRE_TYPE) {
+        QUESTIONNAIRE_TYPE,
+        dataTableUtils,
+        DTColumnDefBuilder) {
 
     $scope.$on('selectedEvaluationAnswers', function (ev, selectedEvaluationAnswers) {
         $rootScope.selectedEvaluationAnswers = selectedEvaluationAnswers;
@@ -33,22 +35,16 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
-            .withButtons([
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-                {extend: 'print',
-                    customize: function (win) {
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
+            .withLanguage(dataTableUtils.getDataTableTranslations())
+            .withOption('order', [0, 'asc'])
+            .withPaginationType('full_numbers')
+            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4], false))
+            .withOption('select', true)
+            .withOption('responsive', true);
 
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ]);
+    $scope.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
+    ];
             
     $scope.init = function() {
         EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {        

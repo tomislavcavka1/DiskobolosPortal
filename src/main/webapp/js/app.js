@@ -26,7 +26,8 @@
         'toaster',
         'sportsBuildingsModule',
         'rankingAndCategorizationOfSportsModule',
-        'categorizationOfSportsPerSportClubModule'
+        'categorizationOfSportsPerSportClubModule',
+        'dataTableUtilsModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

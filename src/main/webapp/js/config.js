@@ -454,6 +454,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'datatables.buttons',
                                 files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                             }
                         ]);
                     }
