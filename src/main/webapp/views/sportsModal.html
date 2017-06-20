@@ -9,18 +9,25 @@
         <div class="modal-body">
             <div class="form-group valid" ng-class="{ 'has-error': sport.name.$invalid }">
                 <label>Naziv</label> <input type="text" name="name" required="true" ng-minlength="2" ng-maxlength="100" placeholder="Upišite naziv" class="form-control" ng-model="data.name">
-            
-            <div class="validation-msg" ng-messages="sport.name.$error">            
-                <p ng-message="required">*Naziv je obavezno polje</p>
-                <p ng-message="minlength">*Minimalna duljina naziva su dva znaka</p>
-                <p ng-message="maxlength">*Maksimalna duljina naziva je 100.</p>
-            </div>
-            </div>
-            
 
-            <div class="form-group">
+                <div class="validation-msg" ng-messages="sport.name.$error">            
+                    <p ng-message="required">*Naziv je obavezno polje</p>
+                    <p ng-message="minlength">*Minimalna duljina naziva su dva znaka</p>
+                    <p ng-message="maxlength">*Maksimalna duljina naziva je 100.</p>
+                </div>
+            </div>
+
+
+            <div class="form-group valid" ng-class="{ 'has-error' : sport.nationalSportsFederations.$invalid}">
                 <label>Nacionalni sportski savez</label>
-                <tags-input ng-model="data.nationalSportsFederations"></tags-input>
+                <tags-input type="text" name="nationalSportsFederations" placeholder="Dodaj stavku" 
+                            min-length="2" max-length="10"
+                            min-tags="1"
+                            allowed-tags-pattern="^[a-zA-Z]" ng-model="data.nationalSportsFederations"></tags-input>
+                <div class="validation-msg">            
+                    <p ng-show="sport.nationalSportsFederations.$error.minTags">Minimalni broj tagova je 1!</p>
+                </div>
+
             </div>
 
             <div class="form-group">

@@ -1762,7 +1762,7 @@ function chartJsCtrl() {
         },
         {
             value: 200,
-            color: "#A4CEE8",
+            color: "red",
             highlight: "#1ab394",
             label: "Laptop"
         }
@@ -1805,7 +1805,7 @@ function chartJsCtrl() {
         },
         {
             value: 100,
-            color: "#A4CEE8",
+            color: "#fb8692",
             highlight: "#1ab394",
             label: "Laptop"
         }

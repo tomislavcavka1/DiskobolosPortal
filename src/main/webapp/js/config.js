@@ -21,39 +21,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
     $stateProvider
 
-            .state('dashboards', {
+            /*
+             Glavni izbornik
+             */
+            .state('content', {
                 abstract: true,
-                url: "/dashboards",
-                templateUrl: "views/common/content.html"
-            })
-            .state('dashboards.dashboard_1', {
-                url: "/dashboard_1",
-                templateUrl: "views/dashboard_1.html",
+                url: "",
+                templateUrl: "views/common/content.html",
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             {
-                                serie: true,
-                                name: 'angular-flot',
-                                files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-                            },
-                            {
-                                name: 'angles',
-                                files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                            },
-                            {
-                                name: 'angular-peity',
-                                files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
+                                files: ['js/diskobolos/login/authenticationModule.js']
                             }
                         ]);
                     }
                 }
             })
-            .state('dashboards.dashboard_2', {
-                url: "/dashboard_2",
-                templateUrl: "views/dashboard_2.html",
+
+            .state('content.dashboard', {
+                url: "/dashboard",
+                templateUrl: "views/dashboard.html",
                 data: {
-                    pageTitle: 'Dashboard 2'
+                    pageTitle: 'Dashboard',
+                    displayName: 'Radna ploča'
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
@@ -74,138 +65,23 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'ui.checkbox',
                                 files: ['js/bootstrap/angular-bootstrap-checkbox.js']
-                            }
-                        ]);
-                    }
-                }
-            })
-            .state('dashboards.dashboard_3', {
-                url: "/dashboard_3",
-                templateUrl: "views/dashboard_3.html",
-                data: {
-                    pageTitle: 'Dashboard 3'
-                },
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
+                            },
                             {
                                 name: 'angles',
                                 files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                            },
-                            {
-                                name: 'angular-peity',
-                                files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
-                            },
-                            {
-                                name: 'ui.checkbox',
-                                files: ['js/bootstrap/angular-bootstrap-checkbox.js']
-                            }
-                        ]);
-                    }
-                }
-            })
-            .state('dashboards_top', {
-                abstract: true,
-                url: "/dashboards_top",
-                templateUrl: "views/common/content_top_navigation.html",
-            })
-            .state('dashboards_top.dashboard_4', {
-                url: "/dashboard_4",
-                templateUrl: "views/dashboard_4.html",
-                data: {
-                    pageTitle: 'Dashboard 4'
-                },
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            {
-                                name: 'angles',
-                                files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                            },
-                            {
-                                name: 'angular-peity',
-                                files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
-                            },
-                            {
-                                serie: true,
-                                name: 'angular-flot',
-                                files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-                            }
-                        ]);
-                    }
-                }
-            })
-            .state('dashboards.dashboard_4_1', {
-                url: "/dashboard_4_1",
-                templateUrl: "views/dashboard_4_1.html",
-                data: {
-                    pageTitle: 'Dashboard 4'
-                },
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            {
-                                name: 'angles',
-                                files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                            },
-                            {
-                                name: 'angular-peity',
-                                files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
-                            },
-                            {
-                                serie: true,
-                                name: 'angular-flot',
-                                files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-                            }
-                        ]);
-                    }
-                }
-            })
-            .state('dashboards.dashboard_5', {
-                url: "/dashboard_5",
-                templateUrl: "views/dashboard_5.html",
-                data: {
-                    pageTitle: 'Dashboard 5'
-                },
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            {
-                                serie: true,
-                                name: 'angular-flot',
-                                files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-                            },
-                            {
-                                files: ['js/plugins/sparkline/jquery.sparkline.min.js']
                             }
                         ]);
                     }
                 }
             })
 
-            /*
-             Glavni izbornik
-             */
-            .state('content', {
-                abstract: true,
-                url: "",
-                templateUrl: "views/common/content.html",
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            {
-                                files: ['js/diskobolos/login/authenticationModule.js']
-                            }
-                        ]);
-                    }
-                }
-            })
 
             .state('content.sports', {
                 url: "/sports",
                 templateUrl: "views/sports.html",
                 data: {
-                    pageTitle: 'Sportovi'
+                    pageTitle: 'Sportovi',
+                    displayName: 'Sportovi'
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
@@ -260,7 +136,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/membershipCategory",
                 templateUrl: "views/membershipCategory.html",
                 data: {
-                    pageTitle: 'Kategorije članstva'
+                    pageTitle: 'Kategorije članstva',
+                    displayName: 'Kategorije članstva'
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
@@ -307,7 +184,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/memberRegister",
                 templateUrl: "views/memberRegister.html",
                 data: {
-                    pageTitle: 'Matična knjiga članica'
+                    pageTitle: 'Matična knjiga članica',
+                    displayName: 'Matična knjiga članica'
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
@@ -379,14 +257,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('evaluation', {
                 abstract: true,
                 url: "",
-                templateUrl: "views/common/content.html"
+                templateUrl: "views/common/content.html",
             })
 
 
             .state('evaluation.termsOfCompetition', {
                 url: "/termsOfCompetition",
                 templateUrl: "views/termsOfCompetition.html",
-                data: {pageTitle: 'Uvjeti natječaja'},
+                data: {pageTitle: 'Uvjeti natječaja',
+                displayName: 'Uvjeti natječaja'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -429,7 +308,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('evaluation.rankingAndCategorizationOfSpors', {
                 url: "/rankingAndCategorizationOfSpors",
                 templateUrl: "views/rankingAndCategorizationOfSpors.html",
-                data: {pageTitle: 'Rangiranje i kategorizacija sportova'},
+                data: {pageTitle: 'Rangiranje i kategorizacija sportova',
+                displayName: 'Rangiranje i kategorizacija sportova'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -468,7 +348,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('evaluation.categorizationOfSportsPerSportClub', {
                 url: "/categorizationOfSportsPerSportClub",
                 templateUrl: "views/categorizationOfSportsPerSportClub.html",
-                data: {pageTitle: 'Kategorizacija sporta za sporstke klubove'},
+                data: {pageTitle: 'Kategorizacija sporta za sporstke klubove',displayName: 'Kategorizacija sporta za sporstke klubove'
+                },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -508,21 +389,31 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('content.registerOfNonprofitOrganizations', {
                 url: "/registerOfNonprofitOrganizations",
                 templateUrl: "views/registerOfNonprofitOrganizations.html",
-                data: {pageTitle: 'registar_neprotifabilnih_organizacija'}
+                data: {pageTitle: 'Registar neprofitabilnih organizacija', displayName: 'Registar neprofitabilnih organizacija'}
             })
 
 
- /*
+            /*
              Registar udruga Republike Hrvatske
              */
 
             .state('content.registerOfAssociationsCRO', {
                 url: "/registerOfAssociationsCRO",
                 templateUrl: "views/registerOfAssociationsCRO.html",
-                data: {pageTitle: 'registar_udruga_republike_hrvatske'}
+                data: {pageTitle: 'Registar udruga Republike Hrvatske', displayName: 'Registar udruga Republike Hrvatske'}
             })
             
-            
+            /*
+             Registar udruga Republike Hrvatske
+             */
+
+            .state('content.nomenklaturaSportovaISportskihGrana', {
+                url: "/nomenklaturaSportovaISportskihGrana",
+                templateUrl: "views/nomenklaturaSportovaISportskihGrana.html",
+                data: {pageTitle: 'Nomenklatura sportova i sportskih grana', displayName: 'Nomenklatura sportova i sportskih grana'}
+            })
+
+
             /*
              Profile
              */
@@ -553,7 +444,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('content.sportsBuildings', {
                 url: "/sportsBuildings",
                 templateUrl: "views/sportsBuildings.html",
-                data: {pageTitle: 'sport buildings'},
+                data: {pageTitle: 'Registar sportskih građevina', displayName: 'Registar sportskih građevina'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -589,7 +480,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 templateUrl: "views/login.html",
                 data: {pageTitle: 'Login', specialClass: 'login-bg'},
                 params: {
-                    'toState': 'content.sports', // default state to proceed to after login
+                    'toState': 'content.dashboard', // default state to proceed to after login
                     'toParams': {}
                 },
                 resolve: {

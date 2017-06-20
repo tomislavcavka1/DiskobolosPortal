@@ -27,7 +27,10 @@
         'sportsBuildingsModule',
         'rankingAndCategorizationOfSportsModule',
         'categorizationOfSportsPerSportClubModule',
-        'dataTableUtilsModule'
+        'dataTableUtilsModule',
+        'dashboardModule',
+        'uiBreadcrumbsModule',
+        'weatherModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

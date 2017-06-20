@@ -29,7 +29,7 @@
                     <div class="form-group valid" ng-class="{ 'has-error': memberRegister.test2.$invalid }">
                         <label>Lokacija</label> 
                         <ui-select name="test2" ng-required="true" ng-model="location.selected" theme="bootstrap">
-                            <ui-select-match placeholder="Izaberite lokaciju">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-match>{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices repeat="location in locations | filter: $select.search">
                                 <div ng-bind-html="location.name | highlight: $select.search"></div>
                                 <small ng-bind-html="location.postalCode | highlight: $select.search"></small>

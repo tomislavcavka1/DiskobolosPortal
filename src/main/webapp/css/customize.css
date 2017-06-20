@@ -4,7 +4,6 @@ Customize css
 
 */
 
-
 .modal-body .valid {
     position: relative;
 }
@@ -23,6 +22,32 @@ Customize css
 .page-heading {
     border-top: 0 none;
     padding: 0 10px 2px;
+}
+
+.btn-primary {
+    background-color: #2BAAE2;
+    border-color: #2BAAE2;
+    color: #ffffff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary.active:hover, .btn-primary.active:focus {
+    background-color: #2BAAE2;
+    border-color: #2BAAE2;
+    color: #ffffff;
+}
+
+.nav > li.active {
+    background: #293846 none repeat scroll 0 0;
+    border-left: 4px solid #2BAAE2;
+}
+
+tags-input .tags .tag-item {
+    background-color: #8092a1 !important;
+
+}
+
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
+    background-color: #2BAAE2;
+    border-color: #2BAAE2;
 }
 
 /************************
@@ -230,7 +255,7 @@ table.dataTable {
 
 
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
-    background-color: #1ab394 !important;
+    background-color: #778a99 !important;
     border: 2px solid white !important;
     border-radius: 14px;
     box-shadow: none !important;
@@ -260,7 +285,7 @@ table.dataTable .green-shortinfo {
 }
 
 table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
-    background: #1ab394 none repeat scroll 0 0;
+    background: #778a99 none repeat scroll 0 0;
     color: #fff;
     padding-right: 30px;
 }
@@ -276,10 +301,40 @@ table.dataTable thead .sorting::after {
     box-shadow: none;
     font-size: 12px;
     padding: 6px 12px;
-    background-color: #29ABE2;
-    border-color: #29ABE2;
-    color: #ffffff;
-    margin: 0 2px;
+    background-color: #fff;
+    color: #676a6c;
+    margin: 0;
+}
+
+/*
+Pagination
+*/
+
+.pagination > li > a, .pagination > li > span {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: inherit;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #2BAAE2;
+    border-color: #2BAAE2;
+    color: #fff;
+    cursor: default;
+    z-index: 2;
+}
+
+.pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
+    background-color: #fff;
+    border-color: #ddd;
+    color: #ddd;
+    cursor: not-allowed;
 }
 
 /************************
