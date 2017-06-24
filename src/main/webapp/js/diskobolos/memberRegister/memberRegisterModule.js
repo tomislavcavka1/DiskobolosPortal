@@ -402,48 +402,6 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
         return $scope.removedItems;
     };
 
-    /**
-     * Function that searches geographical data for provided address
-     * 
-     * @param {type} address for which geographic data will be found
-     * @returns {undefined}
-     */
-    $scope.findCoordinatesForAddress = function (address) {
-        var geocoder = new google.maps.Geocoder();
-        if (!_.isEmpty(address)) {
-            geocoder.geocode({"address": address}, function (results, status) {
-                if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-                    $timeout(function () {
-                        $scope.address.latitude = results[0].geometry.location.lat();
-                        $scope.address.longitude = results[0].geometry.location.lng();
-                        for (var i = 0; i < results[0].address_components.length; i++) {
-                            for (var j = 0; j < results[0].address_components[i].types.length; j++) {
-                                if (results[0].address_components[i].types[j] === "country")
-                                    $scope.address.country.isoCode2 = results[0].address_components[i].short_name;
-                                if (results[0].address_components[i].types[j] === "postal_code")
-                                    $scope.address.municipalityNumber = results[0].address_components[i].short_name;
-                                if (results[0].address_components[i].types[j] === "route")
-                                    $scope.address.street = results[0].address_components[i].long_name;
-                                if (results[0].address_components[i].types[j] === "street_number")
-                                    $scope.address.streetNumber = results[0].address_components[i].short_name;
-                                if (results[0].address_components[i].types[j] === "locality")
-                                    $scope.address.city = results[0].address_components[i].long_name;
-                            }
-                        }
-                    }, 0);
-                } else {
-                    toaster.pop({
-                        type: 'error',
-                        title: 'Greška',
-                        body: 'Cannot find coordinates for filled in address: ' + address,
-                        showCloseButton: true,
-                        timeout: 5000
-                    });
-                }
-            });
-        }
-    };
-
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
@@ -459,7 +417,8 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
         MemberRegisterDataFactory,
         toaster,
         LocationDataFactory,
-        MembershipCategoryDataFactory) {
+        MembershipCategoryDataFactory,
+        $timeout) {
 
     $scope.crudAction = AppConstants.CrudActions['create'];
 
@@ -468,7 +427,14 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
     $scope.data.emailsTags = [];
     $scope.locations = [];
     $scope.membershipCategories = [];
-    $scope.location = {selected: {}};
+    $scope.location = {
+        countryCode: '',
+        address: '',
+        longitude: undefined,
+        latitude: undefined,
+        postalCode: undefined,
+        city: ''
+    };
     $scope.membershipCategory = {selected: {}};
 
     // initialization of the date fields
@@ -500,7 +466,7 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
         $scope.memberRegisterDto = $scope.data;
         $scope.memberRegisterDto.bankAccounts = [];
         $scope.memberRegisterDto.emails = [];
-        $scope.memberRegisterDto.location = $scope.location.selected;
+        $scope.memberRegisterDto.location = $scope.location;
         $scope.memberRegisterDto.membershipCategory = $scope.membershipCategory.selected;
 
         for (var i = 0; i < $scope.data.bankAccountsTags.length; i++) {
@@ -593,6 +559,53 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
+    };
+    
+    /**
+     * Function that searches geographical data for provided address
+     * 
+     * @param {type} address for which geographic data will be found
+     * @returns {undefined}
+     */
+    $scope.findCoordinatesForAddress = function (location) {
+        var geocoder = new google.maps.Geocoder();
+        if (!_.isEmpty(location)) {
+            geocoder.geocode({"address": location}, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                    $timeout(function () {
+                        $scope.location.latitude = results[0].geometry.location.lat();
+                        $scope.location.longitude = results[0].geometry.location.lng();
+                        for (var i = 0; i < results[0].address_components.length; i++) {
+                            for (var j = 0; j < results[0].address_components[i].types.length; j++) {
+                                if (results[0].address_components[i].types[j] === "country")
+                                    $scope.location.countryCode = results[0].address_components[i].short_name;
+                                if (results[0].address_components[i].types[j] === "postal_code")
+                                    $scope.location.postalCode = results[0].address_components[i].short_name;
+                                if (results[0].address_components[i].types[j] === "route")
+                                    $scope.location.address = results[0].address_components[i].long_name;
+                                if (results[0].address_components[i].types[j] === "street_number")
+                                    $scope.location.streetNumber = results[0].address_components[i].short_name;
+                                if (results[0].address_components[i].types[j] === "locality") {
+                                    $scope.location.city = results[0].address_components[i].long_name;                                                               
+                                    $scope.data.location.city = $scope.location.city;
+                                }
+                            }
+                        }
+                        
+                        $scope.location.address = $scope.location.address + ' ' + $scope.location.streetNumber;
+                        delete $scope.location.streetNumber;
+                    }, 0);
+                } else {
+                    toaster.pop({
+                        type: 'error',
+                        title: 'Greška',
+                        body: 'Za upisanu adresu nije moguće dohvatiti podatke ',
+                        showCloseButton: true,
+                        timeout: 5000
+                    });
+                }
+            });
+        }
     };
 
     $scope.init();

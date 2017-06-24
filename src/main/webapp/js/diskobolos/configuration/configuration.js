@@ -40,5 +40,6 @@ configuration.constant('ROLE_PERMISSION_LEVEL', {
 
 configuration.constant('QUESTIONNAIRE_TYPE', {
     termsOfCondition: 'TERMS_OF_CONDITION',
-    rankingAndCategorizationOfSports: 'RANKING_AND_CATEGORIZATION_OF_SPORTS'
+    rankingAndCategorizationOfSports: 'RANKING_AND_CATEGORIZATION_OF_SPORTS',
+    categorizationOfSportsPerSports: 'CATEGORIZATION_OF_SPORTS_PER_SPORT_CLUB'
 });

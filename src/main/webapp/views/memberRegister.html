@@ -49,8 +49,8 @@
                             <tr ng-repeat="memberRegister in memberRegisters">
                                 <td>{{ memberRegister.id}}</td>
                                 <td>{{ memberRegister.name}}</td>
-                                <td>{{ memberRegister.address}}</td>
-                                <td>{{ memberRegister.location.name}}</td>
+                                <td>{{ memberRegister.location.address}}</td>
+                                <td>{{ memberRegister.location.city}}</td>
                                 <td>{{ memberRegister.phone1}}</td>
                                 <td><a ng-href="https://{{ memberRegister.phone2}}" target="_blank">{{ memberRegister.phone2}}</a></td>
                                 <td>{{ memberRegister.fax}}</td>

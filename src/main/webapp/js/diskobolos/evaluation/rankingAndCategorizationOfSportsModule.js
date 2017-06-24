@@ -38,7 +38,7 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
         sportsQualityAccomplishedSportsResultsTownOfZadar: 0,
         totalPoints: 0
     };
-    $rootScope.sum = {};
+    $rootScope.rankingSum = {};
     $rootScope.selectedMemberRegister = {};
     $rootScope.totalPointsPerMemberRegister = {};
 
@@ -50,8 +50,8 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
         $rootScope.selectedMemberRegister = selectedMemberRegister;
     });
     
-    $scope.$on('sum', function (ev, sum) {
-        $rootScope.sum = sum;
+    $scope.$on('rankingSum', function (ev, rankingSum) {
+        $rootScope.rankingSum = rankingSum;
     });
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -106,9 +106,9 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
 
             MemberRegisterDataFactory.getMemberRegisterById({memberRegisterId: id}, function (response) {
                 //broadcast selected member register item
-                $rootScope.sum = $rootScope.totalPointsPerMemberRegister[id];
+                $rootScope.rankingSum = $rootScope.totalPointsPerMemberRegister[id];
                 $rootScope.$broadcast('selectedMemberRegister', response.memberRegister);
-                $rootScope.$broadcast('sum', $rootScope.sum);
+                $rootScope.$broadcast('rankingSum', $rootScope.rankingSum);
 
             }, function (error) {
                 toaster.pop({
@@ -250,16 +250,17 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         
         $scope.points[question] = $scope.answerItem.item.value;
                 
-        if(!_.isUndefined($scope.totalPoints[question])) {  
+        if(!_.isUndefined($scope.totalPoints[question])) {
             if($scope.totalPoints[question] !== $scope.answerItem.item.value) {                
-                $scope.sum -= $scope.totalPoints[question];                    
-                $scope.sum += $scope.answerItem.item.value;
+                $scope.rankingSum -= $scope.totalPoints[question];                    
+                $scope.rankingSum += $scope.answerItem.item.value;
                 $scope.totalPoints[question] = $scope.answerItem.item.value;
             }
-        } else {                
+        } else {           
               $scope.totalPoints[question] = $scope.answerItem.item.value;            
-              $rootScope.sum += $scope.totalPoints[question];
-        }                                                
+              $rootScope.rankingSum += $scope.totalPoints[question];
+        }
+        $rootScope.$broadcast('rankingSum', $rootScope.rankingSum);
     };
     
     $scope.ok = function () {

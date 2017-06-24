@@ -1,9 +1,11 @@
 <div class="inmodal">
     <div class="modal-header">
         <i class="fa fa-edit modal-icon" ng-show="crudAction === 'EDIT'"></i>
-        <i class="fa fa-plus-square modal-icon" ng-show="crudAction === 'CREATE'"></i>                
+        <i class="fa fa-plus-square modal-icon" ng-show="crudAction === 'CREATE'"></i>
+        <i class="fa fa-search modal-icon" ng-show="viewMode === 'READ_MODE_ONLY'"></i>
         <p class="modal-title" ng-show="crudAction === 'EDIT'">Izmjena podataka</p>
         <p class="modal-title" ng-show="crudAction === 'CREATE'">Novi unos</p>
+        <p class="modal-title" ng-show="viewMode === 'READ_MODE_ONLY'">Pregled podataka</p>
     </div>
     <form name="memberRegister">
         <div class="modal-body">
@@ -11,7 +13,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group valid" ng-class="{ 'has-error': memberRegister.name.$invalid }">
-                        <label>Naziv</label> <input type="text" name="name" ng-required="true" ng-minlength="1" ng-maxlength="100"  class="form-control" ng-model="data.name">
+                        <label>Naziv</label> <input type="text" ng-disabled="viewMode === 'READ_MODE_ONLY'" name="name" ng-required="true" ng-minlength="1" ng-maxlength="100"  class="form-control" ng-model="data.name">
                         <div class="validation-msg" ng-messages="memberRegister.name.$error">            
                             <p ng-message="required">*Naziv je obavezno polje</p>
                             <p ng-message="minlength">*Minimalna duljina naziva je 1.</p>
@@ -22,74 +24,67 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Adresa</label> <input type="text" class="form-control" ng-model="data.address" ng-blur="findCoordinatesForAddress(data.address)" ng-autocomplete >
+                        <label>Adresa</label> <input type="text" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.location.address" ng-blur="findCoordinatesForAddress(data.location.address)" ng-autocomplete >
                     </div>
                 </div>            
                 <div class="col-md-6">
                     <div class="form-group valid" ng-class="{ 'has-error': memberRegister.test2.$invalid }">
-                        <label>Lokacija</label> 
-                        <ui-select name="test2" ng-required="true" ng-model="location.selected" theme="bootstrap">
-                            <ui-select-match>{{$select.selected.name}}</ui-select-match>
-                            <ui-select-choices repeat="location in locations | filter: $select.search">
-                                <div ng-bind-html="location.name | highlight: $select.search"></div>
-                                <small ng-bind-html="location.postalCode | highlight: $select.search"></small>
-                            </ui-select-choices>
-                        </ui-select>
-                        <div class="validation-msg" ng-messages="memberRegister.test2.$error">            
-                            <p ng-message="required">*Lokacija je obavezno polje</p>
-                        </div>
+                        <label>Lokacija</label>  <input type="text"  ng-disabled="crudAction === 'CREATE' || viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.location.city">
+                    </div>
+                    <div class="validation-msg" ng-messages="memberRegister.test2.$error">            
+                        <p ng-message="required">*Lokacija je obavezno polje</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Kontakt broj</label> <input type="text"  class="form-control" ng-model="data.phone1">
+                        <label>Kontakt broj</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.phone1">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Web</label> <input type="text"  class="form-control" ng-model="data.phone2">
+                        <label>Web</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.phone2">
                     </div>
                 </div>            
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>FAX</label> <input type="text"  class="form-control" ng-model="data.fax">
+                        <label>FAX</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.fax">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Matični broj</label> <input type="text"  class="form-control" ng-model="data.identificationNumber">
+                        <label>Matični broj</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.identificationNumber">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>OIB</label> <input type="text"  class="form-control" ng-model="data.oib">
+                        <label>OIB</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.oib">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Registarski broj</label> <input type="text"  class="form-control" ng-model="data.registerNumber">
+                        <label>Registarski broj</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.registerNumber">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Broj iz registra neprofitnih organizacija</label> <input type="text"  class="form-control" ng-model="data.numberOfNonProfitOrg">
+                        <label>Broj iz registra neprofitnih organizacija</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.numberOfNonProfitOrg">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Predsjednik</label> <input type="text"  class="form-control" ng-model="data.chairman">
+                        <label>Predsjednik</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.chairman">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Tajnik</label> <input type="text"  class="form-control" ng-model="data.secretary">
+                        <label>Tajnik</label> <input type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.secretary">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" id="dataFrom">
                         <label>Datum mandata od</label>
                         <div class="input-group date">
-                            <input type="datetime" class="form-control" date-time ng-model="data.dateFrom" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                            <input type="datetime" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" date-time ng-model="data.dateFrom" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -98,7 +93,7 @@
                     <div class="form-group" id="dataTo">
                         <label>Datum mandata do</label>
                         <div class="input-group date">
-                            <input type="datetime" class="form-control" date-time ng-model="data.dateTo" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                            <input type="datetime" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" date-time ng-model="data.dateTo" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -107,7 +102,7 @@
                     <div class="form-group">
                         <label>Datum registriranja kluba</label>
                         <div class="input-group date">
-                            <input type="datetime" class="form-control" date-time ng-model="data.registrationDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                            <input type="datetime" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" date-time ng-model="data.registrationDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -115,32 +110,33 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Kategorija članstva</label>
-                        <ui-select ng-model="membershipCategory.selected" theme="bootstrap">
+                        <ui-select ng-hide="viewMode === 'READ_MODE_ONLY'" ng-model="membershipCategory.selected" theme="bootstrap">
                             <ui-select-match>{{$select.selected.description}}</ui-select-match>
                             <ui-select-choices repeat="membershipCategory in membershipCategories | filter: $select.search">
                                 <div ng-bind-html="membershipCategory.description | highlight: $select.search"></div>                            
                             </ui-select-choices>
                         </ui-select>
+                        <input type="text"  ng-show="viewMode === 'READ_MODE_ONLY'" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.membershipCategory.description">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Broj računa</label>
-                        <tags-input ng-model="data.bankAccountsTags"></tags-input> <!-- ng-iban="[HR]" -->
+                        <tags-input ng-disabled="viewMode === 'READ_MODE_ONLY'" ng-model="data.bankAccountsTags"></tags-input> <!-- ng-iban="[HR]" -->
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Elektronička pošta</label>
-                        <tags-input type="email" name="email" ng-model="data.emailsTags"></tags-input>
+                        <tags-input ng-disabled="viewMode === 'READ_MODE_ONLY'" type="email" name="email" ng-model="data.emailsTags"></tags-input>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-white" ng-click="cancel()">Zatvori</button>
-            <button type="button" class="btn btn-primary" ng-disabled="memberRegister.$invalid" ng-show="crudAction === 'EDIT'" ng-click="ok()">Spremi promjene</button>
-            <button type="button" class="btn btn-primary" ng-disabled="memberRegister.$invalid" ng-show="crudAction === 'CREATE'" ng-click="ok()">Kreiraj novu stavku</button>
+            <button type="button" class="btn btn-primary" ng-disabled="memberRegister.$invalid" ng-show="crudAction === 'EDIT' && viewMode !== 'READ_MODE_ONLY'" ng-click="ok()">Spremi promjene</button>
+            <button type="button" class="btn btn-primary" ng-disabled="memberRegister.$invalid" ng-show="crudAction === 'CREATE' && viewMode !== 'READ_MODE_ONLY'" ng-click="ok()">Kreiraj novu stavku</button>
         </div>
     </form>
 </div>

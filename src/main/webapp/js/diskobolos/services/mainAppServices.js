@@ -40,7 +40,8 @@ mainAppServices.factory('MemberRegisterDataFactory', ['$resource', 'AppConstants
 // Services responsible for creation of location, fetching location etc.
 mainAppServices.factory('LocationDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
         return $resource('', {}, {
-            'getAllLocations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/locations/all', isArray: false}            
+            'getAllLocations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/locations/all', isArray: false},
+            'fetchGeographicalData': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/locations/fetchGeographicalData', isArray: false}
         });
     }]);
 

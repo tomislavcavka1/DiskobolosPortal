@@ -30,7 +30,9 @@
         'dataTableUtilsModule',
         'dashboardModule',
         'uiBreadcrumbsModule',
-        'weatherModule'
+        'weatherModule',
+        'eventUtilsModule',
+        'geographicalOverviewOfMemberRegisterModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

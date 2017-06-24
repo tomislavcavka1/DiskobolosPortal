@@ -10,53 +10,45 @@
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <div class="row ibox-header">
-
-
-                        <div class="col-lg-12">
-                            <div class="form-group pull-right">
-                                <button class="btn btn-primary " type="button" ng-click="createData()"><i class="fa fa-plus"></i>&nbsp;Novi unos</button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <table datatable="ng" dt-options="dtOptions"  class="table table-striped table-bordered table-hover dataTables-example">
+                    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
-                                <th>RB</th>
-                                <td><strong>Kriterij razvijenosti sporta</strong> <br><br> Međunarodna federacija</td>
-                                <td><strong>Kriterij razvijenosti sporta</strong> <br><br>Nacionalni savez</td>
-                                <td><strong>Kriterij razvijenosti sporta</strong> <br><br>županijski savez</td>
-                                <td><strong>Kriterij razvijenosti sporta</strong> <br><br>Grad Zadar</td>
-                                <td><strong>Javni status sporta</strong> <br><br>Interes javnosti</td>
-                                <td><strong>Javni status sporta</strong> <br><br>Tradicija sporta u Gradu Zadru</td>
-                                <td><strong>Javni status sporta</strong> <br><br>Olimpijski status sporta</td>
-                                <td><strong>Javni status sporta</strong> <br><br>Važnost za nastavu TZK</td>
-                                <td><strong>Sportska kvaliteta</strong> <br><br>Broj kategoriziranih sportaša</td>
-                                <td><strong>Sportska kvaliteta</strong> <br><br>Ostvareni sportski rezultati (RH)</td>
-                                <td><strong>Sportska kvaliteta</strong> <br><br>Ostvareni sportski rezultati (GZD)</td>
+                                <th>ID</th>
+                                <th>Klub</th>
+                                <td><strong>Kategorizacija prema broju rangiranih klubova u </strong> <br><br> nacionalnom savezu</td>
+                                <td><strong>Kategorizacija prema vrsti športa </strong></td>
+                                <td><strong>Kategorizacija prema zastupljenosti dobnih kategorija</strong></td>
+                                <td><strong>Kategorizacija prema rangu sustava natjecanja</strong></td>
+                                <td><strong>Kategorizacija prema broju članova ekipe koja se natječe</strong></td>
+                                <td><strong>Kategorizacija prema masovnosti u športskim školama</strong></td>
+                                <td><strong>Kategorizacija prema stručnim kadrovima</strong></td>
+                                <td><strong>Kategorizacija prema tradiciji Udruge u Gradu Zadru</strong></td>
+                                <td><strong>.Koeficijnt kategorije sporta</strong></td>
                                 <td><strong>UKUPNI BODOVI</strong></td>
-                                
-                                
+                                <th>promjeni/izbriši</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="sport in sports">
-                                <td>{{sport.id}}</td>
-                                <td>{{sport.name}}</td>
-                                <td>{{sport.nationalSportsFederation}}</td>
-                                <td>{{sport.internationalFederation}}</td>
-                                <td>{{sport.iocSportAccord}}</td>
+                            <tr ng-repeat="categorizationOfSportsPerSport in categorizationOfSportsPerSports">
+                                <td>{{categorizationOfSportsPerSport.id}}</td>
+                                <td>{{categorizationOfSportsPerSport.name}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationOnNationalFederationLevel}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationOnSportTypeLevel}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationAccordingToAge}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationOnCompetitionSystemLevel}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationBasedOnNumberOfTeamMembersCompeting}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationAccordingToMassInSportsSchools}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationAccordingToProfessionalStaff}}</td>
+                                <td>{{categorizationOfSportsPerSport.categorizationAccordingToTraditionOfTownZadar}}</td>
+                                <td>{{categorizationOfSportsPerSport.cofficiencyOfSportsCategory}}</td>
+                                <td>{{categorizationOfSportsPerSport.totalPoints}}</td>
                                 <td class="edit-column">
-                                    <button type="button" class="btn btn-primary " ng-click="editData(sport.id)"><i class="fa fa-edit"></i> </button>
-                                    <button type="button" class="btn btn-danger " ng-click="deleteData(sport.id)"><i class="fa fa-trash"></i> </button>
+                                    <button type="button" class="btn btn-primary " ng-click="editData(categorizationOfSportsPerSport.id)"><i class="fa fa-edit"></i> </button>
+                                    <button type="button" class="btn btn-danger " ng-click="deleteData(categorizationOfSportsPerSport.id)"><i class="fa fa-trash"></i> </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
         </div>

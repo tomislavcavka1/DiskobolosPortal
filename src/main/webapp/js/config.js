@@ -257,7 +257,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('evaluation', {
                 abstract: true,
                 url: "",
-                templateUrl: "views/common/content.html",
+                templateUrl: "views/common/content.html"
             })
 
 
@@ -471,6 +471,39 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     }
                 }
             })
+            
+            .state('content.geographicalOverviewOfMemberRegisters', {
+                url: "/geographicalOverviewOfMemberRegisters",
+                templateUrl: "views/geographicalOverviewOfMemberRegisters.html",
+                data: {pageTitle: 'Prikaz članica na karti', displayName: 'Prikaz članica na karti'} ,
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                serie: true,
+                                files: ['js/plugins/leaflet/leaflet.js', 'js/plugins/leaflet/leaflet.css']
+                            },
+                            {
+                                serie: true,
+                                files: ['https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js', 'https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css',
+                                        'https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css']
+                            },
+                            {
+                                serie: true,
+                                files: ['js/plugins/leaflet/dist/leaflet.awesome-markers.js', 'js/plugins/leaflet/dist/leaflet.awesome-markers.css']
+                            },
+                            {
+                                name: 'leaflet-directive',
+                                files: ['js/plugins/leaflet/angular-leaflet-directive.min.js']
+                            },
+                            {
+                                name: 'ui.select',
+                                files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                            }
+                        ]);
+                    }
+                }
+            })
 
             /*
              Login
@@ -490,6 +523,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 insertBefore: '#loadBefore',
                                 name: 'toaster',
                                 files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            },
+                            {   
+                                names: 'eventUtilsModule',
+                                files: ['js/diskobolos/util/eventUtils.js']
                             }
                         ]);
                     }
