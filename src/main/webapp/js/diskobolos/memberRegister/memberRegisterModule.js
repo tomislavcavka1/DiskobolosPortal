@@ -51,6 +51,20 @@ memberRegisterModule.controller('memberRegisterController', function (
         MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
             //success
             $scope.memberRegisters = response.memberRegisters;
+            
+            for (var n = 0; n < $scope.memberRegisters.length; n++) {              
+                $scope.memberRegisters[n].email = '';
+                $scope.memberRegisters[n].bankAccount = '';
+                // transform emails array to the one row string
+                for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {                    
+                    $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
+                }
+
+                // transform bank accounts array to the one row string
+                for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
+                    $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
+                }
+            }
 
             LocationDataFactory.getAllLocations({}, function (response) {
                 $scope.locations = response.locations;
@@ -66,7 +80,7 @@ memberRegisterModule.controller('memberRegisterController', function (
 
                             if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
                                 for (var i = 0; i < $scope.memberRegisters.length; i++) {
-                                    $scope.memberRegisters[i].membershipCategories = $scope.membershipCategories;
+                                    $scope.memberRegisters[i].membershipCategories = $scope.membershipCategories;                                                                        
                                 }
                             }
                         },
@@ -323,6 +337,20 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                 MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
                     //success
                     $scope.memberRegisters = response.memberRegisters;
+                    
+                    for (var n = 0; n < $scope.memberRegisters.length; n++) {              
+                        $scope.memberRegisters[n].email = '';
+                        $scope.memberRegisters[n].bankAccount = '';
+                        // transform emails array to the one row string
+                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {                    
+                            $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
+                        }
+
+                        // transform bank accounts array to the one row string
+                        for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
+                            $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
+                        }
+                    }
 
                     LocationDataFactory.getAllLocations({}, function (response) {
                         $scope.locations = response.locations;
@@ -503,6 +531,20 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
                 MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
                     //success
                     $scope.memberRegisters = response.memberRegisters;
+                    
+                    for (var n = 0; n < $scope.memberRegisters.length; n++) {              
+                        $scope.memberRegisters[n].email = '';
+                        $scope.memberRegisters[n].bankAccount = '';
+                        // transform emails array to the one row string
+                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {                    
+                            $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
+                        }
+
+                        // transform bank accounts array to the one row string
+                        for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
+                            $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
+                        }
+                    }
 
                     LocationDataFactory.getAllLocations({}, function (response) {
                         $scope.locations = response.locations;
@@ -599,7 +641,7 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
                     toaster.pop({
                         type: 'error',
                         title: 'Greška',
-                        body: 'Za upisanu adresu nije moguće dohvatiti podatke ',
+                        body: 'Za upisanu adresu nije moguće dohvatiti podatke!',
                         showCloseButton: true,
                         timeout: 5000
                     });

@@ -170,7 +170,7 @@ geographicalOverviewOfMemberRegisterModule.controller('geographicalOverviewOfMem
                            layer.setIcon(L.AwesomeMarkers.icon({
                             icon: 'circle',
                             iconColor: 'white',
-                            markerColor: 'darkpuple',
+                            markerColor: 'darkpurple',
                             prefix: 'fa'
                             }));
                            break;
