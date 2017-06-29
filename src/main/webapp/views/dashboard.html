@@ -1,7 +1,7 @@
 <!-- Page breadcrumb -->    
 <div ng-include="'views/common/breadcrumb.html'"></div>
 
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content" ng-controller="dashboardController">
     <div class="row">
         <div class="col-lg-3">
             <div class="ibox float-e-margins">
@@ -9,7 +9,7 @@
                     <h5>Sportovi</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">20</h1>
+                    <h1 class="no-margins">{{dashboardData.numberOfSports}}</h1>
 
                     <small>Broj sportova u gradu Zadru</small>
                 </div>
@@ -21,7 +21,7 @@
                     <h5>Klubovi</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">30</h1>
+                    <h1 class="no-margins">{{dashboardData.numberOfMemberRegisters}}</h1>
 
                     <small>Broj klubova u gradu Zadru</small>
                 </div>
@@ -33,7 +33,7 @@
                     <h5>Sportske građevine</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">20</h1>
+                    <h1 class="no-margins">{{numberOfSportBuildings}}</h1>
 
                     <small>Broj sportskih građevina u gradu Zadru</small>
                 </div>
@@ -45,7 +45,7 @@
                     <h5>Kategorija članstva</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">14</h1>
+                    <h1 class="no-margins">{{dashboardData.numberOfMembershipCategories}}</h1>
 
                     <small>Broj kategorija članica</small>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div ng-controller="dashboardController as chart">
-                                <canvas barchart options="chart.myChartOptions" data="chart.sportData" responsive=true height="80"></canvas></div>
+                                <canvas barchart options="chart.myChartOptions" data="chart.rankingData" responsive=true height="80"></canvas></div>
                         </div>
                     </div>
 
@@ -83,40 +83,40 @@
                     <div class="row">
                         <div class="col-lg-9">
                             <div ng-controller="dashboardController as chart">
-                                <canvas barchart options="chart.myChartOptions" data="chart.clubData" responsive=true height="80"></canvas></div>
+                                <canvas barchart options="chart.myChartOptions" data="chart.categorizationData" responsive=true height="80"></canvas></div>
                         </div>
                         <div class="col-lg-3">
                             <ul class="stat-list">
                                 <li>
                                     <h3 class="no-margins">I. Kategorija</h3>
-                                    <small>Od 31 do 50 bodova</small>
-                                    <div class="stat-percent">48% </div>
+                                    <small>Od 310 do 500 bodova</small>
+                                    <div class="stat-percent">{{dashboardData.groupsOfCategorization.numberOfMembersFirstCategory}}% </div>
                                     <div class="progress progress-mini">
-                                        <div style="width: 48%;" class="progress-bar"></div>
+                                        <div style="width: {{dashboardData.groupsOfCategorization.numberOfMembersFirstCategory}}%;" class="progress-bar"></div>
                                     </div>
                                 </li>
                                 <li>
                                     <h3 class="no-margins ">II. kategorija</h3>
-                                    <small>Od 21 do 30 bodova</small>
-                                    <div class="stat-percent">60% </div>
+                                    <small>Od 210 do 300 bodova</small>
+                                    <div class="stat-percent">{{dashboardData.groupsOfCategorization.numberOfMembersSecondCategory}}% </div>
                                     <div class="progress progress-mini">
-                                        <div style="width: 60%;" class="progress-bar"></div>
+                                        <div style="width: {{dashboardData.groupsOfCategorization.numberOfMembersSecondCategory}}%;" class="progress-bar"></div>
                                     </div>
                                 </li>
                                 <li>
                                     <h3 class="no-margins ">III. kategorija</h3>
-                                    <small>Od 11 do 20 bodova</small>
-                                    <div class="stat-percent">22% </div>
+                                    <small>Od 110 do 200 bodova</small>
+                                    <div class="stat-percent">{{dashboardData.groupsOfCategorization.numberOfMembersThirdCategory}}% </div>
                                     <div class="progress progress-mini">
-                                        <div style="width: 22%;" class="progress-bar"></div>
+                                        <div style="width: {{dashboardData.groupsOfCategorization.numberOfMembersThirdCategory}}%;" class="progress-bar"></div>
                                     </div>
                                 </li>
                                 <li>
                                     <h3 class="no-margins ">IV. kategorija</h3>
-                                    <small>Do 10 bodova</small>
-                                    <div class="stat-percent">22% </div>
+                                    <small>Do 100 bodova</small>
+                                    <div class="stat-percent">{{dashboardData.groupsOfCategorization.numberOfMembersFourthCategory}}% </div>
                                     <div class="progress progress-mini">
-                                        <div style="width: 22%;" class="progress-bar"></div>
+                                        <div style="width: {{dashboardData.groupsOfCategorization.numberOfMembersFourthCategory}}%;" class="progress-bar"></div>
                                     </div>
                                 </li>
                             </ul>
@@ -155,12 +155,12 @@
 
 
 
-                          
-                            
+
+
                         </div>
-                        
+
                         <div class="col-lg-5">
-                          <div ng-app="myapp" ng-controller="WeatherCtrl">
+                            <div ng-app="myapp" ng-controller="WeatherCtrl">
                                 <h2>Vrijeme u Gradu Zadru</h2>
                                 <weather-icon cloudiness="{{ weather.clouds}}"></weather-icon>
                                 <h3>Trenutačno {{ weather.temp.current | temp:2 }}</h3>

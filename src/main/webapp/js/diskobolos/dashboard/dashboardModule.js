@@ -6,36 +6,81 @@
 var dashboardModule = angular.module('dashboardModule', []);
 
 dashboardModule.controller('dashboardController', function (
-        $scope) {
-
+        $scope,
+        DashboardDataFactory,
+        $http) {
+    
     $scope.chart = {};
-    /**
-     * dashboardFlotTwo - simple controller for data
-     * for Flot chart in Dashboard view
-     */
+    $scope.dashboardData = {};
+    $scope.rankingLabels = [];
+    $scope.rankingValues = [];
+    $scope.categorizationLabels = [];
+    $scope.categorizationValues = [];
+    $scope.chart.doughnutData = [];
+    
+    $scope.fetchDashboardData = function() {
+        DashboardDataFactory.fetchDashboardData({}, function (response) {
+            $scope.dashboardData = response.dashboardJson;
+            
+            $http.get('js/diskobolos/sportsBuildings/sportsBuildings.json').then(function(data) {           
+                $scope.numberOfSportBuildings = data.data.length;
+            });
+            
+            for(var i=0; i<$scope.dashboardData.rankingTotalPointsPerMemberRegister.length; i++) {
+                $scope.rankingLabels.push($scope.dashboardData.rankingTotalPointsPerMemberRegister[i].memberRegister.name);
+                $scope.rankingValues.push($scope.dashboardData.rankingTotalPointsPerMemberRegister[i].totalPoints);
+            }
+            
+            for(var j=0; j<$scope.dashboardData.categorizationTotalPointsPerMemberRegister.length; j++) {
+                $scope.categorizationLabels.push($scope.dashboardData.categorizationTotalPointsPerMemberRegister[j].memberRegister.name);
+                $scope.categorizationValues.push($scope.dashboardData.categorizationTotalPointsPerMemberRegister[j].totalPoints);
+            }
+            
+            $scope.chart.doughnutData.push({
+                value: $scope.dashboardData.termsOfCompetitionStatistic.numberOfMembersWithValidTerms,
+                color: "#a3e1d4",
+                highlight: "#1ab394",
+                label: "Zadovoljili uvjete"
+            });
+            $scope.chart.doughnutData.push({
+                value: $scope.dashboardData.termsOfCompetitionStatistic.numberOfUnfulfilledTerms,
+                color: "#dedede",
+                highlight: "#1ab394",
+                label: "Upitnik nije ispunjen"
+            });
+            $scope.chart.doughnutData.push({
+                value: $scope.dashboardData.termsOfCompetitionStatistic.numberOfMembersWithInvalidTerms,
+                color: "#fb8692",
+                highlight: "#1ab394",
+                label: "Nisu zadovoljili uvjete"
+            });    
+        },
+        function (error) {
+            //fail
+            $scope.error = error;
+        });
+    };
 
-    $scope.chart.sportData = {
-        labels: ["Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport"
-                    , "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport", "Sport"],
+    $scope.chart.rankingData = {
+        labels: $scope.rankingLabels,
         datasets: [
             {
                 fillColor: "rgba(26,179,148,0.4)",
                 pointColor: "rgba(151,187,205,0)",
                 pointStrokeColor: "#e67e22",
-                data: [0, 15, 25, 35, 50, 35, 20, 10, 5, 13, 17, 20, 17, 35, 15, 23, 35, 32, 43, 32]
+                data: $scope.rankingValues
             }
         ]
     };
 
-    $scope.chart.clubData = {
-        labels: ["Klub1", "Klub2", "Klub3", "Klub4", "Klub5", "Klub6", "Klub7", "Klub8", "Klub9",
-            "Klub10", "Klub11", "Klub12", "Klub13", "Klub14", "Klub15", "Klub16", "Klub17", "Klub18", "Klub19", "Klub20"],
+    $scope.chart.categorizationData = {
+        labels: $scope.categorizationLabels,
         datasets: [
             {
                 fillColor: "rgba(26,179,148,0.4)",
                 pointColor: "rgba(151,187,205,0)",
                 pointStrokeColor: "#e67e22",
-                data: [0, 15, 25, 35, 50, 35, 20, 10, 5, 13, 17, 20, 17, 35, 15, 23, 35, 32, 43, 32]
+                data: $scope.categorizationValues
             }
         ]
     };
@@ -58,7 +103,7 @@ dashboardModule.controller('dashboardController', function (
         // Number - The value jump in the hard coded scale
         scaleStepWidth: null,
         // Number - The scale starting value
-        scaleStartValue: null,
+        scaleStartValue: 0,
         // String - Colour of the scale line
         scaleLineColor: "rgba(255,255,255,.1)",
         // Number - Pixel width of the scale line
@@ -122,36 +167,7 @@ dashboardModule.controller('dashboardController', function (
         // Function - Will fire on animation completion.
         onAnimationComplete: function () {}
     };
-   
-    /**
-     * chartJsCtrl - Controller for data for ChartJs plugin
-     * used in Chart.js view
-     */
-
-    /**
-     * Data for Doughnut chart
-     */
-    $scope.chart.doughnutData = [
-        {
-            value: 300,
-            color: "#a3e1d4",
-            highlight: "#1ab394",
-            label: "Zadovoljili uvjete"
-        },
-        {
-            value: 50,
-            color: "#dedede",
-            highlight: "#1ab394",
-            label: "Upitnik nije ispunjen"
-        },
-        {
-            value: 100,
-            color: "#fb8692",
-            highlight: "#1ab394",
-            label: "Nisu zadovoljili uvjete"
-        }
-    ];
-
+  
     /**
      * Options for Doughnut chart
      */
@@ -166,7 +182,7 @@ dashboardModule.controller('dashboardController', function (
         animateScale: false
     };
 
-
+    $scope.fetchDashboardData();
 
 });
 

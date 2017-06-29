@@ -3,10 +3,10 @@
 var myapp = angular.module('weatherModule', []);
 
 myapp.factory('weatherService', function($http) {
-    return { 
+    return {
       getWeather: function() {
         var weather = { temp: {}, clouds: null };
-        $http.jsonp('api.openweathermap.org/data/2.5/weather?id=3186952').success(function(data) {
+        $http.jsonp('http://api.openweathermap.org/data/2.5/weather?q=Zadar,at&units=metric&callback=JSON_CALLBACK&APPID=f9dbd911bc01df1d9ce563b2ba4d3209').success(function(data) {
             if (data) {
                 if (data.main) {
                     weather.temp.current = data.main.temp;

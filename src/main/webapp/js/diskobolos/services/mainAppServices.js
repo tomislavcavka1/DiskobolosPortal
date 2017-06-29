@@ -64,6 +64,13 @@ mainAppServices.factory('UserAuthenticationFactory', ['$resource', 'AppConstants
         });
     }]);
 
+// Services responsible for fetching dashboard data
+mainAppServices.factory('DashboardDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
+        return $resource('', {}, {
+            'fetchDashboardData': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/dashboard/all', isArray: false}
+        });
+    }]);
+
 // Services responsible for session storage of data.
 mainAppServices.service('sessionStorageService', ['$window', '$q', '$http', function ($window, $q, $http) {
         this.setJwtToken = function (token) {
