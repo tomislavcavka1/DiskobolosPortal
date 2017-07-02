@@ -16,7 +16,8 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
         MemberRegisterDataFactory,
         QUESTIONNAIRE_TYPE,
         dataTableUtils,
-        DTColumnDefBuilder) {
+        DTColumnDefBuilder,
+        colorUtils) {
 
     $scope.$on('selectedEvaluationAnswers', function (ev, selectedEvaluationAnswers) {
         $rootScope.selectedEvaluationAnswers = selectedEvaluationAnswers;
@@ -88,7 +89,7 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
                     $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
                 }
                 
-                $scope.rankingAndCategorizationOfSports[i].percentageColor = $scope.colorBasedOnPercentage($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
+                $scope.rankingAndCategorizationOfSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
                 $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
             }
         },
@@ -96,20 +97,6 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
             //fail
             $scope.error = error;
         });        
-    };
-    
-    $scope.colorBasedOnPercentage = function(percentage)  {
-        if(percentage === 0) {
-            return "red-percentage";            
-        } else if(percentage > 0 && percentage <= 25) {            
-            return "orange-percentage";
-        } else if(percentage > 25  && percentage <= 50) {
-            return "yellow-percentage";
-        } else if(percentage > 50  && percentage <= 75) {
-            return "blue-percentage";
-        } else {            
-            return "green-percentage";
-        }
     };
 
     $scope.editData = function (id) {
@@ -171,7 +158,8 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         AppConstants,
         EvaluationDataFactory,
         toaster,
-        QUESTIONNAIRE_TYPE) {
+        QUESTIONNAIRE_TYPE,
+        colorUtils) {
             
     $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
@@ -336,7 +324,7 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
                                         $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsCroatia = 0;
                                         $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
                                     }
-                                    $scope.rankingAndCategorizationOfSports[i].percentageColor = $scope.colorBasedOnPercentage($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
+                                    $scope.rankingAndCategorizationOfSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
                                     $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
                                 }
                                 $rootScope.$broadcast('rankingAndCategorizationOfSports', $scope.rankingAndCategorizationOfSports);
@@ -365,20 +353,6 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         $uibModalInstance.close();
     };
     
-    $scope.colorBasedOnPercentage = function(percentage)  {
-        if(percentage === 0) {
-            return "red-percentage";            
-        } else if(percentage > 0 && percentage <= 25) {            
-            return "orange-percentage";
-        } else if(percentage > 25  && percentage <= 50) {
-            return "yellow-percentage";
-        } else if(percentage > 50  && percentage <= 75) {
-            return "blue-percentage";
-        } else {            
-            return "green-percentage";
-        }
-    };
-     
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
