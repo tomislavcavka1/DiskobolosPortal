@@ -364,6 +364,20 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         // close modal view
         $uibModalInstance.close();
     };
+    
+    $scope.colorBasedOnPercentage = function(percentage)  {
+        if(percentage === 0) {
+            return "red-percentage";            
+        } else if(percentage > 0 && percentage <= 25) {            
+            return "orange-percentage";
+        } else if(percentage > 25  && percentage <= 50) {
+            return "yellow-percentage";
+        } else if(percentage > 50  && percentage <= 75) {
+            return "blue-percentage";
+        } else {            
+            return "green-percentage";
+        }
+    };
      
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
