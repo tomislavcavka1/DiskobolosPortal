@@ -46,7 +46,7 @@
                                 <td>{{rankingAndCategorizationOfSport.sportsQualityNumberOfCategorizedAthletes}}</td>
                                 <td>{{rankingAndCategorizationOfSport.sportsQualityAccomplishedSportsResultsCroatia}}</td>
                                 <td>{{rankingAndCategorizationOfSport.sportsQualityAccomplishedSportsResultsTownOfZadar}}</td>
-                                <td>{{rankingAndCategorizationOfSport.questionnairePercentage}}%</td>
+                                <td ng-class="rankingAndCategorizationOfSport.percentageColor">{{rankingAndCategorizationOfSport.questionnairePercentage}}%</td>
                                 <td>{{rankingAndCategorizationOfSport.totalPoints}}</td>
                                 <td class="edit-column">
                                     <button type="button" class="btn btn-primary " ng-click="editData(rankingAndCategorizationOfSport.id)"><i class="fa fa-edit"></i> </button>

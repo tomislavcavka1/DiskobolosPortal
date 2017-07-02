@@ -383,3 +383,23 @@ Pagination
     margin-right: 8px;
     opacity: 0.7;
 }
+
+.red-percentage {
+    color: red; 
+}
+
+.green-percentage {
+    color: green;
+}
+
+.yellow-percentage {
+    color: yellow;
+}
+
+.orange-percentage {
+    color: orange;
+}
+
+.blue-percentage {
+    color: blue;
+}

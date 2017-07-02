@@ -36,6 +36,8 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
         sportsQualityNumberOfCategorizedAthletes: 0,
         sportsQualityAccomplishedSportsResultsCroatia: 0,
         sportsQualityAccomplishedSportsResultsTownOfZadar: 0,
+        questionnairePercentage: 0,
+        percentageColor: 'red',
         totalPoints: 0
     };
     $rootScope.rankingSum = {};
@@ -86,6 +88,7 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
                     $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
                 }
                 
+                $scope.rankingAndCategorizationOfSports[i].percentageColor = $scope.colorBasedOnPercentage($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
                 $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
             }
         },
@@ -94,7 +97,20 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
             $scope.error = error;
         });        
     };
-
+    
+    $scope.colorBasedOnPercentage = function(percentage)  {
+        if(percentage === 0) {
+            return "red-percentage";            
+        } else if(percentage > 0 && percentage <= 25) {            
+            return "orange-percentage";
+        } else if(percentage > 25  && percentage <= 50) {
+            return "yellow-percentage";
+        } else if(percentage > 50  && percentage <= 75) {
+            return "blue-percentage";
+        } else {            
+            return "green-percentage";
+        }
+    };
 
     $scope.editData = function (id) {
 
@@ -320,6 +336,7 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
                                         $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsCroatia = 0;
                                         $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
                                     }
+                                    $scope.rankingAndCategorizationOfSports[i].percentageColor = $scope.colorBasedOnPercentage($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
                                     $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
                                 }
                                 $rootScope.$broadcast('rankingAndCategorizationOfSports', $scope.rankingAndCategorizationOfSports);
