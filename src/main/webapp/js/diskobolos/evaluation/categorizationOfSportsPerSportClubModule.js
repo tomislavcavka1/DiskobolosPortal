@@ -16,7 +16,8 @@ categorizationOfSportsPerSportClubModule.controller('categorizationOfSportsPerSp
         MemberRegisterDataFactory,
         QUESTIONNAIRE_TYPE,
         dataTableUtils,
-        DTColumnDefBuilder) {
+        DTColumnDefBuilder,
+        colorUtils) {
 
     $scope.$on('selectedEvaluationAnswers', function (ev, selectedEvaluationAnswers) {
         $rootScope.selectedEvaluationAnswers = selectedEvaluationAnswers;
@@ -34,6 +35,8 @@ categorizationOfSportsPerSportClubModule.controller('categorizationOfSportsPerSp
         categorizationAccordingToProfessionalStaff: 0,
         categorizationAccordingToTraditionOfTownZadar: 0,
         cofficiencyOfSportsCategory: 0,
+        questionnairePercentage: 0,
+        percentageColor: 'red',
         totalPoints: 0
     };
     $rootScope.categorizationSum = {};
@@ -82,6 +85,7 @@ categorizationOfSportsPerSportClubModule.controller('categorizationOfSportsPerSp
                     $scope.categorizationOfSportsPerSports[i].cofficiencyOfSportsCategory = 0;
                 }
                 
+                $scope.categorizationOfSportsPerSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.categorizationOfSportsPerSports[i].questionnairePercentage);
                 $rootScope.totalPointsPerMemberRegister[$scope.categorizationOfSportsPerSports[i].id] = $scope.categorizationOfSportsPerSports[i].totalPoints;
             }
         },
@@ -151,7 +155,8 @@ categorizationOfSportsPerSportClubModule.controller('EditCategorizationOfSportsP
         AppConstants,
         EvaluationDataFactory,
         toaster,
-        QUESTIONNAIRE_TYPE) {
+        QUESTIONNAIRE_TYPE,
+        colorUtils) {
             
     $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
@@ -307,6 +312,7 @@ categorizationOfSportsPerSportClubModule.controller('EditCategorizationOfSportsP
                                         $scope.categorizationOfSportsPerSports[i].cofficiencyOfSportsCategory = 0;
                                     }
 
+                                    $scope.categorizationOfSportsPerSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.categorizationOfSportsPerSports[i].questionnairePercentage);
                                     $rootScope.totalPointsPerMemberRegister[$scope.categorizationOfSportsPerSports[i].id] = $scope.categorizationOfSportsPerSports[i].totalPoints;
                                 }
                                 $rootScope.$broadcast('categorizationOfSportsPerSports', $scope.categorizationOfSportsPerSports);

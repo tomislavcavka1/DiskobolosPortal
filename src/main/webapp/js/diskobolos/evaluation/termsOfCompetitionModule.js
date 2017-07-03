@@ -16,7 +16,8 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
         MemberRegisterDataFactory,
         QUESTIONNAIRE_TYPE,
         dataTableUtils,
-        DTColumnDefBuilder) {
+        DTColumnDefBuilder,
+        colorUtils) {
 
     $scope.$on('selectedEvaluationAnswers', function (ev, selectedEvaluationAnswers) {
         $rootScope.selectedEvaluationAnswers = selectedEvaluationAnswers;
@@ -49,6 +50,10 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
     $scope.init = function() {
         EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {        
             $scope.termsOfConditions = response.evaluationQuestionDefJson;
+            
+            for(var i=0; i < $scope.termsOfConditions.length; i++) {
+                $scope.termsOfConditions[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.termsOfConditions[i].questionnairePercentage);
+            }
         },
         function (error) {
             //fail
@@ -112,7 +117,8 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
         AppConstants,
         EvaluationDataFactory,
         toaster,
-        QUESTIONNAIRE_TYPE) {
+        QUESTIONNAIRE_TYPE,
+        colorUtils) {
 
     $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
@@ -209,6 +215,10 @@ termsOfCompetitionModule.controller('EditTermsOfCompetitionModalCtrl', function 
                         EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.termsOfCondition}, function (response) {
 
                                 $scope.termsOfConditions = response.evaluationQuestionDefJson;
+                                
+                                for(var i=0; i < $scope.termsOfConditions.length; i++) {
+                                    $scope.termsOfConditions[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.termsOfConditions[i].questionnairePercentage);
+                                }
 
                                 $rootScope.$broadcast('termsOfConditions', $scope.termsOfConditions);
 
