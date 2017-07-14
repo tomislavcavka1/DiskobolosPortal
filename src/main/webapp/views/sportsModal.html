@@ -26,6 +26,7 @@
                             allowed-tags-pattern="^[a-zA-Z]" ng-model="data.nationalSportsFederations"></tags-input>
                 <div class="validation-msg">            
                     <p ng-show="sport.nationalSportsFederations.$error.minTags">Minimalni broj tagova je 1!</p>
+                     <p ng-show="sport.nationalSportsFederations.$error.allowedTagsPattern">Minimalni broj tagova je 1!</p>
                 </div>
 
             </div>

@@ -19,7 +19,7 @@ sportsBuildingsModule.controller('sportsBuildingsController', function (
             .withLanguage(dataTableUtils.getDataTableTranslations())
             .withOption('order', [0, 'asc'])
             .withPaginationType('full_numbers')
-            .withButtons(dataTableUtils.getDataTableButtons([], false))
+            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4, 5, 6], true))
             .withOption('select', true)
             .withOption('responsive', true);
 

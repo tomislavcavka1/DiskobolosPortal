@@ -38,8 +38,8 @@
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Vrednovanje</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('evaluation')}">
                     <li ui-sref-active="active"><a ui-sref="evaluation.termsOfCompetition">Uvjeti natječaja</a></li>
-                    <li ui-sref-active="active"><a ui-sref="evaluation.rankingAndCategorizationOfSpors">Rangiranje i kategorizacija sportova</a></li>
-                    <li ui-sref-active="active"><a ui-sref="evaluation.categorizationOfSportsPerSportClub">Kategorizacija sporta za sportske klubove</a></li>
+                    <li ui-sref-active="active"><a ui-sref="evaluation.rankingAndCategorizationOfSpors">Vrednovanje sportova</a></li>
+                    <li ui-sref-active="active"><a ui-sref="evaluation.categorizationOfSportsPerSportClub">Vrednovanje sportskih udruga</a></li>
                 </ul>
             </li>
 
@@ -57,9 +57,17 @@
             <li ui-sref-active="active">
                 <a ui-sref="content.nomenklaturaSportovaISportskihGrana"><i class="fa fa-file-o"></i> <span class="nav-label">Nomenklatura sportova i sportskih grana</span> </a>
             </li>
+            
+            <li ui-sref-active="active">
+                <a ui-sref="content.location"><i class="fa fa-car" aria-hidden="true"></i> <span class="nav-label">Udaljenost gradova za izračun putnih naloga</span> </a>
+            </li>
 
             <li ui-sref-active="active">
                 <a ui-sref="content.geographicalOverviewOfMemberRegisters"><i class="fa fa-map-marker"></i> <span class="nav-label">Prikaz članica na karti</span> </a>
+            </li>
+            
+            <li ui-sref-active="active">
+                <a ui-sref="content.newModule"><i class="fa fa-map-marker"></i> <span class="nav-label">New module</span> </a>
             </li>
 
         </ul>   

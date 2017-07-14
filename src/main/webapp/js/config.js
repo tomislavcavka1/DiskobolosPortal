@@ -67,8 +67,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 files: ['js/bootstrap/angular-bootstrap-checkbox.js']
                             },
                             {
+                                files: ['js/plugins/chartJs/Chart.min.js']
+                            },
+                            {
                                 name: 'angles',
-                                files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+                                files: ['js/plugins/chartJs/angles.js']
                             }
                         ]);
                     }
@@ -210,8 +213,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
                             },
                             {
-                                name: 'datePicker',
-                                files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                                name: '720kb.datepicker',
+                                files: ['css/plugins/angular_datepicker/angular-datepicker.css', 'js/plugins/angular_datepicker/angular-datepicker.js']
                             },
                             {
                                 name: 'ui.select',
@@ -245,6 +248,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'dataTableUtilsModule',
                                 files: ['js/diskobolos/util/dataTableUtils.js']
+                            },
+                            {
+                                files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
                             }
                         ]);
                     }
@@ -265,7 +271,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/termsOfCompetition",
                 templateUrl: "views/termsOfCompetition.html",
                 data: {pageTitle: 'Uvjeti natječaja',
-                displayName: 'Uvjeti natječaja'},
+                    displayName: 'Uvjeti natječaja'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -308,8 +314,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('evaluation.rankingAndCategorizationOfSpors', {
                 url: "/rankingAndCategorizationOfSpors",
                 templateUrl: "views/rankingAndCategorizationOfSpors.html",
-                data: {pageTitle: 'Rangiranje i kategorizacija sportova',
-                displayName: 'Rangiranje i kategorizacija sportova'},
+                data: {pageTitle: 'Vrednovanje sportova',
+                    displayName: 'Vrednovanje sportova'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -348,7 +354,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('evaluation.categorizationOfSportsPerSportClub', {
                 url: "/categorizationOfSportsPerSportClub",
                 templateUrl: "views/categorizationOfSportsPerSportClub.html",
-                data: {pageTitle: 'Kategorizacija sporta za sporstke klubove',displayName: 'Kategorizacija sporta za sporstke klubove'
+                data: {pageTitle: 'Vrednovanje sportskih udruga', displayName: 'Vrednovanje sportskih udruga'
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
@@ -402,7 +408,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 templateUrl: "views/registerOfAssociationsCRO.html",
                 data: {pageTitle: 'Registar udruga Republike Hrvatske', displayName: 'Registar udruga Republike Hrvatske'}
             })
-            
+
             /*
              Registar udruga Republike Hrvatske
              */
@@ -411,6 +417,60 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/nomenklaturaSportovaISportskihGrana",
                 templateUrl: "views/nomenklaturaSportovaISportskihGrana.html",
                 data: {pageTitle: 'Nomenklatura sportova i sportskih grana', displayName: 'Nomenklatura sportova i sportskih grana'}
+            })
+
+            /*
+             Location
+             */
+
+            .state('content.location', {
+                url: "/location",
+                templateUrl: "views/location.html",
+                data: {pageTitle: 'Udaljenost gradova za izračun putnih naloga', displayName: 'Udaljenost gradova za izračun putnih naloga'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                           
+                        ]);
+                    }
+                }
+
+            })
+            
+            /*
+             New module
+             */
+
+            .state('content.newModule', {
+                url: "/newModule",
+                templateUrl: "views/newModule.html",
+                data: {pageTitle: 'newModule', displayName: 'newModule'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                serie: true,
+                                files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                            },
+                            {
+                                files: ['js/plugins/moment/moment.min.js']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables',
+                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
+                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
+                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables.buttons',
+                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            }
+                        ]);
+                    }
+                }
+
             })
 
 
@@ -471,11 +531,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     }
                 }
             })
-            
+
             .state('content.geographicalOverviewOfMemberRegisters', {
                 url: "/geographicalOverviewOfMemberRegisters",
                 templateUrl: "views/geographicalOverviewOfMemberRegisters.html",
-                data: {pageTitle: 'Prikaz članica na karti', displayName: 'Prikaz članica na karti'} ,
+                data: {pageTitle: 'Prikaz članica na karti', displayName: 'Prikaz članica na karti'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -486,7 +546,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 serie: true,
                                 files: ['https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js', 'https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css',
-                                        'https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css']
+                                    'https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css']
                             },
                             {
                                 serie: true,
@@ -524,7 +584,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 name: 'toaster',
                                 files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                             },
-                            {   
+                            {
                                 names: 'eventUtilsModule',
                                 files: ['js/diskobolos/util/eventUtils.js']
                             }

@@ -25,6 +25,7 @@
         'profileModule',
         'toaster',
         'sportsBuildingsModule',
+        'newModule',
         'rankingAndCategorizationOfSportsModule',
         'categorizationOfSportsPerSportClubModule',
         'dataTableUtilsModule',
@@ -34,6 +35,7 @@
         'eventUtilsModule',
         'geographicalOverviewOfMemberRegisterModule',
         'colorUtilsModule'
+        
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

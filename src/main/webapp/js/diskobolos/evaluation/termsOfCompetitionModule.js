@@ -38,6 +38,7 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
             .withDOM('<"html5buttons"B>lTfgitp')
             .withLanguage(dataTableUtils.getDataTableTranslations())
             .withOption('order', [0, 'asc'])
+            .withOption('stateSave', true)
             .withPaginationType('full_numbers')
             .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4], false))
             .withOption('select', true)

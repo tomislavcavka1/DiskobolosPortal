@@ -240,7 +240,7 @@ tags-input .tags .tag-item {
 ************************/
 
 table td.edit-column {
-    width: 125px;
+    width: 100px;
     text-align: center;
 }
 
@@ -287,7 +287,6 @@ table.dataTable .green-shortinfo {
 table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
     background: #778a99 none repeat scroll 0 0;
     color: #fff;
-    padding-right: 30px;
 }
 
 table.dataTable thead .sorting::after {
@@ -295,6 +294,10 @@ table.dataTable thead .sorting::after {
     content: "";
     opacity: 0.5;
 }
+
+/*table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
+    padding-right: 0 !important;
+}*/
 
 
 .html5buttons a {
@@ -406,4 +409,65 @@ Pagination
 
 .blue-percentage {
     color: blue;
+}
+
+/******************************
+Datepicker - customize
+******************************/
+
+._720kb-datepicker-calendar-header {
+    font-size: 15px;
+    line-height: 33px !important;
+    text-align: center;
+}
+
+._720kb-datepicker-calendar-header a, ._720kb-datepicker-calendar-header a:hover {
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 1) !important;
+    font-size: 13.5px;
+    font-weight: bold;
+    padding: 3% 9% 4%;
+    text-decoration: none;
+}
+
+._720kb-datepicker-calendar-month span {
+    color: rgba(255, 255, 255, 1) !important;
+    font-size: 13px;
+}
+
+/******************************
+Location
+******************************/
+
+.adp-summary {
+    padding: 0 3px 3px;
+    font-size: 18px;
+}
+
+/*#dir-container {
+    width: 560px;
+    float:left;
+}*/
+
+/*#map-container {
+    width: 560px;
+    height: 600px;
+}*/
+
+#map-container{
+    position: relative;
+    width: 50%;
+    padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+#map-container > *{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }

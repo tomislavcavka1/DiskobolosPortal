@@ -46,13 +46,13 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
     $rootScope.totalPointsPerMemberRegister = {};
 
     $scope.$on('rankingAndCategorizationOfSports', function (ev, rankingAndCategorizationOfSports) {
-        $scope.rankingAndCategorizationOfSports = rankingAndCategorizationOfSports;        
+        $scope.rankingAndCategorizationOfSports = rankingAndCategorizationOfSports;
     });
 
     $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
         $rootScope.selectedMemberRegister = selectedMemberRegister;
     });
-    
+
     $scope.$on('rankingSum', function (ev, rankingSum) {
         $rootScope.rankingSum = rankingSum;
     });
@@ -61,21 +61,24 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
             .withDOM('<"html5buttons"B>lTfgitp')
             .withLanguage(dataTableUtils.getDataTableTranslations())
             .withOption('order', [0, 'asc'])
+            .withOption('stateSave', true)
             .withPaginationType('full_numbers')
             .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4, 5, 6], false))
             .withOption('select', true)
             .withOption('responsive', true);
-    
+
     $scope.dtColumnDefs = [
-        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
+        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1),
+        DTColumnDefBuilder.newColumnDef(-2).withOption('responsivePriority', 2),
+        DTColumnDefBuilder.newColumnDef(-3).withOption('responsivePriority', 3)
     ];
-            
-    $scope.init = function() {
-        EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.rankingAndCategorizationOfSports}, function (response) {        
-            $scope.rankingAndCategorizationOfSports = response.evaluationQuestionDefJson;                        
-            
-            for(var i=0; i < $scope.rankingAndCategorizationOfSports.length; i++) {
-                if($scope.rankingAndCategorizationOfSports[i].totalPoints === 0)  {
+
+    $scope.init = function () {
+        EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.rankingAndCategorizationOfSports}, function (response) {
+            $scope.rankingAndCategorizationOfSports = response.evaluationQuestionDefJson;
+
+            for (var i = 0; i < $scope.rankingAndCategorizationOfSports.length; i++) {
+                if ($scope.rankingAndCategorizationOfSports[i].totalPoints === 0) {
                     $scope.rankingAndCategorizationOfSports[i].criterionOfSportInternationalFederation = 0;
                     $scope.rankingAndCategorizationOfSports[i].criterionOfSportNationalAlliance = 0;
                     $scope.rankingAndCategorizationOfSports[i].criterionOfSportCountyAlliance = 0;
@@ -88,15 +91,15 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
                     $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsCroatia = 0;
                     $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
                 }
-                
+
                 $scope.rankingAndCategorizationOfSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
                 $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
             }
         },
-        function (error) {
-            //fail
-            $scope.error = error;
-        });        
+                function (error) {
+                    //fail
+                    $scope.error = error;
+                });
     };
 
     $scope.editData = function (id) {
@@ -144,9 +147,9 @@ rankingAndCategorizationOfSportsModule.controller('rankingAndCategorizationOfSpo
             });
         });
     };
-    
+
     $scope.init();
-    
+
 });
 
 
@@ -160,7 +163,7 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         toaster,
         QUESTIONNAIRE_TYPE,
         colorUtils) {
-            
+
     $scope.crudAction = AppConstants.CrudActions['edit'];
     $scope.data = {};
     $scope.data = $rootScope.selectedEvaluationAnswers;
@@ -179,94 +182,94 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
     $scope.sportsQualityAchievedSportsResultsInTownZadar = [];
     $scope.totalPoints = [];
     $scope.points = [];
-    
+
     EvaluationDataFactory.findAllByQuestionnaireType({questionnaireType: QUESTIONNAIRE_TYPE.rankingAndCategorizationOfSports}, function (response) {
-                //success
-                $scope.evaluationQuestions = response.evaluationDtoQuestions;                
+        //success
+        $scope.evaluationQuestions = response.evaluationDtoQuestions;
 
-                for (var i = 0; i < $scope.evaluationQuestions.length; i++) {
+        for (var i = 0; i < $scope.evaluationQuestions.length; i++) {
 
-                    $scope.evaluationQuestions[i].initValue = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
-                        return obj.answer.evaluationQuestionDef.question === $scope.evaluationQuestions[i].question;
-                    });
+            $scope.evaluationQuestions[i].initValue = _.find($rootScope.selectedEvaluationAnswers, function (obj) {
+                return obj.answer.evaluationQuestionDef.question === $scope.evaluationQuestions[i].question;
+            });
 
-                    for (var j = 0; j < $scope.evaluationQuestions[i].items.length; j++) {
-                        $scope.questionItems.push({item: $scope.evaluationQuestions[i].items[j]});
-                    }
-                    
-                    $scope.points[$scope.evaluationQuestions[i].question] = !_.isUndefined($scope.evaluationQuestions[i].initValue) ? parseInt($scope.evaluationQuestions[i].initValue.answer.value) : undefined;
-                    $scope.totalPoints[$scope.evaluationQuestions[i].question] = !_.isUndefined($scope.evaluationQuestions[i].initValue) ? parseInt($scope.evaluationQuestions[i].initValue.answer.value) : undefined;
+            for (var j = 0; j < $scope.evaluationQuestions[i].items.length; j++) {
+                $scope.questionItems.push({item: $scope.evaluationQuestions[i].items[j]});
+            }
 
-                    switch ($scope.evaluationQuestions[i].group) {
-                        case 'INTERNATIONAL_FEDERATION':
-                            $scope.criterionOfSportDevelopmentInternationalFederation.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'NATIONAL_ALLIANCE':
-                            $scope.criterionOfSportNationalAlliance.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'COUNTY_ALLIANCE':
-                            $scope.criterionOfSportCountyAlliance.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'CITY_OF_ZADAR':
-                            $scope.criterionOfSportCityOfZadar.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'PUBLIC_INTEREST':
-                            $scope.publicInterestOfSportPublicInterest.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'TRADITION_OF_SPORT_ZADAR':
-                            $scope.publicInterestOfSportTownZadar.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'OLYMPIC_SPORTS_STATUS':
-                            $scope.publicInterestOfSportOlympicStatus.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'IMPORTANCE_FOR_TEACHING_TZK':
-                            $scope.publicInterestOfSportImportanceForTeachingTzk.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'NUMBER_OF_CATEGORIZED_ATHLETES':
-                            $scope.sportsQualityNumbeOfCategorizedAthletes.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'ACHIEVED_SPORTS_RESULTS_IN_CROATIA':
-                            $scope.sportsQualityAchievedSportsResultsInCroatia.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        case 'ACHIEVED_SPORTS_RESULTS_IN_TOWN_ZADAR':
-                            $scope.sportsQualityAchievedSportsResultsInTownZadar.push({questionDef: $scope.evaluationQuestions[i]});
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            },
+            $scope.points[$scope.evaluationQuestions[i].question] = !_.isUndefined($scope.evaluationQuestions[i].initValue) ? parseInt($scope.evaluationQuestions[i].initValue.answer.value) : undefined;
+            $scope.totalPoints[$scope.evaluationQuestions[i].question] = !_.isUndefined($scope.evaluationQuestions[i].initValue) ? parseInt($scope.evaluationQuestions[i].initValue.answer.value) : undefined;
+
+            switch ($scope.evaluationQuestions[i].group) {
+                case 'INTERNATIONAL_FEDERATION':
+                    $scope.criterionOfSportDevelopmentInternationalFederation.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'NATIONAL_ALLIANCE':
+                    $scope.criterionOfSportNationalAlliance.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'COUNTY_ALLIANCE':
+                    $scope.criterionOfSportCountyAlliance.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'CITY_OF_ZADAR':
+                    $scope.criterionOfSportCityOfZadar.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'PUBLIC_INTEREST':
+                    $scope.publicInterestOfSportPublicInterest.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'TRADITION_OF_SPORT_ZADAR':
+                    $scope.publicInterestOfSportTownZadar.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'OLYMPIC_SPORTS_STATUS':
+                    $scope.publicInterestOfSportOlympicStatus.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'IMPORTANCE_FOR_TEACHING_TZK':
+                    $scope.publicInterestOfSportImportanceForTeachingTzk.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'NUMBER_OF_CATEGORIZED_ATHLETES':
+                    $scope.sportsQualityNumbeOfCategorizedAthletes.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'ACHIEVED_SPORTS_RESULTS_IN_CROATIA':
+                    $scope.sportsQualityAchievedSportsResultsInCroatia.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                case 'ACHIEVED_SPORTS_RESULTS_IN_TOWN_ZADAR':
+                    $scope.sportsQualityAchievedSportsResultsInTownZadar.push({questionDef: $scope.evaluationQuestions[i]});
+                    break;
+                default:
+                    break;
+            }
+        }
+    },
             function (error) {
                 //fail
                 $scope.error = error;
             });
-    
+
     /**
      * Calculates total points for the ranking questionnaire 
      * 
      * @param {type} question represents key for the question
      * @returns {undefined}
      */
-    $scope.calculateTotal = function(question) {
+    $scope.calculateTotal = function (question) {
         $scope.answerItem = _.find($scope.questionItems, function (obj) {
             return obj.item.id === $scope.answers[question];
         });
-        
+
         $scope.points[question] = $scope.answerItem.item.value;
-                
-        if(!_.isUndefined($scope.totalPoints[question])) {
-            if($scope.totalPoints[question] !== $scope.answerItem.item.value) {                
-                $scope.rankingSum -= $scope.totalPoints[question];                    
+
+        if (!_.isUndefined($scope.totalPoints[question])) {
+            if ($scope.totalPoints[question] !== $scope.answerItem.item.value) {
+                $scope.rankingSum -= $scope.totalPoints[question];
                 $scope.rankingSum += $scope.answerItem.item.value;
                 $scope.totalPoints[question] = $scope.answerItem.item.value;
             }
-        } else {           
-              $scope.totalPoints[question] = $scope.answerItem.item.value;            
-              $rootScope.rankingSum += $scope.totalPoints[question];
+        } else {
+            $scope.totalPoints[question] = $scope.answerItem.item.value;
+            $rootScope.rankingSum += $scope.totalPoints[question];
         }
         $rootScope.$broadcast('rankingSum', $rootScope.rankingSum);
     };
-    
+
     $scope.ok = function () {
 
         $scope.evaluationAnswersDto = {};
@@ -295,47 +298,47 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
 
         EvaluationDataFactory.editEvaluationAnswers($scope.evaluationAnswersDto, function (response) {
 
-                    if (response.result === 200) {
-                        console.log('Evaluation answers are successfully edited!');
+            if (response.result === 200) {
+                console.log('Evaluation answers are successfully edited!');
 
-                        toaster.pop({
-                            type: 'info',
-                            title: 'Uspješna izmjena stavke',
-                            body: "Rangiranje i kategorizacija za odabranu stavku su uspješno izmijenjeni.",
-                            showCloseButton: true,
-                            timeout: 5000
-                        });
+                toaster.pop({
+                    type: 'info',
+                    title: 'Uspješna izmjena stavke',
+                    body: "Rangiranje i kategorizacija za odabranu stavku su uspješno izmijenjeni.",
+                    showCloseButton: true,
+                    timeout: 5000
+                });
 
-                        EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.rankingAndCategorizationOfSports}, function (response) {
+                EvaluationDataFactory.fetchMemberRegistersWithAssociatedEvaluations({questionnaireType: QUESTIONNAIRE_TYPE.rankingAndCategorizationOfSports}, function (response) {
 
-                                $scope.rankingAndCategorizationOfSports = response.evaluationQuestionDefJson;
-                                
-                                for(var i=0; i < $scope.rankingAndCategorizationOfSports.length; i++) {
-                                    if($scope.rankingAndCategorizationOfSports[i].totalPoints === 0)  {
-                                        $scope.rankingAndCategorizationOfSports[i].criterionOfSportInternationalFederation = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].criterionOfSportNationalAlliance = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].criterionOfSportCountyAlliance = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].criterionOfSportCityOfZadar = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].sportStatusOfPublicInterest = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].sportStatusTownZadar = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].olympicSportsStatus = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].importanceForTeachingTzk = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].sportsQualityNumberOfCategorizedAthletes = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsCroatia = 0;
-                                        $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
-                                    }
-                                    $scope.rankingAndCategorizationOfSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
-                                    $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
-                                }
-                                $rootScope.$broadcast('rankingAndCategorizationOfSports', $scope.rankingAndCategorizationOfSports);
+                    $scope.rankingAndCategorizationOfSports = response.evaluationQuestionDefJson;
 
-                                },
-                                function (error) {
-                                    //fail
-                                    $scope.error = error;
-                                });
+                    for (var i = 0; i < $scope.rankingAndCategorizationOfSports.length; i++) {
+                        if ($scope.rankingAndCategorizationOfSports[i].totalPoints === 0) {
+                            $scope.rankingAndCategorizationOfSports[i].criterionOfSportInternationalFederation = 0;
+                            $scope.rankingAndCategorizationOfSports[i].criterionOfSportNationalAlliance = 0;
+                            $scope.rankingAndCategorizationOfSports[i].criterionOfSportCountyAlliance = 0;
+                            $scope.rankingAndCategorizationOfSports[i].criterionOfSportCityOfZadar = 0;
+                            $scope.rankingAndCategorizationOfSports[i].sportStatusOfPublicInterest = 0;
+                            $scope.rankingAndCategorizationOfSports[i].sportStatusTownZadar = 0;
+                            $scope.rankingAndCategorizationOfSports[i].olympicSportsStatus = 0;
+                            $scope.rankingAndCategorizationOfSports[i].importanceForTeachingTzk = 0;
+                            $scope.rankingAndCategorizationOfSports[i].sportsQualityNumberOfCategorizedAthletes = 0;
+                            $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsCroatia = 0;
+                            $scope.rankingAndCategorizationOfSports[i].sportsQualityAccomplishedSportsResultsTownOfZadar = 0;
+                        }
+                        $scope.rankingAndCategorizationOfSports[i].percentageColor = colorUtils.colorBasedOnPercentageValue($scope.rankingAndCategorizationOfSports[i].questionnairePercentage);
+                        $rootScope.totalPointsPerMemberRegister[$scope.rankingAndCategorizationOfSports[i].id] = $scope.rankingAndCategorizationOfSports[i].totalPoints;
                     }
+                    $rootScope.$broadcast('rankingAndCategorizationOfSports', $scope.rankingAndCategorizationOfSports);
+
                 },
+                        function (error) {
+                            //fail
+                            $scope.error = error;
+                        });
+            }
+        },
                 function (error) {
                     //fail
                     $scope.error = error;
@@ -352,7 +355,7 @@ rankingAndCategorizationOfSportsModule.controller('EditRankingAndCategorizationO
         // close modal view
         $uibModalInstance.close();
     };
-    
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };

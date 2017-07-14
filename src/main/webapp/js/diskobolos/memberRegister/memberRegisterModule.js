@@ -13,31 +13,53 @@ memberRegisterModule.controller('memberRegisterController', function (
         MemberRegisterDataFactory,
         $uibModal,
         DTOptionsBuilder,
-        DTColumnDefBuilder,        
+        DTColumnDefBuilder,
         LocationDataFactory,
         MembershipCategoryDataFactory,
         SweetAlert,
         toaster,
         dataTableUtils) {
-    
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withDOM('<"html5buttons"B>lTfgitp')
             .withLanguage(dataTableUtils.getDataTableTranslations())
             .withOption('order', [0, 'asc'])
+            .withOption('stateSave', true)
             .withPaginationType('full_numbers')
             .withButtons(dataTableUtils.getDataTableButtons([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], true))
             .withOption('select', true)
             .withOption('responsive', true);
 
     $scope.dtColumnDefs = [
-        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1)
+        DTColumnDefBuilder.newColumnDef(-1).withOption('responsivePriority', 1),
+        DTColumnDefBuilder.newColumnDef(-2).withOption('responsivePriority', 2),
+        DTColumnDefBuilder.newColumnDef(-3).withOption('responsivePriority', 3)
     ];
 
     $scope.$on('selectedMemberRegister', function (ev, selectedMemberRegister) {
         $rootScope.selectedMemberRegister = selectedMemberRegister;
     });
 
-    $scope.memberRegisters = {};
+    $scope.memberRegisters = {
+        bankAccounts: [],
+        chairman: undefined,
+        dateFrom: undefined,
+        dateTo: undefined,
+        emails: [],
+        fax: undefined,
+        id: undefined,
+        identificationNumber: undefined,
+        location: [],
+        membershipCategory: {},
+        name: undefined,
+        numberOfNonProfitOrg: undefined,
+        oib: undefined,
+        phone1: undefined,
+        phone2: undefined,
+        registerNumber: undefined,
+        registrationDate: undefined,
+        secretary: undefined
+    };
 
     $scope.$on('memberRegisters', function (ev, memberRegisters) {
         $scope.memberRegisters = memberRegisters;
@@ -51,12 +73,12 @@ memberRegisterModule.controller('memberRegisterController', function (
         MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
             //success
             $scope.memberRegisters = response.memberRegisters;
-            
-            for (var n = 0; n < $scope.memberRegisters.length; n++) {              
+
+            for (var n = 0; n < $scope.memberRegisters.length; n++) {
                 $scope.memberRegisters[n].email = '';
                 $scope.memberRegisters[n].bankAccount = '';
                 // transform emails array to the one row string
-                for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {                    
+                for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {
                     $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
                 }
 
@@ -78,22 +100,22 @@ memberRegisterModule.controller('memberRegisterController', function (
                 MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
                     $scope.membershipCategories = response.membershipCategories;
 
-                            if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
-                                for (var i = 0; i < $scope.memberRegisters.length; i++) {
-                                    $scope.memberRegisters[i].membershipCategories = $scope.membershipCategories;                                                                        
-                                }
-                            }
-                        },
+                    if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
+                        for (var i = 0; i < $scope.memberRegisters.length; i++) {
+                            $scope.memberRegisters[i].membershipCategories = $scope.membershipCategories;
+                        }
+                    }
+                },
                         function (error) {
                             //fail
                             $scope.error = error;
                         });
-                    },
+            },
                     function (error) {
                         //fail
                         $scope.error = error;
                     });
-                },
+        },
                 function (error) {
                     //fail
                     $scope.error = error;
@@ -337,12 +359,12 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                 MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
                     //success
                     $scope.memberRegisters = response.memberRegisters;
-                    
-                    for (var n = 0; n < $scope.memberRegisters.length; n++) {              
+
+                    for (var n = 0; n < $scope.memberRegisters.length; n++) {
                         $scope.memberRegisters[n].email = '';
                         $scope.memberRegisters[n].bankAccount = '';
                         // transform emails array to the one row string
-                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {                    
+                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {
                             $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
                         }
 
@@ -531,12 +553,12 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
                 MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
                     //success
                     $scope.memberRegisters = response.memberRegisters;
-                    
-                    for (var n = 0; n < $scope.memberRegisters.length; n++) {              
+
+                    for (var n = 0; n < $scope.memberRegisters.length; n++) {
                         $scope.memberRegisters[n].email = '';
                         $scope.memberRegisters[n].bankAccount = '';
                         // transform emails array to the one row string
-                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {                    
+                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {
                             $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
                         }
 
@@ -602,7 +624,7 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-    
+
     /**
      * Function that searches geographical data for provided address
      * 
@@ -628,12 +650,12 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
                                 if (results[0].address_components[i].types[j] === "street_number")
                                     $scope.location.streetNumber = results[0].address_components[i].short_name;
                                 if (results[0].address_components[i].types[j] === "locality") {
-                                    $scope.location.city = results[0].address_components[i].long_name;                                                               
+                                    $scope.location.city = results[0].address_components[i].long_name;
                                     $scope.data.location.city = $scope.location.city;
                                 }
                             }
                         }
-                        
+
                         $scope.location.address = $scope.location.address + ' ' + $scope.location.streetNumber;
                         delete $scope.location.streetNumber;
                     }, 0);
