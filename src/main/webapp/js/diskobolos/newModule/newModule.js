@@ -40,10 +40,14 @@ newModule.controller('newModuleController',
                 else
                     return 'display';
             };
+            
+         
 
             $scope.editContact = function (contact) {
                 $scope.model.selected = angular.copy(contact);
             };
+                      
+
 
             $scope.saveContact = function (idx) {
                 console.log("Saving contact");
