@@ -13,40 +13,31 @@
 
                         <table datatable="ng" dt-options="dtOptions"  dt-column-defs="dtColumnDefs" class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
-                            <th>Lorem</th>
-                            <th>Prvi broj</th>
-                            <th>Drugi broj</th>
-                            <th></th>
+                                <tr>
+                                    <th>R.B.</th>
+                                    <th>Članice</th>
+                                    <th>Sredstva udruge</th>
+                                    <th>Sredstva po sportovima</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="contact in model.contacts" ng-include="getTemplate(contact)">
-                                </tr>
+                                <tr ng-repeat="contact in contacts">
+                                    <td>
+                           {{contact.RB}}
+                            </td>
+                             <td>
+                           {{contact.clanice}}
+                            </td>
+                            <td>
+                            <edit-in-place value="contact.sredstva_udruge"></edit-in-place>
+                            </td>
+                            <td>
+                            <edit-in-place value="contact.sredstva_sportovi"></edit-in-place>
+                            </td>
+                            
+                            </tr>
                             </tbody>
                         </table>
-
-
-                        <script type="text/ng-template" id="display">
-                            <td>{{contact.name}}</td>
-                            <td ng-click="editContact(contact)">{{contact.number1}}</td>
-                            <td ng-click="editContact(contact)">{{contact.number2}}</td>
-                            <td>
-                            
-                            </td>
-                        </script>
-                        <script type="text/ng-template" id="edit">
-                            <td>{{contact.name}}</td>
-                            <td><input type="text" class="form-control" ng-model="model.selected.number1"/></td>
-                            <td><input type="text" class="form-control" ng-model="model.selected.number2"/></td>
-                            <td class="edit-column">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary " ng-click="saveContact($index)">Spremi</button>
-                                        <button type="button" class="btn btn-danger " ng-click="reset()">Izađi</button>
-                                    </div>
-                           </td>                           
-                        </script>
-                        
-                   
-                      
                     </div>
 
 
