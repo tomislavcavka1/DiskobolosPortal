@@ -435,6 +435,10 @@ Datepicker - customize
     font-size: 13px;
 }
 
+._720kb-datepicker-calendar-day:hover, ._720kb-datepicker-calendar-day._720kb-datepicker-active {
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0 !important;
+}
+
 /******************************
 Location
 ******************************/
@@ -490,4 +494,9 @@ datatable grid control
 
 .edit-in-place.active input {
   display: inline-block;
+}
+
+.pdf-toolbar {
+    margin: 0 auto;
+    max-width: 655px !important;
 }

@@ -34,7 +34,9 @@
         'weatherModule',
         'eventUtilsModule',
         'geographicalOverviewOfMemberRegisterModule',
-        'colorUtilsModule'
+        'colorUtilsModule',
+        'publicCallModule'
+      
         
     ]);
 })();

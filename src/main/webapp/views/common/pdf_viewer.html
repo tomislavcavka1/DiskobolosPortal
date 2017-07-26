@@ -6,6 +6,8 @@
         <button id="zoomin" class="btn btn-white" ng-click="zoomIn()"><i class="fa fa-search-minus"></i> <span class="hidden-xs">Zoom In</span></button>
         <button id="zoomout" class="btn btn-white" ng-click="zoomOut()"><i class="fa fa-search-plus"></i> <span class="hidden-xs">Zoom Out</span> </button>
         <button id="zoomfit" class="btn btn-white" ng-click="fit()"> 100%</button>
+        <button id="print" class="btn btn-white"> <i class="fa fa-print" aria-hidden="true"></i> <span class="hidden-xs">Print</span> </button>
+
         <span class="btn btn-white hidden-xs">Page: </span>
 
         <div class="input-group">
@@ -18,3 +20,34 @@
 
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        var canvas = document.getElementById("pdf-canvas");
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "gold";
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = 5;
+        ctx.rect(50, 50, 100, 100);
+        ctx.fill();
+        ctx.stroke();
+
+        function print_voucher() {
+            var win = window.open();
+            win.document.write("<br><img src='" + canvas.toDataURL() + "'/>");
+            win.print();
+            win.location.reload();
+        }
+
+        $("#print").click(function () {
+            print_voucher();
+        });
+
+
+    }); // end $(function(){});
+
+
+</script>

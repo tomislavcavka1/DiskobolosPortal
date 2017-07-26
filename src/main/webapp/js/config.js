@@ -426,11 +426,35 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('content.location', {
                 url: "/location",
                 templateUrl: "views/location.html",
-                data: {pageTitle: 'Udaljenost gradova za izračun putnih naloga', displayName: 'Udaljenost gradova za izračun putnih naloga'},
+                data: {pageTitle: 'Udaljenost putovanja na gostujuća natjecanja udruge', displayName: 'Udaljenost putovanja na gostujuća natjecanja udruge'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
                            
+                        ]);
+                    }
+                }
+
+            })
+            
+             /*
+             Public Call 
+             */
+
+            .state('content.publicCall', {
+                url: "/javnipoziv",
+                templateUrl: "views/publicCall.html",
+                data: {pageTitle: 'Javni poziv - sport', displayName: 'Javni poziv - sport'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                            files: ['js/plugins/pdfjs/pdf.js']
+                        },
+                        {
+                            name: 'pdf',
+                            files: ['js/plugins/pdfjs/angular-pdf.js']
+                        }
                         ]);
                     }
                 }
@@ -466,6 +490,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 serie: true,
                                 name: 'datatables.buttons',
                                 files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
                             }
                         ]);
                     }

@@ -11,16 +11,46 @@
 
                     <form role="form" class="form-inline" style="margin-bottom:30px;">
                         <div class="form-group">
-                            <label for="from-input" class="sr-only">Email address</label>
                             <input id="from-input" class="form-control" type="text" placeholder="Upišite lokaciju Od">
                         </div>
                         <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
                         <div class="form-group">
-                            <label for="to-input" class="sr-only">Email address</label>
                             <input id="to-input" class="form-control" type="text" placeholder="Upišite lokaciju Do">
                         </div>
 
                         <input id="btnclick" class="btn btn-primary" onclick="Demo.getDirections();" type=button value="Prikaži!"/>
+                    </form>
+
+
+                    <form id="location" class="form-inline" style="margin-bottom:30px;">
+
+                        <div class="form-group">
+                            <select id="vrste-vozila" class="form-control" name="account">
+                                <option value="" selected="">Izaberite vozilo</option>
+                                <option value="2">Osobno vozilo</option>
+                                <option value="2.50">Kombi - vlastito</option>
+                                <option value="3.50">Kombi - vanjsko</option>
+                                <option value="3.50">Autobus - standard</option>
+                                <option value="8.30">Autobus/Vanjska usluga - AUTOBUS 57</option>
+                                <option value="7.90">Autobus/Vanjska usluga - AUTOBUS 49</option>
+                                <option value="6.20">Autobus/Vanjska usluga - BUS 26</option>
+                                <option value="5.80">Autobus/Vanjska usluga - MINIBUS 19</option>
+                                <option value="1">Prijevoz opreme</option>
+                            </select>
+
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <input id="kilometers" class="form-control" type="text" >
+                        </div>
+
+                        <input id="count" class="btn btn-primary" type=button value="Izračunaj"/>
+
+
+
+
                     </form>
 
 
@@ -102,6 +132,62 @@
 
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(btnclick, 'click', Demo.init);
+
+
+
+
+    $(document).ready(function () {
+
+        $('#location').hide();
+
+        $('#kombi').hide();
+
+        $('#autobus').hide();
+
+        $('#autoVanjskaUsluga').hide();
+    });
+
+
+    $("#btnclick").click(function () {
+
+        $('#location').show();
+
+        $('#kilometers').val('');
+
+
+
+    });
+    
+    $('#vrste-vozila').change(function () {
+        
+        $('#kilometers').val('');
+        
+        
+    });
+    
+    
+
+
+
+    $('#count').click(function () {
+
+        var str = $('.adp-summary span').first().html();
+        var spaceChar = str.indexOf(" ");
+
+        var value = str.substring(0, spaceChar);
+
+
+        var value2 = $('#vrste-vozila').val();
+
+
+        var total = (value * value2).toFixed(2);
+
+        $('#kilometers').val(total + 'KN');
+
+    });
+
+
+
 
 
 
