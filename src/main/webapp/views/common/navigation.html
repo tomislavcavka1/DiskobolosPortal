@@ -35,7 +35,7 @@
                 <a ui-sref="content.memberRegister"><i class="fa fa-address-book-o"></i> <span class="nav-label">Matična knjiga članica</span> </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="content.publicCall"><i class="fa fa-address-book-o"></i> <span class="nav-label">Javni poziv - Sport</span> </a>
+                <a ui-sref="content.publicCall"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="nav-label">Javni poziv - Sport</span> </a>
             </li>
             <li ng-class="{active: $state.includes('evaluation')}">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Vrednovanje</span><span class="fa arrow"></span></a>
@@ -43,6 +43,15 @@
                     <li ui-sref-active="active"><a ui-sref="evaluation.termsOfCompetition">Uvjeti natječaja</a></li>
                     <li ui-sref-active="active"><a ui-sref="evaluation.rankingAndCategorizationOfSpors">Vrednovanje sportova</a></li>
                     <li ui-sref-active="active"><a ui-sref="evaluation.categorizationOfSportsPerSportClub">Vrednovanje sportskih udruga</a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('evaluationForms')}">
+                <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Vrednovanje obrasci</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('evaluation')}">
+                    <li ui-sref-active="active"><a ui-sref="evaluationForms.evaluationFormsFirst">Vrednovanje 1</a></li>
+                    <li ui-sref-active="active"><a ui-sref="evaluationForms.evaluationFormsSecond">Vrednovanje 2</a></li>
+
                 </ul>
             </li>
 
@@ -58,9 +67,9 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="content.nomenklaturaSportovaISportskihGrana"><i class="fa fa-file-o"></i> <span class="nav-label">Nomenklatura sportova i sportskih grana</span> </a>
+                <a ui-sref="content.nomenklaturaSportovaISportskihGrana"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="nav-label">Nomenklatura sportova i sportskih grana</span> </a>
             </li>
-            
+
             <li ui-sref-active="active">
                 <a ui-sref="content.location"><i class="fa fa-car" aria-hidden="true"></i> <span class="nav-label">Udaljenost putovanja na gostujuća natjecanja udruge</span> </a>
             </li>
@@ -68,7 +77,7 @@
             <li ui-sref-active="active">
                 <a ui-sref="content.geographicalOverviewOfMemberRegisters"><i class="fa fa-map-marker"></i> <span class="nav-label">Prikaz članica na karti</span> </a>
             </li>
-            
+
             <li ui-sref-active="active">
                 <a ui-sref="content.newModule"><i class="fa fa-map-marker"></i> <span class="nav-label">New module</span> </a>
             </li>

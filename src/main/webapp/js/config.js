@@ -430,14 +430,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                           
+
                         ]);
                     }
                 }
 
             })
-            
-             /*
+
+            /*
              Public Call 
              */
 
@@ -449,18 +449,18 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             {
-                            files: ['js/plugins/pdfjs/pdf.js']
-                        },
-                        {
-                            name: 'pdf',
-                            files: ['js/plugins/pdfjs/angular-pdf.js']
-                        }
+                                files: ['js/plugins/pdfjs/pdf.js']
+                            },
+                            {
+                                name: 'pdf',
+                                files: ['js/plugins/pdfjs/angular-pdf.js']
+                            }
                         ]);
                     }
                 }
 
             })
-            
+
             /*
              New module
              */
@@ -500,7 +500,84 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
             })
 
+            /*
+             Vrednovanje obrasci
+             */
+            .state('evaluationForms', {
+                abstract: true,
+                url: "",
+                templateUrl: "views/common/content.html"
+            })
 
+            .state('evaluationForms.evaluationFormsFirst', {
+                url: "/vrednovanjeObrazac1",
+                templateUrl: "views/evaluationFormsFirst.html",
+                data: {pageTitle: 'evaluationFormsFirst', displayName: 'evaluationFormsFirst'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                serie: true,
+                                files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                            },
+                            {
+                                files: ['js/plugins/moment/moment.min.js']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables',
+                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
+                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
+                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables.buttons',
+                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                            }
+                        ]);
+                    }
+                }
+
+            })
+            
+             .state('evaluationForms.evaluationFormsSecond', {
+                url: "/vrednovanjeObrazac2",
+                templateUrl: "views/evaluationFormsSecond.html",
+                data: {pageTitle: 'evaluationFormsSecond', displayName: 'evaluationFormsSecond'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                serie: true,
+                                files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                            },
+                            {
+                                files: ['js/plugins/moment/moment.min.js']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables',
+                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
+                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
+                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables.buttons',
+                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
+                            },
+                            {
+                                files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                            }
+                        ]);
+                    }
+                }
+
+            })
             /*
              Profile
              */

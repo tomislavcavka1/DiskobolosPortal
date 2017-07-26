@@ -35,7 +35,8 @@
         'eventUtilsModule',
         'geographicalOverviewOfMemberRegisterModule',
         'colorUtilsModule',
-        'publicCallModule'
+        'publicCallModule',
+        'evaluationFormsModule'
       
         
     ]);
