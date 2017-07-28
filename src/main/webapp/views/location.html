@@ -43,13 +43,8 @@
 
                         <div class="form-group">
 
-                            <input id="kilometers" class="form-control" type="text" >
+                            <input id="kilometers" class="form-control" type="text" style="text-align: right; margin-right: 5px;">kn
                         </div>
-
-                        <input id="count" class="btn btn-primary" type=button value="Izračunaj"/>
-
-
-
 
                     </form>
 
@@ -128,66 +123,59 @@
         }
     };
 
-
-
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(btnclick, 'click', Demo.init);
-
-
 
 
     $(document).ready(function () {
 
         $('#location').hide();
-
         $('#kombi').hide();
-
         $('#autobus').hide();
-
         $('#autoVanjskaUsluga').hide();
     });
-
 
     $("#btnclick").click(function () {
 
         $('#location').show();
-
         $('#kilometers').val('');
-
-
-
+        $('#vrste-vozila').val('');
     });
-    
+
     $('#vrste-vozila').change(function () {
-        
+
         $('#kilometers').val('');
-        
-        
     });
-    
-    
 
-
-
-    $('#count').click(function () {
+    $('#vrste-vozila').change(function () {
 
         var str = $('.adp-summary span').first().html();
         var spaceChar = str.indexOf(" ");
-
         var value = str.substring(0, spaceChar);
-
-
         var value2 = $('#vrste-vozila').val();
-
-
         var total = (value * value2).toFixed(2);
+        $('#kilometers').val(total);
 
-        $('#kilometers').val(total + 'KN');
+        $('.adp-fullwidth tr td').click(function () {
 
+            setTimeout(function () {
+
+                var str = $('.adp-summary span').first().html();
+                var spaceChar = str.indexOf(" ");
+                var value = str.substring(0, spaceChar);
+                var value2 = $('#vrste-vozila').val();
+                var total = (value * value2).toFixed(2);
+                $('#kilometers').val(total);
+
+            }, 200);
+        });
     });
 
+    $('#add').click(function () {
 
 
+
+    });
 
 
 

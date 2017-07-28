@@ -10,7 +10,6 @@
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins">{{dashboardData.numberOfSports}}</h1>
-
                     <small>Broj sportova u gradu Zadru</small>
                 </div>
             </div>
@@ -22,7 +21,6 @@
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins">{{dashboardData.numberOfMemberRegisters}}</h1>
-
                     <small>Broj klubova u gradu Zadru</small>
                 </div>
             </div>
@@ -34,7 +32,6 @@
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins">{{numberOfSportBuildings}}</h1>
-
                     <small>Broj sportskih građevina u gradu Zadru</small>
                 </div>
             </div>
@@ -46,7 +43,6 @@
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins">{{dashboardData.numberOfMembershipCategories}}</h1>
-
                     <small>Broj kategorija članica</small>
                 </div>
             </div>
@@ -57,19 +53,16 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Rangiranje i kategorizacija sportova</h5>
-
                 </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-lg-12">
                             <div ng-controller="dashboardController as chart">
-                                <canvas barchart options="chart.myChartOptions" data="chart.rankingData" width="500" ></canvas></div>
-
+                                <canvas barchart options="chart.myChartOptions" data="chart.rankingData" height="400" responsive=true></canvas>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -123,9 +116,7 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -136,30 +127,17 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Grafički prikaz uvjeta natječaja</h5>
-
                 </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-lg-3" ng-controller="dashboardController as chart">
-
-
                             <canvas doughnutchart options="chart.doughnutOptions" data="chart.doughnutData" responsive=true></canvas>
-
-
                         </div>
-
                         <div class="col-lg-4">
-
                             <h4><i style="color: #a3e1d4;" class="fa fa-square" aria-hidden="true"></i>   Zadovoljili uvjete</h4>
                             <h4><i style="color: #fb8692;" class="fa fa-square" aria-hidden="true"></i>   Nisu zadovoljili uvjete</h4>
                             <h4><i style="color: #dedede;" class="fa fa-square" aria-hidden="true"></i>   Upitnik nije ispunjen</h4>
-
-
-
-
-
                         </div>
-
                         <div class="col-lg-5">
                             <div ng-app="myapp" ng-controller="WeatherCtrl">
                                 <h2>Vrijeme u Gradu Zadru</h2>

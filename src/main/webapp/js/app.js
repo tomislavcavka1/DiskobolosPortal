@@ -35,7 +35,7 @@
         'eventUtilsModule',
         'geographicalOverviewOfMemberRegisterModule',
         'colorUtilsModule',
-        'publicCallModule',
+        'pdfViewerModule',
         'evaluationFormsModule'
       
         

@@ -498,5 +498,30 @@ datatable grid control
 
 .pdf-toolbar {
     margin: 0 auto;
-    max-width: 655px !important;
+    max-width: 720px !important;
+}
+
+
+div.explore_area {
+    position:relative;
+    width:100%;
+    overflow:auto;
+}
+
+
+
+/*
+media print
+*/
+
+@media print
+{    
+    *
+    {
+        display: none;
+    }
+    canvas 
+    {
+        display: inline;
+    }
 }

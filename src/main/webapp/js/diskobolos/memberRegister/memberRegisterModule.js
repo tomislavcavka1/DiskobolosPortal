@@ -488,9 +488,9 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
     $scope.membershipCategory = {selected: {}};
 
     // initialization of the date fields
-    $scope.data.dateFrom = new Date();
-    $scope.data.dateTo = new Date();
-    $scope.data.registrationDate = new Date();
+    $scope.data.dateFrom = new Date().toLocaleFormat();
+    $scope.data.dateTo = new Date().toLocaleFormat();
+    $scope.data.registrationDate = new Date().toLocaleFormat();
 
     $scope.init = function () {
         LocationDataFactory.getAllLocations({}, function (response) {

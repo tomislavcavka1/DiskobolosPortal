@@ -416,7 +416,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('content.nomenklaturaSportovaISportskihGrana', {
                 url: "/nomenklaturaSportovaISportskihGrana",
                 templateUrl: "views/nomenklaturaSportovaISportskihGrana.html",
-                data: {pageTitle: 'Nomenklatura sportova i sportskih grana', displayName: 'Nomenklatura sportova i sportskih grana'}
+                data: {pageTitle: 'Nomenklatura sportova i sportskih grana', displayName: 'Nomenklatura sportova i sportskih grana'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                files: ['js/plugins/pdfjs/build/pdf.js']
+                            },
+                            {
+                                name: 'pdf',
+                                files: ['js/plugins/pdfjs//angular-pdf.js']
+                            }
+
+                        ]);
+                    }
+                }
             })
 
             /*
@@ -430,7 +444,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
-
                         ]);
                     }
                 }
@@ -449,11 +462,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             {
-                                files: ['js/plugins/pdfjs/pdf.js']
+                                files: ['js/plugins/pdfjs/build/pdf.js']
                             },
                             {
                                 name: 'pdf',
-                                files: ['js/plugins/pdfjs/angular-pdf.js']
+                                files: ['js/plugins/pdfjs//angular-pdf.js']
                             }
                         ]);
                     }
@@ -543,8 +556,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
 
             })
-            
-             .state('evaluationForms.evaluationFormsSecond', {
+
+            .state('evaluationForms.evaluationFormsSecond', {
                 url: "/vrednovanjeObrazac2",
                 templateUrl: "views/evaluationFormsSecond.html",
                 data: {pageTitle: 'evaluationFormsSecond', displayName: 'evaluationFormsSecond'},
