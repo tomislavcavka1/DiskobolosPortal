@@ -38,3 +38,67 @@ pdfViewerModule.controller('nomenclatureSportsController', function (
 });
 
 
+
+pdfViewerModule.controller('evaluationSportsClubController', function (
+        $scope) {
+    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
+
+
+    $scope.printbtn = function () {
+
+        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd.print();
+
+
+    };
+});
+
+
+pdfViewerModule.controller('evaluationManifestationController', function (
+        $scope) {
+    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
+
+
+    $scope.printbtn = function () {
+
+        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd.print();
+
+
+    };
+});
+
+
+pdfViewerModule.controller('evaluationTeamClubController', function (
+        $scope) {
+    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
+
+
+    $scope.printbtn = function () {
+
+        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd.print();
+
+
+    };
+});
+
+
+
+pdfViewerModule.controller('evaluationCoachesController', function (
+        $scope) {
+    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
+
+
+    $scope.printbtn = function () {
+
+        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd.print();
+
+
+    };
+});

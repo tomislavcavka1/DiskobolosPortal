@@ -1,0 +1,27 @@
+<!-- Page breadcrumb -->    
+<div ng-include="'views/common/breadcrumb.html'"></div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div align="center" class="col-lg-12">
+            <div class="ibox" id="ibox">
+
+
+                <div class="ibox-content" ng-controller="evaluationSportsClubController">
+
+                    <ng-pdf template-url="./views/common/pdf_viewer.html" scale="page-fit"></ng-pdf>
+                    <div class="explore_area">
+                        <canvas class=" m-t-md" id="pdf-canvas"></canvas>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

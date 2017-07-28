@@ -7,7 +7,7 @@ var configuration = angular.module('configuration', []);
      
 configuration.constant('AppConstants', {
      ServerName: {
-        hostUrl: 'http://localhost:8080/'
+        hostUrl: 'http://192.168.99.100:8080/'
     },
     CrudActions: {
         create: "CREATE",
