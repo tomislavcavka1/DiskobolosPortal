@@ -1,3 +1,5 @@
+/* global moment */
+
 /**
  * AngularJS controller responsible for fetching, creation, edit and deletion of the member register data.
  * 
@@ -51,11 +53,11 @@ memberRegisterModule.controller('memberRegisterController', function (
         identificationNumber: undefined,
         location: [],
         membershipCategory: {},
+        sportCategory: {},
         name: undefined,
         numberOfNonProfitOrg: undefined,
         oib: undefined,
-        phone1: undefined,
-        phone2: undefined,
+        phones: [],
         registerNumber: undefined,
         registrationDate: undefined,
         secretary: undefined
@@ -75,11 +77,31 @@ memberRegisterModule.controller('memberRegisterController', function (
             $scope.memberRegisters = response.memberRegisters;
 
             for (var n = 0; n < $scope.memberRegisters.length; n++) {
+                $scope.memberRegisters[n].phone = '';
+                $scope.memberRegisters[n].fax = '';
+                $scope.memberRegisters[n].mobile = '';
                 $scope.memberRegisters[n].email = '';
                 $scope.memberRegisters[n].bankAccount = '';
                 // transform emails array to the one row string
                 for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {
                     $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
+                }
+                
+                // transform phones array to the one row string
+                for (var p = 0; p < $scope.memberRegisters[n].phones.length; p++) {
+                    switch ($scope.memberRegisters[n].phones[p].phoneType) {
+                        case 'PHONE':
+                            $scope.memberRegisters[n].phone += (_.isEmpty($scope.memberRegisters[n].phone) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                            break;
+                        case 'FAX':
+                            $scope.memberRegisters[n].fax += (_.isEmpty($scope.memberRegisters[n].fax) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                            break;
+                        case 'MOBILE':
+                            $scope.memberRegisters[n].mobile += (_.isEmpty($scope.memberRegisters[n].mobile) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 // transform bank accounts array to the one row string
@@ -263,13 +285,15 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
         MemberRegisterDataFactory,
         toaster,
         LocationDataFactory,
-        MembershipCategoryDataFactory,
-        $timeout) {
+        MembershipCategoryDataFactory) {
 
     $scope.crudAction = AppConstants.CrudActions['edit'];
 
     $scope.data = {};
     $scope.data = $rootScope.selectedMemberRegister;
+    $scope.data.phonesTags = [];
+    $scope.data.mobilesTags = [];
+    $scope.data.faxesTags = [];
     $scope.data.bankAccountsTags = [];
     $scope.data.emailsTags = [];
     $scope.locations = [];
@@ -281,9 +305,12 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
     $scope.location = {selected: {}};
     $scope.location.selected = $rootScope.selectedMemberRegister.location;
 
-    // sets default value for membership categpry dropdown
+    // sets default value for membership category dropdown
     $scope.membershipCategory = {selected: {}};
     $scope.membershipCategory.selected = $rootScope.selectedMemberRegister.membershipCategory;
+    // sets default value for sport category dropdown
+    $scope.sportCategory = {selected: {}};
+    $scope.sportCategory.selected = $rootScope.selectedMemberRegister.sportCategory;  
 
     if (_.isArray($scope.data.locations) && $scope.data.locations.length > 0) {
         for (var i = 0; i < $scope.data.locations.length; i++) {
@@ -310,14 +337,39 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
             $scope.data.emailsTags.push({alreadyExists: true, id: $scope.data.emails[i].id, text: $scope.data.emails[i].email});
         }
     }
+    
+    // initializes list of phones, mobile phones and faxes for tag input element
+    if (_.isArray($scope.data.phones) && $scope.data.phones.length > 0) {
+        for (var p = 0; p < $scope.data.phones.length; p++) {
+            switch ($scope.data.phones[p].phoneType) {
+                case 'PHONE':
+                    $scope.data.phonesTags.push({alreadyExists: true, id: $scope.data.phones[p].id, text: $scope.data.phones[p].phoneNumber});
+                    break;
+                case 'FAX':
+                    $scope.data.faxesTags.push({alreadyExists: true, id: $scope.data.phones[p].id, text: $scope.data.phones[p].phoneNumber});
+                    break;
+                case 'MOBILE':
+                    $scope.data.mobilesTags.push({alreadyExists: true, id: $scope.data.phones[p].id, text: $scope.data.phones[p].phoneNumber});
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     $scope.ok = function () {
         // initialize data transfer object
         $scope.memberRegisterDto = {};
         $scope.memberRegisterDto = $scope.data;
+        $scope.memberRegisterDto.phonesDto = [];
         $scope.memberRegisterDto.location = $scope.location.selected;
         $scope.memberRegisterDto.membershipCategory = $scope.membershipCategory.selected;
 
+        $scope.memberRegisterDto.phonesDto.push({category: 'PHONE', data: $scope.data.phonesTags});
+        $scope.memberRegisterDto.phonesDto.push({category: 'MOBILE', data: $scope.data.mobilesTags});
+        $scope.memberRegisterDto.phonesDto.push({category: 'FAX', data: $scope.data.faxesTags});
+        $scope.memberRegisterDto.removedPhones = $scope.getRemovedItems($scope.memberRegisterDto.phonesDto);
+        
         for (var i = 0; i < $scope.data.bankAccountsTags.length; i++) {
             if (_.isUndefined($scope.data.bankAccountsTags[i].alreadyExists)) {
                 $scope.memberRegisterDto.bankAccounts.push({accountDescription: '', bankAccountType: 'ACCOUNT_NUMBER', accountNumber: $scope.data.bankAccountsTags[i].text, id: 0});
@@ -329,7 +381,7 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                 $scope.memberRegisterDto.emails.push({id: 0, email: $scope.data.emailsTags[i].text});
             }
         }
-
+        
         // find removed items
         $scope.memberRegisterDto.removedBankAccounts = $scope.findRemovedItems($scope.data.bankAccounts, $scope.data.bankAccountsTags);
         $scope.memberRegisterDto.removedEmails = $scope.findRemovedItems($scope.data.emails, $scope.data.emailsTags);
@@ -361,6 +413,9 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                     $scope.memberRegisters = response.memberRegisters;
 
                     for (var n = 0; n < $scope.memberRegisters.length; n++) {
+                        $scope.memberRegisters[n].phone = '';
+                        $scope.memberRegisters[n].fax = '';
+                        $scope.memberRegisters[n].mobile = '';
                         $scope.memberRegisters[n].email = '';
                         $scope.memberRegisters[n].bankAccount = '';
                         // transform emails array to the one row string
@@ -371,6 +426,23 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                         // transform bank accounts array to the one row string
                         for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
                             $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
+                        }
+                        
+                        // transform phones array to the one row string
+                        for (var p = 0; p < $scope.memberRegisters[n].phones.length; p++) {
+                            switch ($scope.memberRegisters[n].phones[p].phoneType) {
+                                case 'PHONE':
+                                    $scope.memberRegisters[n].phone += (_.isEmpty($scope.memberRegisters[n].phone) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                                    break;
+                                case 'FAX':
+                                    $scope.memberRegisters[n].fax += (_.isEmpty($scope.memberRegisters[n].fax) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                                    break;
+                                case 'MOBILE':
+                                    $scope.memberRegisters[n].mobile += (_.isEmpty($scope.memberRegisters[n].mobile) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
 
@@ -451,6 +523,36 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
 
         return $scope.removedItems;
     };
+    
+    $scope.getRemovedItems = function (listOfTagItems) {
+        $scope.addedItems = [];
+        $scope.removedItemsList = [];
+        for (var i = 0; i < $rootScope.selectedMemberRegister.phones.length; i++) {
+            for (var j = 0; j < listOfTagItems.length; j++) {
+                for (var k = 0; k < listOfTagItems[j].data.length; k++) {
+
+                    var addedItemObj = _.find($scope.addedItems, function (obj) {
+                        return obj.id === listOfTagItems[j].data[k].id;
+                    });
+                    if (_.isUndefined(addedItemObj)) {
+                        $scope.addedItems.push(listOfTagItems[j].data[k]);
+                    }
+                }
+            }
+        }
+
+        for (var n = 0; n < $scope.selectedMemberRegister.phones.length; n++) {
+
+            var addedItemObj = _.find($scope.addedItems, function (obj) {
+                return obj.id === $scope.selectedMemberRegister.phones[n].id;
+            });
+            if (_.isUndefined(addedItemObj)) {
+                $scope.removedItemsList.push($scope.selectedMemberRegister.phones[n]);
+            }
+        }
+
+        return $scope.removedItemsList;
+    };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
@@ -468,7 +570,8 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
         toaster,
         LocationDataFactory,
         MembershipCategoryDataFactory,
-        $timeout) {
+        $timeout,
+        SportDataFactory) {
 
     $scope.crudAction = AppConstants.CrudActions['create'];
 
@@ -486,11 +589,15 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
         city: ''
     };
     $scope.membershipCategory = {selected: {}};
+    $scope.sportCategory = {selected: {}};
 
     // initialization of the date fields
-    $scope.data.dateFrom = new Date().toLocaleFormat();
-    $scope.data.dateTo = new Date().toLocaleFormat();
-    $scope.data.registrationDate = new Date().toLocaleFormat();
+//    $scope.data.dateFrom = new Date().toLocaleFormat(); // toLocaleFormat() doesn't work on Chrome
+    $scope.data.dateFrom = moment(new Date()).format('YYYY-MM-DD');
+//    $scope.data.dateTo = new Date().toLocaleFormat(); // toLocaleFormat() doesn't work on Chrome
+    $scope.data.dateTo = moment(new Date()).format('YYYY-MM-DD');
+//    $scope.data.registrationDate = new Date().toLocaleFormat(); // toLocaleFormat() doesn't work on Chrome
+    $scope.data.registrationDate = moment(new Date()).format('YYYY-MM-DD');
 
     $scope.init = function () {
         LocationDataFactory.getAllLocations({}, function (response) {
@@ -498,26 +605,40 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
 
             MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
                 $scope.membershipCategories = response.membershipCategories;
-            },
-                    function (error) {
-                        //fail
-                        $scope.error = error;
-                    });
-        },
+                
+                SportDataFactory.getAllSports({}, function (response) {
+                    $scope.sportCategories = response.sports;
+                },
                 function (error) {
                     //fail
                     $scope.error = error;
                 });
+            },
+            function (error) {
+                //fail
+                $scope.error = error;
+            });
+        },
+        function (error) {
+            //fail
+            $scope.error = error;
+        });
     };
 
     $scope.ok = function () {
         // initialize data transfer object
         $scope.memberRegisterDto = {};
         $scope.memberRegisterDto = $scope.data;
+        $scope.memberRegisterDto.phonesDto = [];
         $scope.memberRegisterDto.bankAccounts = [];
         $scope.memberRegisterDto.emails = [];
         $scope.memberRegisterDto.location = $scope.location;
         $scope.memberRegisterDto.membershipCategory = $scope.membershipCategory.selected;
+        $scope.memberRegisterDto.sportCategory = $scope.sportCategory.selected;
+        
+        $scope.memberRegisterDto.phonesDto.push({category: 'PHONE', data: $scope.data.phonesTags});
+        $scope.memberRegisterDto.phonesDto.push({category: 'MOBILE', data: $scope.data.mobilesTags});
+        $scope.memberRegisterDto.phonesDto.push({category: 'FAX', data: $scope.data.faxesTags});
 
         for (var i = 0; i < $scope.data.bankAccountsTags.length; i++) {
             $scope.memberRegisterDto.bankAccounts.push({accountDescription: '', bankAccountType: 'ACCOUNT_NUMBER', accountNumber: $scope.data.bankAccountsTags[i].text, id: null});
@@ -539,83 +660,103 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
 
         MemberRegisterDataFactory.createMemberRegisterData($scope.memberRegisterDto, function (response) {
 
-            if (response.result === 200) {
-                console.log('Member register data is successfully created.');
+                if (response.result === 200) {
+                    console.log('Member register data is successfully created.');
 
-                toaster.pop({
-                    type: 'info',
-                    title: 'Uspješna izmjena stavke',
-                    body: "Podaci za odabranu stavku su uspješno kreirani.",
-                    showCloseButton: true,
-                    timeout: 5000
-                });
+                    toaster.pop({
+                        type: 'info',
+                        title: 'Uspješna izmjena stavke',
+                        body: "Podaci za odabranu stavku su uspješno kreirani.",
+                        showCloseButton: true,
+                        timeout: 5000
+                    });
 
-                MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
-                    //success
-                    $scope.memberRegisters = response.memberRegisters;
+                    MemberRegisterDataFactory.getAllMemberRegisters({}, function (response) {
+                        //success
+                        $scope.memberRegisters = response.memberRegisters;
 
-                    for (var n = 0; n < $scope.memberRegisters.length; n++) {
-                        $scope.memberRegisters[n].email = '';
-                        $scope.memberRegisters[n].bankAccount = '';
-                        // transform emails array to the one row string
-                        for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {
-                            $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
-                        }
+                        for (var n = 0; n < $scope.memberRegisters.length; n++) {
+                            $scope.memberRegisters[n].phone = '';
+                            $scope.memberRegisters[n].fax = '';
+                            $scope.memberRegisters[n].mobile = '';
+                            $scope.memberRegisters[n].email = '';
+                            $scope.memberRegisters[n].bankAccount = '';
+                            // transform emails array to the one row string
+                            for (var j = 0; j < $scope.memberRegisters[n].emails.length; j++) {
+                                $scope.memberRegisters[n].email += $scope.memberRegisters[n].emails[j].email + (j === $scope.memberRegisters[n].emails.length - 1 ? '' : ', ');
+                            }
 
-                        // transform bank accounts array to the one row string
-                        for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
-                            $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
-                        }
-                    }
+                            // transform bank accounts array to the one row string
+                            for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
+                                $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
+                            }
 
-                    LocationDataFactory.getAllLocations({}, function (response) {
-                        $scope.locations = response.locations;
-
-                        if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
-                            for (var i = 0; i < $scope.memberRegisters.length; i++) {
-                                $scope.memberRegisters[i].locations = $scope.locations;
+                            // transform phones array to the one row string
+                            for (var p = 0; p < $scope.memberRegisters[n].phones.length; p++) {
+                                switch ($scope.memberRegisters[n].phones[p].phoneType) {
+                                    case 'PHONE':
+                                        $scope.memberRegisters[n].phone += (_.isEmpty($scope.memberRegisters[n].phone) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                                        break;
+                                    case 'FAX':
+                                        $scope.memberRegisters[n].fax += (_.isEmpty($scope.memberRegisters[n].fax) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                                        break;
+                                    case 'MOBILE':
+                                        $scope.memberRegisters[n].mobile += (_.isEmpty($scope.memberRegisters[n].mobile) ? '' : ', ') + $scope.memberRegisters[n].phones[p].phoneNumber;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
 
-                        MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
-                            $scope.membershipCategories = response.membershipCategories;
+                        LocationDataFactory.getAllLocations({}, function (response) {
+                            $scope.locations = response.locations;
 
                             if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
                                 for (var i = 0; i < $scope.memberRegisters.length; i++) {
-                                    $scope.memberRegisters[i].membershipCategories = $scope.membershipCategories;
+                                    $scope.memberRegisters[i].locations = $scope.locations;
                                 }
                             }
-                        },
-                                function (error) {
-                                    //fail
-                                    $scope.error = error;
-                                });
-                    },
+
+                            MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
+                                $scope.membershipCategories = response.membershipCategories;
+
+                                if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
+                                    for (var i = 0; i < $scope.memberRegisters.length; i++) {
+                                        $scope.memberRegisters[i].membershipCategories = $scope.membershipCategories;
+                                    }
+                                }
+                            },
                             function (error) {
                                 //fail
                                 $scope.error = error;
                             });
-
-                    $rootScope.$broadcast('memberRegisters', $scope.memberRegisters);
-                },
+                        },
                         function (error) {
                             //fail
                             $scope.error = error;
                         });
-            }
-        },
-                function (error) {
-                    //fail
-                    $scope.error = error;
 
-                    toaster.pop({
-                        type: 'error',
-                        title: 'Greška',
-                        body: "Greška prilikom kreiranja stavke ",
-                        showCloseButton: true,
-                        timeout: 5000
+                        $rootScope.$broadcast('memberRegisters', $scope.memberRegisters);
+                    },
+                    function (error) {
+                        //fail
+                        $scope.error = error;
                     });
+                }
+            },
+            function (error) {
+                //fail
+                $scope.error = error;
+
+                toaster.pop({
+                    type: 'error',
+                    title: 'Greška',
+                    body: "Greška prilikom kreiranja stavke ",
+                    showCloseButton: true,
+                    timeout: 5000
                 });
+            });
 
         // close modal view
         $uibModalInstance.close();

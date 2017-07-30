@@ -201,6 +201,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 files: ['js/plugins/moment/moment.min.js']
                             },
                             {
+                                files: ['js/plugins/moment/2.17.1/moment-with-locales.min.js']
+                            },
+                            {
                                 serie: true,
                                 name: 'datatables',
                                 files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',

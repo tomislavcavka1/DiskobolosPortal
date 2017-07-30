@@ -36,13 +36,7 @@
                     <div class="validation-msg">
                         <p ng-show="memberRegister.location.$error.required">*Lokacija je obavezno polje</p>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Kontakt broj</label> <input data-mask="(+385) 99 999 9999" type="text"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.phone1">
-                        <span class="help-block">Primjer unosa: (+385) 99 999 9999</span>
-                    </div>
-                </div>
+                </div>                
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{ 'has-error': memberRegister.web.$invalid }">
                         <label>Web</label> 
@@ -53,12 +47,6 @@
                         </div>
                     </div>
                 </div>            
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>FAX</label> <input type="text" data-mask="(+385) 99 999 9999"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.fax">
-                        <span class="help-block">Primjer unosa: (+385) 99 999 9999</span>
-                    </div>
-                </div>
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{ 'has-error': memberRegister.identificationNumber.$invalid }">
                         <label>Matični broj</label> <input type="text" name="identificationNumber" ng-maxlength="10" ng-pattern="/^[0-9]*$/"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.identificationNumber">
@@ -155,6 +143,48 @@
                             </ui-select-choices>
                         </ui-select>
                         <input type="text"  ng-show="viewMode === 'READ_MODE_ONLY'" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.membershipCategory.description">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Vrsta sporta</label>
+                        <ui-select ng-hide="viewMode === 'READ_MODE_ONLY'" ng-model="sportCategory.selected" theme="bootstrap">
+                            <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="sportCategory in sportCategories | filter: $select.search">
+                                <div ng-bind-html="sportCategory.name | highlight: $select.search"></div>                            
+                            </ui-select-choices>
+                        </ui-select>
+                        <input type="text"  ng-show="viewMode === 'READ_MODE_ONLY'" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.sportCategory.name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" ng-class="{ 'has-error': memberRegister.phonesTags.$invalid }">
+                        <label>Kontakt broj</label>
+                        <tags-input type="text" name="phonesTags" allowed-tags-pattern="^((\d{2,4})/)?((\d{6,8})|(\d{2})-(\d{2})-(\d{2,4})|(\d{3,4})-(\d{3,4}))$" max-length="21" ng-disabled="viewMode === 'READ_MODE_ONLY'" ng-model="data.phonesTags"></tags-input>
+                        <span class="help-block">Primjer unosa: 999/9999-999</span>
+                        <div class="validation-msg">
+                            <p ng-show="memberRegister.phonesTags.$error.allowedTagsPattern">Unesite pravilno kontakt broj</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" ng-class="{ 'has-error': memberRegister.mobilesTags.$invalid }">
+                        <label>Broj mobilnog telefona</label>
+                        <tags-input type="text" name="mobilesTags" allowed-tags-pattern="^((\d{2,4})/)?((\d{6,8})|(\d{2})-(\d{2})-(\d{2,4})|(\d{3,4})-(\d{3,4}))$" max-length="21" ng-disabled="viewMode === 'READ_MODE_ONLY'" ng-model="data.mobilesTags"></tags-input>
+                        <span class="help-block">Primjer unosa: 999/9999-999</span>
+                        <div class="validation-msg">
+                            <p ng-show="memberRegister.mobilesTags.$error.allowedTagsPattern">Unesite pravilno broj mobilnog telefona</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" ng-class="{ 'has-error': memberRegister.faxesTags.$invalid }">
+                        <label>FAX</label>
+                        <tags-input type="text" name="faxesTags" allowed-tags-pattern="^((\d{2,4})/)?((\d{6,8})|(\d{2})-(\d{2})-(\d{2,4})|(\d{3,4})-(\d{3,4}))$" max-length="21" ng-disabled="viewMode === 'READ_MODE_ONLY'" ng-model="data.faxesTags"></tags-input>
+                        <span class="help-block">Primjer unosa: 999/9999-999</span>
+                        <div class="validation-msg">
+                            <p ng-show="memberRegister.faxesTags.$error.allowedTagsPattern">Unesite pravilno broj fax-a</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">

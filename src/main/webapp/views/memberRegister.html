@@ -11,7 +11,7 @@
 
                 <div class="ibox-content">
 
-                  <div class="row ibox-header">
+                    <div class="row ibox-header">
 
 
                         <div class="col-lg-12">
@@ -29,6 +29,7 @@
                                 <th>Adresa</th>
                                 <th>Lokacija</th>
                                 <th>Kontakt broj</th>
+                                <th>Mobilni telefon</th>
                                 <th>Web</th>
                                 <th>FAX</th>
                                 <th>Matični broj</th>
@@ -40,7 +41,8 @@
                                 <th>Datum mandata od</th>
                                 <th>Datum mandata do</th> 
                                 <th>Datum registriranja kluba</th> 
-                                <th>Kategorija članstva</th> 
+                                <th>Kategorija članstva</th>
+                                <th>Vrsta sporta</th>
                                 <th>Broj računa</th> 
                                 <th>Elektronička pošta</th> 
                                 <th class="not-export-col">promjeni/izbriši</th>
@@ -52,7 +54,8 @@
                                 <td>{{ memberRegister.name}}</td>
                                 <td>{{ memberRegister.location.address}}</td>
                                 <td>{{ memberRegister.location.city}}</td>
-                                <td>{{ memberRegister.phone1}}</td>
+                                <td>{{ memberRegister.phone}}</td>
+                                <td>{{ memberRegister.mobile}}</td>
                                 <td><a ng-href="https://{{ memberRegister.phone2}}" target="_blank">{{ memberRegister.phone2}}</a></td>
                                 <td>{{ memberRegister.fax}}</td>
                                 <td>{{ memberRegister.identificationNumber}}</td>
@@ -65,6 +68,7 @@
                                 <td>{{ memberRegister.dateTo}}</td>
                                 <td>{{ memberRegister.registrationDate}}</td>
                                 <td>{{ memberRegister.membershipCategory.description}}</td>
+                                <td>{{ memberRegister.sportCategory.name}}</td>
                                 <td>{{ memberRegister.bankAccount}}</td>
                                 <td>{{ memberRegister.email}}</td>
                                 <td class="edit-column">

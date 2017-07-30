@@ -292,6 +292,7 @@ sportModule.controller('EditSportModalCtrl', function (
                 });
         $uibModalInstance.close();
     };
+    
     $scope.findRemovedItems = function (nomenclatureOfSportsItems) {
         $scope.addedNomenclatureItems = [];
         $scope.removedNomenclatureItems = [];
@@ -321,6 +322,7 @@ sportModule.controller('EditSportModalCtrl', function (
 
         return $scope.removedNomenclatureItems;
     };
+    
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
@@ -345,6 +347,7 @@ sportModule.controller('CreateSportModalCtrl', function (
         $scope.sportDto.nomenclatureOfSports.push({category: 'NATIONAL_SPORTS_FEDERATION', data: $scope.data.nationalSportsFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'INTERNATIONAL_FEDERATION', data: $scope.data.internationalFederations});
         $scope.sportDto.nomenclatureOfSports.push({category: 'IOC_SPORTACCORD', data: $scope.data.iocSportAccords});
+        
         SportDataFactory.createSportData($scope.sportDto, function (response) {
 
             if (response.result === 200) {
