@@ -41,13 +41,13 @@ pdfViewerModule.controller('nomenclatureSportsController', function (
 
 pdfViewerModule.controller('evaluationSportsClubController', function (
         $scope) {
-    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.pdfUrl = 'pdf/vrednovanjaProgramaKlubovaPojedinacni.pdf';
     $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
 
 
     $scope.printbtn = function () {
 
-        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd = window.open('pdf/vrednovanjaProgramaKlubovaPojedinacni.pdf');
         $scope.wnd.print();
 
 
@@ -57,13 +57,13 @@ pdfViewerModule.controller('evaluationSportsClubController', function (
 
 pdfViewerModule.controller('evaluationManifestationController', function (
         $scope) {
-    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.pdfUrl = 'pdf/vrednovanjaProgramaPriredbe.pdf';
     $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
 
 
     $scope.printbtn = function () {
 
-        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd = window.open('pdf/vrednovanjaProgramaPriredbe.pdf');
         $scope.wnd.print();
 
 
@@ -73,13 +73,13 @@ pdfViewerModule.controller('evaluationManifestationController', function (
 
 pdfViewerModule.controller('evaluationTeamClubController', function (
         $scope) {
-    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.pdfUrl = 'pdf/vrednovanjaProgramaKlubovaEkipni.pdf';
     $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
 
 
     $scope.printbtn = function () {
 
-        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd = window.open('pdf/vrednovanjaProgramaKlubovaEkipni.pdf');
         $scope.wnd.print();
 
 
@@ -90,13 +90,13 @@ pdfViewerModule.controller('evaluationTeamClubController', function (
 
 pdfViewerModule.controller('evaluationCoachesController', function (
         $scope) {
-    $scope.pdfUrl = 'pdf/nomenklaturasportovi.pdf';
+    $scope.pdfUrl = 'pdf/vrednovanjaProgramaTrenera.pdf';
     $scope.httpHeaders = {Authorization: 'Bearer some-aleatory-token'};
 
 
     $scope.printbtn = function () {
 
-        $scope.wnd = window.open('pdf/nomenklaturasportovi.pdf');
+        $scope.wnd = window.open('pdf/vrednovanjaProgramaTrenera.pdf');
         $scope.wnd.print();
 
 
