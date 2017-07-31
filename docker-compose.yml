@@ -5,11 +5,13 @@ services:
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: postgres
-      POSTGRES_DB: postgres         
+      POSTGRES_DB: postgres
+    volumes:
+      - ./src/main/java/scripts/sql:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"  
   diskobolos:
-    image: elterinjo2112/diskobolos-core:0.1.0
+    image: elterinjo2112/diskobolos-core:0.1.1
     ports:
       - "8080:8080"
     links:
