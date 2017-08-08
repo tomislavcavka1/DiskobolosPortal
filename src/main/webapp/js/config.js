@@ -139,8 +139,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 url: "/membershipCategory",
                 templateUrl: "views/membershipCategory.html",
                 data: {
-                    pageTitle: 'Kategorije članstva',
-                    displayName: 'Kategorije članstva'
+                    pageTitle: 'Kategorija članstva',
+                    displayName: 'Kategorija članstva'
                 },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {

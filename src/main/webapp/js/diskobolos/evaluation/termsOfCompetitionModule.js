@@ -40,7 +40,7 @@ termsOfCompetitionModule.controller('termsOfCompetitionController', function (
             .withOption('order', [0, 'asc'])
             .withOption('stateSave', true)
             .withPaginationType('full_numbers')
-            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4], false))
+            .withButtons(dataTableUtils.getDataTableButtons([1, 2, 3, 4, 5, 6], false))
             .withOption('select', true)
             .withOption('responsive', true);
 

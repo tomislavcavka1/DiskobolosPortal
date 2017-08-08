@@ -239,6 +239,8 @@ tags-input .tags .tag-item {
         datatable 
 ************************/
 
+
+
 table td.edit-column {
     width: 100px;
     text-align: center;
@@ -298,6 +300,13 @@ table.dataTable thead .sorting::after {
 /*table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
     padding-right: 0 !important;
 }*/
+
+.html5buttons {
+    float: right;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 15px;
+}
 
 
 .html5buttons a {
