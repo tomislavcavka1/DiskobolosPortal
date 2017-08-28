@@ -53,10 +53,10 @@
                         <span class="help-block">Primjer unosa: 12345678</span>
                         <div class="validation-msg">
                             <p ng-show="memberRegister.identificationNumber.$error.pattern">Unesite pravilno matični broj</p>
-                            <p ng-show="memberRegister.identificationNumber.$error.maxlength && !memberRegister.identificationNumber.$error.pattern">Največi dopušteni broj znamenki je 10</p>
+                            <p ng-show="memberRegister.identificationNumber.$error.maxlength && !memberRegister.identificationNumber.$error.pattern">Najveći dopušteni broj znamenki je 10</p>
                         </div>
                     </div>
-                </div>
+                </div> 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>OIB</label> <input type="text" data-mask="99999999999"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.oib">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{ 'has-error': memberRegister.chairman.$invalid }">
-                        <label>Predsjednik</label> <input type="text" name="chairman" ng-pattern="/^[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | .-]*[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | .-][A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | .-]*$/" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.chairman">
+                        <label>Predsjednik</label> <input type="text" name="chairman" ng-pattern="/^[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | 0-9 .-/()-]*[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | 0-9 .-/()-][A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | 0-9 .-/()-]*$/" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.chairman">
                         <div class="validation-msg">
                             <p ng-show="memberRegister.chairman.$error.pattern">Unesite pravilno ime osobe</p>
                         </div>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{ 'has-error': memberRegister.secretary.$invalid }">
-                        <label>Tajnik</label> <input type="text" name="secretary" ng-pattern="/^[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | .-]*[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | .-][A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | .-]*$/"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.secretary">
+                        <label>Tajnik</label> <input type="text" name="secretary" ng-pattern="/^[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | 0-9 .-/()-]*[A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | 0-9 .-/()-][A-Za-z | čćdžđšžljnjČĆDŽĐŠŽLJNJ | 0-9 .-/()-]*$/"  ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.secretary">
                         <div class="validation-msg">
                             <p ng-show="memberRegister.secretary.$error.pattern">Unesite pravilno ime osobe</p>
                         </div>

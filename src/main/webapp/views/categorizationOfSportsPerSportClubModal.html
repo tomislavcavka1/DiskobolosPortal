@@ -12,13 +12,12 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToNumberOfRegisteredClubsInNationalFederation">
                                     <div class="panel-heading">
-                                        1. Kategorizacija prema broju registriranih klubova u nacionalnom savezu
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToNumberOfRegisteredClubsInNationalFederation">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                        <div class="form-group">
                                             <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
@@ -31,13 +30,12 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationByTypeOfSport">
                                     <div class="panel-heading">
-                                        2. Kategorizacija prema vrsti športa
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationByTypeOfSport">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                        <div class="form-group">
                                             <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
@@ -50,13 +48,12 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToAgeCategories">
                                     <div class="panel-heading">
-                                        3. Kategorizacija prema zastupljenosti dobnih kategorija
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToAgeCategories">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                        <div class="form-group">
                                             <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
@@ -69,14 +66,13 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToRankOfCompetitionSystem">
                                     <div class="panel-heading">
-                                        4. Kategorizacija prema rangu sustava natjecanja
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToRankOfCompetitionSystem">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
-                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                        <div class="form-group">
+                                           <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
                                                 </label>
@@ -93,14 +89,13 @@
                         <div class="row">
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToNumberOfTeamMembersCompeting">
                                     <div class="panel-heading">
-                                        5. Kategorizacija prema broju članova ekipe koja se natječe
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToNumberOfTeamMembersCompeting">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
-                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                        <div class="form-group">
+                                           <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
                                                 </label>
@@ -112,14 +107,13 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToMassInSportsSchools">
                                     <div class="panel-heading">
-                                        6. Kategorizacija prema masovnosti u športskim školama
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToMassInSportsSchools">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
-                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                        <div class="form-group">
+                                           <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
                                                 </label>
@@ -131,14 +125,13 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToProfessionalStaff">
                                     <div class="panel-heading">
-                                        7. Kategorizacija prema stručnim kadrovima
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToProfessionalStaff">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
-                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                        <div class="form-group">
+                                           <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
                                                 </label>
@@ -150,13 +143,12 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in categorizationAccordingToTraditionOfTownZadar">
                                     <div class="panel-heading">
-                                        8.Kategorizacija prema tradiciji Udruge u Gradu Zadru
+                                        {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in categorizationAccordingToTraditionOfTownZadar">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
+                                        <div class="form-group">
                                             <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
@@ -174,14 +166,13 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-lg-3">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-repeat="evaluationQuestion in cofficiencyOfSportsCategory">
                                     <div class="panel-heading">
-                                        9.Koeficijnt kategorije sporta
+                                       {{evaluationQuestion.questionDef.label}}
                                     </div>
                                     <div class="panel-body">
-                                        <div class="form-group" ng-repeat="evaluationQuestion in cofficiencyOfSportsCategory">
-                                            <label class="m-b">{{evaluationQuestion.questionDef.label}}</label>
-                                            <div ng-repeat="item in evaluationQuestion.questionDef.items">
+                                        <div class="form-group">
+                                           <div ng-repeat="item in evaluationQuestion.questionDef.items">
                                                 <label ng-init="answers[evaluationQuestion.questionDef.question] = evaluationQuestion.questionDef.initValue.answer.id">
                                                     <input icheck type="radio" name="{{evaluationQuestion.question.question}}" ng-model="answers[evaluationQuestion.questionDef.question]" ng-change="calculateTotal(evaluationQuestion.questionDef.question)" ng-value="item.id"/> {{item.label}}
                                                 </label>
