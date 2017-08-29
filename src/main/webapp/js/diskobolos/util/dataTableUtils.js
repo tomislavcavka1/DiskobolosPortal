@@ -114,12 +114,9 @@ dataTableUtilsModule.factory('dataTableUtils', function () {
                                     width: 900
                                 }
 
-                            ]},
-                                );
+                            ]}
+                          );
                     }
-
-
-
                 });
             } else {
                 buttonsOptions.push({extend: 'pdfHtml5', text: '<i class="fa fa-file-pdf-o"></i> PDF', exportOptions: {
@@ -135,8 +132,8 @@ dataTableUtilsModule.factory('dataTableUtils', function () {
                                     width: 500
                                 }
 
-                            ]},
-                                );
+                            ]}
+                         );
                     }
                 });
             }
