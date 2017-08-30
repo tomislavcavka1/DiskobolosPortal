@@ -1,5 +1,5 @@
 [
-{
+    {
         "id": 0,
         "naziv": "Atletski stadion na Višnjiku",
         "upravitelj": "",
@@ -8,8 +8,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/atletski_stadion_visnjik.jpg"
-        },
-{
+    },
+    {
         "id": 1,
         "naziv": "Bazen Kolovare",
         "upravitelj": "",
@@ -18,8 +18,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Bazen_Kolovare.jpg"
-},
-{
+    },
+    {
         "id": 2,
         "naziv": "Bočalište Crvene kuće u Zadru",
         "upravitelj": "",
@@ -28,8 +28,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Bocaliste_Crvene_kuce.jpg"
-},
-{
+    },
+    {
         "id": 3,
         "naziv": "Đil",
         "upravitelj": "",
@@ -38,8 +38,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/dil.jpg"
-},
-{
+    },
+    {
         "id": 4,
         "naziv": "Dvorana Športske škole Loptica ",
         "upravitelj": "Dječja sportska škola Loptica ",
@@ -48,8 +48,8 @@
         "email": "lopticazd@gmail.com",
         "web": "http://loptica-zadar.webnode.hr",
         "slika": "../img/sportsBuildings/Dvorana_loptica.jpg"
-},
-{
+    },
+    {
         "id": 5,
         "naziv": "Dvorana ŠRC Višnjik ",
         "upravitelj": "",
@@ -58,7 +58,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Dvorana_SRC_Visnjik.jpg"
-}, {
+    }, {
         "id": 6,
         "naziv": "Dvorana STK Donat ",
         "upravitelj": "",
@@ -67,7 +67,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Dvorana_STK_Donat.jpg"
-}, {
+    }, {
         "id": 7,
         "naziv": "Dvorana Teakwondo klub Zadar",
         "upravitelj": "",
@@ -76,7 +76,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Dvorana_Teakwondo_kluba_Zadar.jpg"
-}, {
+    }, {
         "id": 8,
         "naziv": "Dvorana Vodovod ",
         "upravitelj": "Vodovod Zadar",
@@ -85,7 +85,7 @@
         "email": "vodovod1@vodovod-zadar.hr ",
         "web": "http://www.vodovod-zadar.hr ",
         "slika": "../img/sportsBuildings/vodovod.jpg"
-}, {
+    }, {
         "id": 9,
         "naziv": "Dvorana Jazine ",
         "upravitelj": "KK ZADAR ",
@@ -94,7 +94,7 @@
         "email": "info@kkzadar.net ",
         "web": "http://www.kkzadar.net ",
         "slika": "../img/sportsBuildings/Dvorana_Jazine.jpg"
-}, {
+    }, {
         "id": 10,
         "naziv": "Dvorana Mocire ",
         "upravitelj": "",
@@ -103,7 +103,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Dvorana_Mocire.jpg"
-}, {
+    }, {
         "id": 11,
         "naziv": "Dvorana Višnjik ",
         "upravitelj": "ŠPORTSKI CENTAR VIŠNJIK ",
@@ -112,7 +112,7 @@
         "email": "info@visnjik.hr ",
         "web": "http://peka.visnjik.hr/hr/  ",
         "slika": "../img/sportsBuildings/Dvorana_Visnjik.jpg"
-}, {
+    }, {
         "id": 12,
         "naziv": "Fitness Omnia ",
         "upravitelj": "Fitness Omnia ",
@@ -121,7 +121,7 @@
         "email": "omniarezervacije@gmail.com",
         "web": "http://www.omnia-fitness.com",
         "slika": "../img/sportsBuildings/Fitness_centar_Omnia.jpg"
-}, {
+    }, {
         "id": 13,
         "naziv": "Igralište Stanko Baričević Šole",
         "upravitelj": "",
@@ -130,7 +130,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Igraliste_Stanko_Baricevic_Sole_Crno.jpg"
-}, {
+    }, {
         "id": 14,
         "naziv": "Kuglana Mocire",
         "upravitelj": "",
@@ -139,7 +139,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Kuglana_Mocire.jpg"
-}, {
+    }, {
         "id": 15,
         "naziv": "Nogometno igralište Bagat",
         "upravitelj": "",
@@ -148,7 +148,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Nogometno_igraliste_Bagat.jpg"
-}, {
+    }, {
         "id": 16,
         "naziv": "Nogometno igralište Sima",
         "upravitelj": "",
@@ -157,7 +157,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Nogometno_igraliste_Arbanasi.jpg"
-}, {
+    }, {
         "id": 17,
         "naziv": "Plivalište Višnjik",
         "upravitelj": "ŠPORTSKI CENTAR VIŠNJIK",
@@ -166,7 +166,7 @@
         "email": "info@visnjik.hr",
         "web": "http://peka.visnjik.hr/hr/ ",
         "slika": "../img/sportsBuildings/Plivaliste_Visnjik.jpg"
-}, {
+    }, {
         "id": 18,
         "naziv": "Ravnice",
         "upravitelj": "",
@@ -175,7 +175,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Ravnice.jpg"
-}, {
+    }, {
         "id": 19,
         "naziv": "Šepurine",
         "upravitelj": "",
@@ -184,7 +184,7 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/sepurine.jpg"
-}, {
+    }, {
         "id": 20,
         "naziv": " ŠRC Franko Lisica",
         "upravitelj": "",
@@ -193,8 +193,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Igraliste_SRC_Franka_Lisice.jpg"
-}, {
-"id": 21,
+    }, {
+        "id": 21,
         "naziv": "Stadion NK Zadar",
         "upravitelj": "",
         "adresa": "Stadion Stanovi, 23000 Zadar",
@@ -202,8 +202,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Stadion_NK_Zadar.jpg"
-}, {
-"id": 22,
+    }, {
+        "id": 22,
         "naziv": "Streljana Žmirići",
         "upravitelj": "",
         "adresa": "Put Nina, 23000 Zadar",
@@ -211,8 +211,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Streljana_Zmirici.jpg"
-}, {
-"id": 23,
+    }, {
+        "id": 23,
         "naziv": "Teniski tereni Zadar",
         "upravitelj": "",
         "adresa": "Borik, Ul. Tina Ujevića 32, 23000 Zadar",
@@ -220,8 +220,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Teniski_tereni_Zadar.jpg"
-}, {
-"id": 24,
+    }, {
+        "id": 24,
         "naziv": "Uskok",
         "upravitelj": "",
         "adresa": "Obala kneza Trpimira 55, 23000, Zadar ",
@@ -229,8 +229,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Uskok.jpg"
-}, {
-"id": 25,
+    }, {
+        "id": 25,
         "naziv": "Veslački dom",
         "upravitelj": "",
         "adresa": "Obala kneza Branimira 6A, 23000, Zadar",
@@ -238,8 +238,8 @@
         "email": "",
         "web": "",
         "slika": "../img/sportsBuildings/Veslacki_dom.jpg"
-}, {
-"id": 26,
+    }, {
+        "id": 26,
         "naziv": "Dvorana Krešimir Ćosić ",
         "upravitelj": "ŠPORTSKI CENTAR VIŠNJIK ",
         "adresa": "Splitska 3, 23000 Zadar",
@@ -247,5 +247,5 @@
         "email": "info@visnjik.hr ",
         "web": "http://peka.visnjik.hr/hr/ ",
         "slika": "../img/sportsBuildings/dvorana_kresimir_cosic.jpg"
-}
+    }
 ]

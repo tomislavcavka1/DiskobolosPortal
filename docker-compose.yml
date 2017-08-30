@@ -1,17 +1,15 @@
 version: '2'
 services:  
   postgresql:
-    image: postgres
+    image: elterinjo2112/diskobolos-db:0.1.0
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
-    volumes:
-      - ./src/main/java/scripts/sql:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"  
-  diskobolos:
-    image: elterinjo2112/diskobolos-core:0.1.1
+  diskobolos-core:
+    image: elterinjo2112/diskobolos-core:0.1.2
     ports:
       - "8080:8080"
     links:
@@ -20,3 +18,11 @@ services:
       - postgresql
     environment:
       LOGGING_LEVEL: DEBUG
+  diskobolos-portal:
+    image: elterinjo2112/diskobolos-portal:0.1.0
+    ports:
+      - "8081:8080"
+    links:
+      - diskobolos-core
+    depends_on:
+      - diskobolos-core
