@@ -198,9 +198,9 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': memberRegister.email.$invalid }">
                         <label>Elektronička pošta</label>
-                        <tags-input type="email"  ng-disabled="viewMode === 'READ_MODE_ONLY'" name="text" ng-model="data.emailsTags"></tags-input>
+                        <tags-input type="email"  ng-disabled="viewMode === 'READ_MODE_ONLY'" name="email" allowed-tags-pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" ng-model="data.emailsTags"></tags-input>
                         <span class="help-block">Primjer unosa: imeprezime@gmail.com</span>
                         <div class="validation-msg">
                             <p ng-show="memberRegister.email.$error.pattern">Unesite pravilno elektroničku poštu</p>

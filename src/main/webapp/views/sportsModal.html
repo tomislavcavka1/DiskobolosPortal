@@ -17,18 +17,9 @@
                 </div>
             </div>
 
-
-            <div class="form-group valid" ng-class="{ 'has-error' : sport.nationalSportsFederations.$invalid}">
+            <div class="form-group">
                 <label>Nacionalni sportski savez</label>
-                <tags-input type="text" name="nationalSportsFederations" placeholder="Dodaj stavku" 
-                            min-length="2" max-length="10"
-                            min-tags="1"
-                            allowed-tags-pattern="^[a-zA-Z]" ng-model="data.nationalSportsFederations"></tags-input>
-                <div class="validation-msg">            
-                    <p ng-show="sport.nationalSportsFederations.$error.minTags">Minimalni broj tagova je 1!</p>
-                     <p ng-show="sport.nationalSportsFederations.$error.allowedTagsPattern">Minimalni broj tagova je 1!</p>
-                </div>
-
+                <tags-input type="text" ng-model="data.nationalSportsFederations"></tags-input>
             </div>
 
             <div class="form-group">

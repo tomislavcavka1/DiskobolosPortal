@@ -148,35 +148,32 @@
     });
 
     $('#vrste-vozila').change(function () {
+      
 
-        var str = $('.adp-summary span').first().html();
+        var str = $('.adp-summary span').first().html().replace(',', '.');
         var spaceChar = str.indexOf(" ");
         var value = str.substring(0, spaceChar);
         var value2 = $('#vrste-vozila').val();
         var total = (value * value2).toFixed(2);
         $('#kilometers').val(total);
+     
 
         $('.adp-fullwidth tr td').click(function () {
 
             setTimeout(function () {
 
-                var str = $('.adp-summary span').first().html();
+                var str = $('.adp-summary span').first().html().replace(',', '.');
                 var spaceChar = str.indexOf(" ");
                 var value = str.substring(0, spaceChar);
                 var value2 = $('#vrste-vozila').val();
                 var total = (value * value2).toFixed(2);
-                $('#kilometers').val(total);
+                $('#kilometers').val(total).replace('.', ',');
 
             }, 200);
         });
     });
 
-    $('#add').click(function () {
-
-
-
-    });
-
+   
 
 
 </script>
