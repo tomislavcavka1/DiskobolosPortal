@@ -45,7 +45,9 @@ sportModule.controller('sportController', function (
 
         SportDataFactory.getAllSports({}, function (response) {
              //success
-             $scope.sports = response.sports;
+             $scope.sports = _.filter(response.sports, function (obj) {
+                return obj.name !== 'UNKNOWN';
+             });
              if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                  for (var i = 0; i < $scope.sports.length; i++) {
@@ -137,7 +139,9 @@ sportModule.controller('sportController', function (
                                 });
                                 SportDataFactory.getAllSports({}, function (response) {
                                     //success
-                                    $scope.sports = response.sports;
+                                    $scope.sports = _.filter(response.sports, function (obj) {
+                                        return obj.name !== 'UNKNOWN';
+                                    });
                                     if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                                         for (var i = 0; i < $scope.sports.length; i++) {
@@ -244,7 +248,9 @@ sportModule.controller('EditSportModalCtrl', function (
                 });
                 SportDataFactory.getAllSports({}, function (response) {
                     //success
-                    $scope.sports = response.sports;
+                    $scope.sports = _.filter(response.sports, function (obj) {
+                        return obj.name !== 'UNKNOWN';
+                    });
                     if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                         for (var i = 0; i < $scope.sports.length; i++) {
@@ -361,7 +367,9 @@ sportModule.controller('CreateSportModalCtrl', function (
                 });
                 SportDataFactory.getAllSports({}, function (response) {
                     //success
-                    $scope.sports = response.sports;
+                    $scope.sports = _.filter(response.sports, function (obj) {
+                        return obj.name !== 'UNKNOWN';
+                    });
                     if (_.isArray($scope.sports) && $scope.sports.length > 0) {
 
                         for (var i = 0; i < $scope.sports.length; i++) {

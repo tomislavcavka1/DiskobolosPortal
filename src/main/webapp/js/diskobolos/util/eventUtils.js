@@ -21,5 +21,3 @@ eventUtilsModule.directive('ngEnter', function () {
         });
     };
 });
-
-

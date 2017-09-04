@@ -46,12 +46,14 @@ membershipCategoryModule.controller('membershipCategoryController', function (
 
         MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
             //success
-            $scope.membershipCategories = response.membershipCategories;
+            $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                return obj.description !== 'UNKNOWN';
+            });
         },
-                function (error) {
-                    //fail
-                    $scope.error = error;
-                });
+        function (error) {
+            //fail
+            $scope.error = error;
+        });
     };
 
     $scope.editData = function (id) {
@@ -123,7 +125,9 @@ membershipCategoryModule.controller('membershipCategoryController', function (
 
                                 MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
                                     //success
-                                    $scope.membershipCategories = response.membershipCategories;
+                                    $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                                        return obj.description !== 'UNKNOWN';
+                                    });
                                     $rootScope.$broadcast('membershipCategories', $scope.membershipCategories);
                                 },
                                         function (error) {
@@ -185,7 +189,9 @@ membershipCategoryModule.controller('EditMembershipModalCtrl', function (
 
                 MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
                     //success
-                    $scope.membershipCategories = response.membershipCategories;
+                    $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                        return obj.description !== 'UNKNOWN';
+                    });
                     $rootScope.$broadcast('membershipCategories', $scope.membershipCategories);
                 },
                         function (error) {
@@ -245,7 +251,9 @@ membershipCategoryModule.controller('CreateMembershipModalCtrl', function (
 
                 MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
                     //success
-                    $scope.membershipCategories = response.membershipCategories;
+                    $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                        return obj.description !== 'UNKNOWN';
+                    });
                     $rootScope.$broadcast('membershipCategories', $scope.membershipCategories);
                 },
                         function (error) {

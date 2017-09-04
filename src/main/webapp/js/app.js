@@ -36,9 +36,8 @@
         'geographicalOverviewOfMemberRegisterModule',
         'colorUtilsModule',
         'pdfViewerModule',
-        'evaluationFormsModule'
-      
-        
+        'evaluationFormsModule',
+        'inputFieldsUtilsModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad

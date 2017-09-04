@@ -136,7 +136,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Kategorija članstva</label>
-                        <ui-select ng-hide="viewMode === 'READ_MODE_ONLY'" ng-model="membershipCategory.selected" theme="bootstrap">
+                        <ui-select ng-hide="viewMode === 'READ_MODE_ONLY'" ng-model="membershipCategory.selected" theme="bootstrap" on-select="loadSports($item, $model)">
                             <ui-select-match>{{$select.selected.description}}</ui-select-match>
                             <ui-select-choices repeat="membershipCategory in membershipCategories | filter: $select.search">
                                 <div ng-bind-html="membershipCategory.description | highlight: $select.search"></div>                            
@@ -154,7 +154,7 @@
                                 <div ng-bind-html="sportCategory.name | highlight: $select.search"></div>                            
                             </ui-select-choices>
                         </ui-select>
-                        <input type="text"  ng-show="viewMode === 'READ_MODE_ONLY'" ng-disabled="viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.sportCategory.name">
+                        <input type="text"  ng-show="viewMode === 'READ_MODE_ONLY'" ng-disabled="sportCategoryDisabled || viewMode === 'READ_MODE_ONLY'" class="form-control" ng-model="data.sportCategory.name">
                     </div>
                 </div>
                 <div class="col-md-6">

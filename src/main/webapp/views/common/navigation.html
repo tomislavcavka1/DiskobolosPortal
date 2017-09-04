@@ -9,9 +9,9 @@
                     <a uib-dropdown-toggle href>
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold"><p ng-bind="authenticatedUser.username"></p></strong>
+                                <strong class="font-bold"><p ng-bind="authenticatedUser.username"></p></strong><b class="caret"></b>
                             </span>
-                            <span class="text-muted text-xs block"><p ng-bind="authenticatedUser.role.authority"></p><b class="caret"></b></span>
+                            <!--<span class="text-muted text-xs block"><p ng-bind="authenticatedUser.role.authority"></p><b class="caret"></b></span>-->
                         </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
@@ -37,7 +37,7 @@
             <li ui-sref-active="active">
                 <a ui-sref="content.publicCall"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="nav-label">Javni poziv - Sport</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('evaluation')}">
+            <li ng-show="authenticatedUser.role.authority === 'ROLE_ADMIN'" ng-class="{active: $state.includes('evaluation')}">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Vrednovanje</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('evaluation')}">
                     <li ui-sref-active="active"><a ui-sref="evaluation.termsOfCompetition">Uvjeti natječaja</a></li>
@@ -80,9 +80,9 @@
                 <a ui-sref="content.geographicalOverviewOfMemberRegisters"><i class="fa fa-map-marker"></i> <span class="nav-label">Prikaz članica na karti</span> </a>
             </li>
 
-            <li ui-sref-active="active">
-                <a ui-sref="content.newModule"><i class="fa fa-map-marker"></i> <span class="nav-label">New module</span> </a>
-            </li>
+            <!--            <li ui-sref-active="active">
+                            <a ui-sref="content.newModule"><i class="fa fa-map-marker"></i> <span class="nav-label">New module</span> </a>
+                        </li>-->
 
         </ul>   
 

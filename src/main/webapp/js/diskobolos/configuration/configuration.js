@@ -7,7 +7,7 @@ var configuration = angular.module('configuration', []);
      
 configuration.constant('AppConstants', {
      ServerName: {
-        hostUrl: 'http://192.168.99.100:8080/'
+        hostUrl: 'http://localhost:8080/'
     },
     CrudActions: {
         create: "CREATE",
@@ -21,7 +21,8 @@ configuration.constant('AppConstants', {
 
 configuration.constant('AUTH_EVENTS', {
   notAuthenticated: 'auth-not-authenticated',
-  notAuthorized: 'auth-not-authorized'
+  notAuthorized: 'auth-not-authorized',
+  conflict: 'conflict'
 });
  
 configuration.constant('USER_ROLES', {
@@ -30,11 +31,11 @@ configuration.constant('USER_ROLES', {
 });
 
 configuration.constant('ROLE_PERMISSION_LEVEL', {
-  veryHigh: 'VERY_HIGH',
-  high: 'HIGH',
-  medium: 'MEDIUM',
-  small: 'SMALL',
-  verySmall: 'VERY_SMALL'
+  veryHigh: 100,
+  high: 80,
+  medium: 50,
+  small: 30,
+  verySmall: 10
 });
 
 

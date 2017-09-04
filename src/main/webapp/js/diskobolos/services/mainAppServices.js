@@ -33,7 +33,7 @@ mainAppServices.factory('MemberRegisterDataFactory', ['$resource', 'AppConstants
             'editSelectedMemberRegister': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/edit'},
             'createMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/create'},
             'deleteMemberRegisterData': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/delete'},
-            'getMemberRegisterById': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/getMemberRegisterById/:memberRegisterId', params:{memberRegisterId: '@memberRegisterId'}}
+            'getMemberRegisterById': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/memberRegister/getMemberRegisterById/:memberRegisterId', params: {memberRegisterId: '@memberRegisterId'}}
         });
     }]);
 
@@ -50,10 +50,10 @@ mainAppServices.factory('EvaluationDataFactory', ['$resource', 'AppConstants', f
         return $resource('', {}, {
             'getAllEvaluationQuestions': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/all', isArray: false},
             'storeEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/create'},
-            'fetchMemberRegistersWithAssociatedEvaluations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchMemberRegistersWithAssociatedEvaluations/:questionnaireType', params:{questionnaireType: '@questionnaireType'}, isArray: false},
-            'findAllByMemberRegisterAndQuestionnaireType': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/findAllByMemberRegisterAndQuestionnaireType/:memberRegisterId/:questionnaireType', params:{memberRegisterId: '@memberRegisterId', questionnaireType: '@questionnaireType'}},
+            'fetchMemberRegistersWithAssociatedEvaluations': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/fetchMemberRegistersWithAssociatedEvaluations/:questionnaireType', params: {questionnaireType: '@questionnaireType'}, isArray: false},
+            'findAllByMemberRegisterAndQuestionnaireType': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/findAllByMemberRegisterAndQuestionnaireType/:memberRegisterId/:questionnaireType', params: {memberRegisterId: '@memberRegisterId', questionnaireType: '@questionnaireType'}},
             'editEvaluationAnswers': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/evaluation/edit'},
-            'findAllByQuestionnaireType': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/findAllByQuestionnaireType/:questionnaireType', params:{questionnaireType: '@questionnaireType'}}
+            'findAllByQuestionnaireType': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/evaluation/findAllByQuestionnaireType/:questionnaireType', params: {questionnaireType: '@questionnaireType'}}
         });
     }]);
 
@@ -77,39 +77,40 @@ mainAppServices.service('sessionStorageService', ['$window', '$q', '$http', func
             $window.localStorage.setItem('jwtToken', token);
             // Set the token as header for your requests!
             $http.defaults.headers.common['X-Auth-Token'] = {"Authorization": token};
-        },
-        this.getJwtToken = function () {
-            if ($window.localStorage.getItem('jwtToken')) {                    
-                return $q.when($window.localStorage.getItem('jwtToken'));
-            } else {
-                var deferred = $q.defer();
-                deferred.reject('No Login User');
-                return deferred.promise;
-            }
-        };
+            },
+            this.getJwtToken = function () {
+                if ($window.localStorage.getItem('jwtToken')) {
+                    return $q.when($window.localStorage.getItem('jwtToken'));
+                } else {
+                    var deferred = $q.defer();
+                    deferred.reject('No Login User');
+                    return deferred.promise;
+                }
+            };
         this.removeJwtToken = function () {
             $http.defaults.headers.common['X-Auth-Token'] = undefined;
             $window.localStorage.removeItem('jwtToken');
-        };        
-}]);
+        };
+    }]);
 
 // intercepts HTTP reponses errors during authentication
 mainAppServices.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
-  return {
-    responseError: function (response) {
-      $rootScope.$broadcast({
-        401: AUTH_EVENTS.notAuthenticated,
-        403: AUTH_EVENTS.notAuthorized
-      }[response.status], response);
-      return $q.reject(response);
-    }
-  };
+    return {
+        responseError: function (response) {
+            $rootScope.$broadcast({
+                401: AUTH_EVENTS.notAuthenticated,
+                403: AUTH_EVENTS.notAuthorized,
+                409: AUTH_EVENTS.conflict
+            }[response.status], response);
+            return $q.reject(response);
+        }
+    };
 });
- 
+
 mainAppServices.config(function ($httpProvider) {
-  $httpProvider.interceptors.push('AuthInterceptor');
-  
-  $httpProvider.interceptors.push(['$q', '$location', '$window', function($q, $location, $window) {
+    $httpProvider.interceptors.push('AuthInterceptor');
+
+    $httpProvider.interceptors.push(['$q', '$location', '$window', function ($q, $location, $window) {
             return {
                 'request': function (config) {
                     config.headers = config.headers || {};
@@ -118,8 +119,8 @@ mainAppServices.config(function ($httpProvider) {
                     }
                     return config;
                 },
-                'responseError': function(response) {
-                    if(response.status === 401) {
+                'responseError': function (response) {
+                    if (response.status === 401) {
                         $location.path('/login');
                     }
                     return $q.reject(response);

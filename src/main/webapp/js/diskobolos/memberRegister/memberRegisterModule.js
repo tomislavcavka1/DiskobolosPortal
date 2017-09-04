@@ -108,6 +108,14 @@ memberRegisterModule.controller('memberRegisterController', function (
                 for (var k = 0; k < $scope.memberRegisters[n].bankAccounts.length; k++) {
                     $scope.memberRegisters[n].bankAccount += $scope.memberRegisters[n].bankAccounts[k].accountNumber + (k === $scope.memberRegisters[n].bankAccounts.length - 1 ? '' : ', ');
                 }
+                
+                if($scope.memberRegisters[n].membershipCategory.description === 'UNKNOWN') {
+                    $scope.memberRegisters[n].membershipCategory.description = '';
+                }
+                
+                if($scope.memberRegisters[n].sportCategory.name === 'UNKNOWN') {
+                    $scope.memberRegisters[n].sportCategory.name = '';
+                }
             }
 
             LocationDataFactory.getAllLocations({}, function (response) {
@@ -120,7 +128,9 @@ memberRegisterModule.controller('memberRegisterController', function (
                 }
 
                 MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
-                    $scope.membershipCategories = response.membershipCategories;
+                    $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                       return obj.description !== 'UNKNOWN';
+                    });
 
                     if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
                         for (var i = 0; i < $scope.memberRegisters.length; i++) {
@@ -143,13 +153,13 @@ memberRegisterModule.controller('memberRegisterController', function (
                     $scope.error = error;
                 });
     };
-
+    
     $scope.editData = function (id) {
 
         $rootScope.selectedMemberRegister = _.find($scope.memberRegisters, function (obj) {
             return obj.id === id;
         });
-
+        
         //broadcast selected member register item
         $rootScope.$broadcast('selectedMemberRegister', $rootScope.selectedMemberRegister);
 
@@ -186,7 +196,7 @@ memberRegisterModule.controller('memberRegisterController', function (
         $rootScope.selectedMemberRegister = _.find($scope.memberRegisters, function (obj) {
             return obj.id === id;
         });
-
+        
         //broadcast selected member register item
         $rootScope.$broadcast('selectedMemberRegister', $rootScope.selectedMemberRegister);
 
@@ -229,7 +239,9 @@ memberRegisterModule.controller('memberRegisterController', function (
                                         }
 
                                         MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
-                                            $scope.membershipCategories = response.membershipCategories;
+                                            $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                                                return obj.description !== 'UNKNOWN';
+                                            });
 
                                             if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
                                                 for (var i = 0; i < $scope.memberRegisters.length; i++) {
@@ -285,7 +297,8 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
         MemberRegisterDataFactory,
         toaster,
         LocationDataFactory,
-        MembershipCategoryDataFactory) {
+        MembershipCategoryDataFactory,
+        SportDataFactory) {
 
     $scope.crudAction = AppConstants.CrudActions['edit'];
 
@@ -320,7 +333,23 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
 
     if (_.isArray($scope.data.membershipCategories) && $scope.data.membershipCategories.length > 0) {
         for (var i = 0; i < $scope.data.membershipCategories.length; i++) {
-            $scope.membershipCategories.push($scope.data.membershipCategories[i]);
+            if($scope.data.membershipCategories[i].description !== 'UNKNOWN') {
+                $scope.membershipCategories.push($scope.data.membershipCategories[i]);
+            }
+            
+            if($scope.data.membershipCategories[i].description === 'SPORT') {
+                SportDataFactory.getAllSports({}, function (response) {
+                    $scope.sportCategories = _.filter(response.sports, function (obj) {
+                        return obj.name !== 'UNKNOWN';
+                    });
+                    $scope.sportCategoryDisabled = false;
+                },
+                function (error) {
+                    //fail
+                    $scope.sportCategoryDisabled = true;
+                    $scope.error = error;
+                });
+            }
         }
     }
 
@@ -356,6 +385,26 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
             }
         }
     }
+    
+    $scope.loadSports = function($item, $model) {
+        
+        if($item.description === 'SPORT') {
+            SportDataFactory.getAllSports({}, function (response) {
+                $scope.sportCategories = _.filter(response.sports, function (obj) {
+                    return obj.name !== 'UNKNOWN';
+                });
+                $scope.sportCategoryDisabled = false;
+            },
+            function (error) {
+                //fail
+                $scope.sportCategoryDisabled = true;
+                $scope.error = error;
+            });
+        }
+         
+         $scope.sportCategory.selected = '';
+         $scope.sportCategories = [];
+    };
 
     $scope.ok = function () {
         // initialize data transfer object
@@ -364,6 +413,9 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
         $scope.memberRegisterDto.phonesDto = [];
         $scope.memberRegisterDto.location = $scope.location.selected;
         $scope.memberRegisterDto.membershipCategory = $scope.membershipCategory.selected;
+        if(!_.isUndefined($scope.sportCategory.selected) && !_.isEmpty($scope.sportCategory.selected)) {            
+            $scope.memberRegisterDto.sportCategory = $scope.sportCategory.selected;
+        }
 
         $scope.memberRegisterDto.phonesDto.push({category: 'PHONE', data: $scope.data.phonesTags});
         $scope.memberRegisterDto.phonesDto.push({category: 'MOBILE', data: $scope.data.mobilesTags});
@@ -444,6 +496,14 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                                     break;
                             }
                         }
+                        
+                        if($scope.memberRegisters[n].membershipCategory.description === 'UNKNOWN') {
+                            $scope.memberRegisters[n].membershipCategory.description = '';
+                        }
+                
+                        if($scope.memberRegisters[n].sportCategory.name === 'UNKNOWN') {
+                            $scope.memberRegisters[n].sportCategory.name = '';
+                        }
                     }
 
                     LocationDataFactory.getAllLocations({}, function (response) {
@@ -456,7 +516,9 @@ memberRegisterModule.controller('EditMemberRegisterModalCtrl', function (
                         }
 
                         MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
-                            $scope.membershipCategories = response.membershipCategories;
+                            $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                                return obj.description !== 'UNKNOWN';
+                            });
 
                             if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
                                 for (var i = 0; i < $scope.memberRegisters.length; i++) {
@@ -590,6 +652,7 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
     };
     $scope.membershipCategory = {selected: {}};
     $scope.sportCategory = {selected: {}};
+    $scope.sportCategoryDisabled = true;
 
     // initialization of the date fields
 //    $scope.data.dateFrom = new Date().toLocaleFormat(); // toLocaleFormat() doesn't work on Chrome
@@ -604,14 +667,8 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
             $scope.locations = response.locations;
 
             MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
-                $scope.membershipCategories = response.membershipCategories;
-                
-                SportDataFactory.getAllSports({}, function (response) {
-                    $scope.sportCategories = response.sports;
-                },
-                function (error) {
-                    //fail
-                    $scope.error = error;
+                $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                    return obj.description !== 'UNKNOWN';
                 });
             },
             function (error) {
@@ -623,6 +680,27 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
             //fail
             $scope.error = error;
         });
+    };
+    
+    $scope.loadSports = function($item, $model) {
+        
+        if($item.description === 'SPORT') {
+            SportDataFactory.getAllSports({}, function (response) {
+                
+                $scope.sportCategories = _.filter(response.sports, function (obj) {
+                    return obj.name !== 'UNKNOWN';
+                });
+                $scope.sportCategoryDisabled = false;
+            },
+            function (error) {
+                //fail
+                $scope.sportCategoryDisabled = true;
+                $scope.error = error;
+            });
+        }
+         
+         $scope.sportCategory.selected = '';
+         $scope.sportCategories = [];
     };
 
     $scope.ok = function () {
@@ -707,6 +785,14 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
                                         break;
                                 }
                             }
+                            
+                            if($scope.memberRegisters[n].membershipCategory.description === 'UNKNOWN') {
+                                $scope.memberRegisters[n].membershipCategory.description = '';
+                            }
+
+                            if($scope.memberRegisters[n].sportCategory.name === 'UNKNOWN') {
+                                $scope.memberRegisters[n].sportCategory.name = '';
+                            }
                         }
 
                         LocationDataFactory.getAllLocations({}, function (response) {
@@ -719,7 +805,9 @@ memberRegisterModule.controller('CreateMemberRegisterModalCtrl', function (
                             }
 
                             MembershipCategoryDataFactory.getAllMembershipCategories({}, function (response) {
-                                $scope.membershipCategories = response.membershipCategories;
+                                $scope.membershipCategories = _.filter(response.membershipCategories, function (obj) {
+                                    return obj.description !== 'UNKNOWN';
+                                });
 
                                 if (_.isArray($scope.memberRegisters) && $scope.memberRegisters.length > 0) {
                                     for (var i = 0; i < $scope.memberRegisters.length; i++) {

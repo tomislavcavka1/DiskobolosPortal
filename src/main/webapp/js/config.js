@@ -761,9 +761,7 @@ angular
                         }
                         $rootScope.authenticatedUser.username = jwtObj.sub;
                         // find role with the highest permission level
-                        $rootScope.authenticatedUser.role = _.find($rootScope.authenticatedUser.roles, function (obj) {
-                            return obj.permissionLevel === ROLE_PERMISSION_LEVEL.veryHigh;
-                        });
+                        $rootScope.authenticatedUser.role = _.max($rootScope.authenticatedUser.roles, function(roles){ return roles.permissionLevel; });
                     }
                 }, function (response) {
                     // in case we get an error we need to redirect to the login page and clean data from the session                
