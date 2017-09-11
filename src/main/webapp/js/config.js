@@ -693,7 +693,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             {
                                 name: 'ui.grid.edit',
                                 files: ['js/plugins/ui-grid/ui-grid.min.js', 'css/plugins/ui-grid/ui-grid.min.css']
-                            }                                                        
+                            },
+                            {
+                                name: 'ui.grid.pagination',
+                                files: ['js/plugins/ui-grid/pagination.js']
+                            }                            
                         ]);
                     }
                 }

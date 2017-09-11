@@ -15,9 +15,11 @@ financialResourcesModule.controller('financialResourcesController', function (
     $scope.gridOptions = {
     enableFiltering: true,
     treeRowHeaderAlwaysVisible: false,
+    paginationPageSizes: [5, 10, 25],
+    paginationPageSize: 5,
     columnDefs: [
       { name: 'name', width: '30%' },
-      { name: 'gender', grouping: { groupPriority: 1 }, sort: { priority: 1, direction: 'asc' }, width: '20%', cellFilter: 'mapGender' },
+      { name: 'gender', width: '20%', cellFilter: 'mapGender' }, // grouping: { groupPriority: 1 }, sort: { priority: 1, direction: 'asc' },
       { name: 'age', treeAggregationType: uiGridGroupingConstants.aggregation.MAX, width: '20%' },
       { name: 'company', width: '25%' },
       { name: 'registered', width: '40%', cellFilter: 'date', type: 'date' },
