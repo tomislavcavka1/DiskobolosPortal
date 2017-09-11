@@ -7,6 +7,7 @@ var configuration = angular.module('configuration', []);
      
 configuration.constant('AppConstants', {
      ServerName: {
+        // hostUrl: 'http://diskobolos-szgz.com:8080/'
         hostUrl: 'http://localhost:8080/'
     },
     CrudActions: {

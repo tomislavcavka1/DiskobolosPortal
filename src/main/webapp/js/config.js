@@ -478,45 +478,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             })
 
             /*
-             New module
-             */
-
-            .state('content.newModule', {
-                url: "/newModule",
-                templateUrl: "views/newModule.html",
-                data: {pageTitle: 'newModule', displayName: 'newModule'},
-                resolve: {
-                    loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            {
-                                serie: true,
-                                files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
-                            },
-                            {
-                                files: ['js/plugins/moment/moment.min.js']
-                            },
-                            {
-                                serie: true,
-                                name: 'datatables',
-                                files: ['js/plugins/dataTables/angular-datatables.js', 'https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js',
-                                    'https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.css', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js',
-                                    'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
-                            },
-                            {
-                                serie: true,
-                                name: 'datatables.buttons',
-                                files: ['https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js', 'https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js', 'js/plugins/dataTables/angular-datatables.buttons.min.js', 'https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js', 'https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css']
-                            },
-                            {
-                                files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
-                            }
-                        ]);
-                    }
-                }
-
-            })
-
-            /*
              Vrednovanje obrasci
              */
             .state('evaluationForms', {
@@ -545,7 +506,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
             })
 
-           
+
             .state('evaluationForms.evaluationManifestation', {
                 url: "/vrednovanjeProgramaOrganizatora",
                 templateUrl: "views/evaluationManifestation.html",
@@ -565,8 +526,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
 
             })
-            
-            
+
+
             .state('evaluationForms.evaluationTeamClub', {
                 url: "/vrednovanjeProgramaKlubovaMomcadskiSportovi",
                 templateUrl: "views/evaluationTeamClub.html",
@@ -586,8 +547,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
 
             })
-            
-            
+
+
             .state('evaluationForms.evaluationCoaches', {
                 url: "/vrednovanjeProgramaTrenera",
                 templateUrl: "views/evaluationCoaches.html",
@@ -698,6 +659,46 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             })
 
+            .state('content.financialResources', {
+                url: "/financialResources",
+                templateUrl: "views/financialResources.html",
+                data: {pageTitle: 'Prikaz članica na karti', displayName: 'Sredstva po sportovima'},
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                name: 'ui.grid',
+                                files: ['js/plugins/ui-grid/ui-grid.min.js', 'css/plugins/ui-grid/ui-grid.min.css']
+                            },
+                            {
+                                name: 'ui.grid.selection',
+                                files: ['js/plugins/ui-grid/selection.js']
+                            },
+                            {
+                                name: 'ui.grid.exporter',
+                                files: ['js/plugins/ui-grid/exporter.js']
+                            },
+                            {
+                                name: 'ui.grid.edit',
+                                files: ['js/plugins/ui-grid/gridEdit.js']
+                            },
+                            {
+                                name: 'ui.grid.treeBase',
+                                files: ['js/plugins/ui-grid/tree-base.js']
+                            },
+                            {
+                                name: 'ui.grid.grouping',
+                                files: ['js/plugins/ui-grid/grouping.js']
+                            },
+                            {
+                                name: 'ui.grid.edit',
+                                files: ['js/plugins/ui-grid/ui-grid.min.js', 'css/plugins/ui-grid/ui-grid.min.css']
+                            }                                                        
+                        ]);
+                    }
+                }
+            })
+
             /*
              Login
              */
@@ -761,7 +762,9 @@ angular
                         }
                         $rootScope.authenticatedUser.username = jwtObj.sub;
                         // find role with the highest permission level
-                        $rootScope.authenticatedUser.role = _.max($rootScope.authenticatedUser.roles, function(roles){ return roles.permissionLevel; });
+                        $rootScope.authenticatedUser.role = _.max($rootScope.authenticatedUser.roles, function (roles) {
+                            return roles.permissionLevel;
+                        });
                     }
                 }, function (response) {
                     // in case we get an error we need to redirect to the login page and clean data from the session                

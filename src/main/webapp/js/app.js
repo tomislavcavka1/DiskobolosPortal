@@ -25,7 +25,6 @@
         'profileModule',
         'toaster',
         'sportsBuildingsModule',
-        'newModule',
         'rankingAndCategorizationOfSportsModule',
         'categorizationOfSportsPerSportClubModule',
         'dataTableUtilsModule',
@@ -37,7 +36,8 @@
         'colorUtilsModule',
         'pdfViewerModule',
         'evaluationFormsModule',
-        'inputFieldsUtilsModule'
+        'inputFieldsUtilsModule',
+        'financialResourcesModule'
     ]);
 })();
 // Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad
