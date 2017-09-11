@@ -662,10 +662,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             .state('content.financialResources', {
                 url: "/financialResources",
                 templateUrl: "views/financialResources.html",
-                data: {pageTitle: 'Prikaz članica na karti', displayName: 'Sredstva po sportovima'},
+                data: {pageTitle: 'Sredstva po sportovima', displayName: 'Sredstva po sportovima'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
+                        return $ocLazyLoad.load([                            
                             {
                                 name: 'ui.grid',
                                 files: ['js/plugins/ui-grid/ui-grid.min.js', 'css/plugins/ui-grid/ui-grid.min.css']
@@ -691,13 +691,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                                 files: ['js/plugins/ui-grid/grouping.js']
                             },
                             {
-                                name: 'ui.grid.edit',
-                                files: ['js/plugins/ui-grid/ui-grid.min.js', 'css/plugins/ui-grid/ui-grid.min.css']
-                            },
-                            {
                                 name: 'ui.grid.pagination',
                                 files: ['js/plugins/ui-grid/pagination.js']
-                            }                            
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            }
                         ]);
                     }
                 }

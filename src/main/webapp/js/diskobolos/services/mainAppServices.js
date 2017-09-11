@@ -71,6 +71,14 @@ mainAppServices.factory('DashboardDataFactory', ['$resource', 'AppConstants', fu
         });
     }]);
 
+// Services responsible for creation of financial resources, fetching financial resources etc.
+mainAppServices.factory('FinancialResourcesDataFactory', ['$resource', 'AppConstants', function ($resource, AppConstants) {
+        return $resource('', {}, {
+            'getAllFinancialResources': {method: 'GET', url: AppConstants.ServerName['hostUrl'] + '/financialResources/all', isArray: false},
+            'editFinancialResources': {method: 'POST', url: AppConstants.ServerName['hostUrl'] + '/financialResources/edit'}
+        });
+    }]);
+
 // Services responsible for session storage of data.
 mainAppServices.service('sessionStorageService', ['$window', '$q', '$http', function ($window, $q, $http) {
         this.setJwtToken = function (token) {
